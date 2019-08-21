@@ -1,0 +1,28 @@
+<view class="view">
+  <block wx:if="{{!camera}}">
+    <view class="jy_auth_v">
+      <view class="jy_auth_bg" wx:if="{{!tempVideoPath}}" bindtap="open">
+        <image src="../../images/auth_ico1.png"></image>
+        <view class="jy_auth_text">点击录制</view>
+      </view>
+      <view class="window" wx:elif="{{tempVideoPath && (userInfo.videoStatus==1 || userInfo.videoStatus==2)}}">
+        <video class="cover-9" src="{{tempVideoPath}}" poster="{{tempThumbPath}}" autoplay></video>
+      </view>
+      <view class="window" wx:else bindtap="open">
+        <video class="cover-9" src="{{tempVideoPath}}" poster="{{tempThumbPath}}" autoplay></video>
+      </view>
+    </view>
+    <view class="jy_auth_v_b">
+      乾坤岛为侠客们提供一个纯粹、高效、安全的社交网络平台，为保护用户的真实性及约会的安全性，我们通过拍摄一段您本人的真实视频来保障双方的权益。
+    </view>
+  </block> 
+  <camera class="camera" device-position="{{device?'back':'front'}}" wx:if="{{camera}}" flash="off">
+    <cover-view class="cover-1" bindtap="camera">
+      <cover-view class="cover-2">
+        <cover-view class="cover-5" wx:if="{{startRecord}}">{{time}}S</cover-view>
+      </cover-view>
+    </cover-view>
+    <cover-image class="cover-3" src="../../images/close-icon.png" style="width:60rpx;height:60rpx;" bindtap="close"></cover-image>
+    <cover-image class="cover-4" src="../../images/device_change.png" style="width:80rpx;height:60rpx;" bindtap="devicePosition"></cover-image>
+  </camera>
+</view>

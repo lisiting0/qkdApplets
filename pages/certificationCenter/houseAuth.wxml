@@ -1,0 +1,72 @@
+<view class="page gray jy_auth">
+  <view class="jy_auth_block">
+    <view class="jy_auth_dp">
+      <icon class="iconfont icon-dian1" />认证后男生会看到您独有的房产认证图标
+    </view>
+    <view class="jy_info_block">
+      <view class="jy_info_title">
+        <text>认证</text>
+      </view>
+      <view class="bg_white rz_block">
+        <view class="rz_container">
+          <view class="idCard">
+            <image src="../../images/idcard.png"></image>
+          </view>
+          <view>实名</view>
+        </view>
+        <view class='rz_container'>
+          <view class="car">
+            <image src="../../images/car.png"></image>
+          </view>
+          <view>车产</view>
+        </view>
+        <view class='rz_container ok'>
+          <view class="house">
+            <image src="../../images/house.png"></image>
+          </view>
+          <view>房产</view>
+        </view>
+        <view class='rz_container'>
+          <view class="health">
+            <image src="../../images/health.png"></image>
+          </view>
+          <view>健康</view>
+        </view>
+        <view class='rz_container'>
+          <view class="video">
+            <image src="../../images/video_icon.png"></image>
+          </view>
+          <view>视频</view>
+        </view>
+      </view>
+    </view>
+    <view class="jy_auth_dp">
+      <icon class="iconfont icon-dian1" />真实度与实力体现，为您加分，提升关注
+    </view>
+  </view>
+  <view class="jy_auth_block">
+    <view class="jy_auth_tit3">完善小区信息</view>
+    <view class="shade">  
+      <input type="text" placeholder="请填写小区名称" class="jy_auth_xqname" disabled='disabled' wx:if="{{certificationResult.result==1 || certificationResult.result==2}}"></input>
+      <input type="text" placeholder="请填写小区名称" class="jy_auth_xqname" bindinput="watchInput" wx:else></input>
+    </view>
+  </view>
+  <view class="jy_auth_block">
+    <view class="jy_auth_tit3">上传证件</view>
+    <view class="shade" wx:if="{{certificationResult.result==1 || certificationResult.result==2}}">
+      <image mode="aspectFitf" src="{{attachment1?attachment1:'../../images/fcz_icon.png'}}" class="jy_auth_up2"></image>
+    </view>
+    <view class="shade" bindtap="uploadImage" wx:else>
+      <image mode="aspectFitf" src="{{attachment1?attachment1:'../../images/fcz_icon.png'}}" class="jy_auth_up2"></image>
+    </view>
+  </view>
+  <view class="jy_auth_tip">
+    <image src="../../images/auth_ico5.png" mode="aspectFitf"></image>
+    所有上传信息，仅供审核用，不对外显示
+  </view>
+  <view class="jy_auth_btn" wx:if="{{certificationResult.result==1}}">已通过</view>
+  <view class="jy_auth_btn" wx:elif="{{certificationResult.result==2}}">审核中</view> 
+  <view class="jy_auth_btn" bindtap="submit" wx:elif="{{certificationResult.result==0}}">审核未通过,重新提交</view> 
+  <view class="jy_auth_btn" bindtap="submit" wx:else>提交</view>  
+  <view class="jy_auth_tip" wx:if="{{certificationResult.result==0&&certificationResult.memo}}">原因：{{result.memo}}</view>
+</view>

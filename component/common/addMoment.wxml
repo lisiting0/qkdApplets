@@ -1,0 +1,40 @@
+<!-- 添加动态 -->
+<view class="modals modals-bottom-dialog" hidden="{{!showMoment}}">
+  <view class="bottom-dialog-body bottom-pos" style="padding: 0 40rpx;" animation='{{animationData}}'>
+    <textarea rows="6" placeholder="此刻你在想些什么..." auto-focus="true" bindinput="bindinput"></textarea>
+    <view class="photo-cls">
+      <view class="weui-uploader__files">
+        <block wx:for="{{feedImg}}" wx:key="*this">
+          <view class="weui-uploader__file" bindtap="previewImage" id="{{item}}">
+            <image class="weui-uploader__img" src="{{item}}" mode="aspectFill" />
+          </view>
+        </block>
+      </view>
+      <view class="weui-uploader__input-box" hidden="{{feedImg.length==6}}">
+        <view class="weui-uploader__input" bindtap="chooseImage"></view>
+      </view>
+    </view>
+    <view class="text-cls">
+      <view>
+        <icon class="iconfont icon-yonghutouxiang"></icon>
+        <text class="who-see-text">谁可以看</text>
+        <text class="who-see-val" bindtap="showRole">{{viewRole[viewIndex]}}</text>
+        <icon class="iconfont icon-arrow_r"></icon>
+      </view>
+    </view>
+    <view class="fix-btn" bindtap="postFeed">确定</view>
+  </view>
+</view>
+
+<view class="modals role-dialog" hidden="{{!showHideRole}}">
+  <view class="bottom-pos jy_bond_block" animation='{{animationRole}}'>
+    <view class="jy_qb_tit">查看权限</view>
+    <view class="jy_qb_pay_list">
+      <block wx:for="{{viewRole}}" wx:key='index' wx:for-index="index">
+        <view class="jy_qb_pay_list_li iconfont {{index==viewIndex?'cur':''}}" data-index="{{index}}" bindtap="changeRole">{{item}}
+        </view>
+      </block>
+    </view>
+    <view class='jy_auth_btn' style="margin:0rpx 20rpx;" bindtap='confirm'>确定</view>
+  </view>
+</view>

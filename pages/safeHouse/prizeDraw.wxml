@@ -1,0 +1,86 @@
+<view class="page">
+  <image src="../../images/prizedraw/bg2.jpg" class="prizeDraw_bg"></image>
+  <view class="setting">
+    <view class="right-panel">
+      <view>我的乾坤币</view>
+      <view>{{userMoney}}</view>
+    </view>
+  </view>
+
+  <view class="container">
+    <view class="main">
+      <view class="canvas-container">
+        <image src="../../images/prizedraw/circle3.png" class="canvas-container-bg"></image>
+        <view animation="{{animationData}}" class="canvas-content">
+          <!-- <view class="canvas-line">
+            <view class="canvas-litem" wx:for="{{awardsList}}" wx:key="unique" style="-webkit-transform: rotate({{item.lineTurn}});transform: rotate({{item.lineTurn}})"></view>
+          </view> -->
+
+          <view class="canvas-list">
+            <view class="canvas-item" wx:for="{{awardsList}}" wx:key="unique">
+              <view class="canvas-item-text" style="-webkit-transform: rotate({{item.turn}});transform: rotate({{item.turn}})">{{item.award}}
+              </view>
+              <image src="{{item.icon}}" class="canvas-image" style="-webkit-transform: rotate({{item.turn}});transform: rotate({{item.turn}})"></image>
+            </view>
+          </view>
+        </view>
+        <image src="../../images/prizedraw/102.png" bindtap="playReward" class="canvas-btn {{btnDisabled}}"></image>
+        <view class="canvas-cost">{{cost}}</view>
+      </view>
+    </view>
+  </view>
+  <view class="message-swiper">
+    <!-- <template v-if="message">
+          <swiper :options="swiperOption2" ref="mySwiper2">
+            <slot v-for="(item,index) in message">
+              <swiper-slide v-if="index % 2 == 0">
+                <view>
+                  <a><span>{{item.user&&item.user.aliasName}}</span><span>获得{{item.type == 0 ? '美丽约会' : item.type == 1? item.objId+'乾坤币':item.objId}}</span></a>
+                  <a v-if="index+1 < message.length"><span>{{message[index+1]&&message[index+1].user&&message[index+1].user.aliasName}}</span><span>获得{{message[index+1]&&message[index+1].type== 0 ? '美丽约会' : message[index+1]&&message[index+1].type== 1? message[index+1]&&message[index+1].objId+'乾坤币':message[index+1]&&message[index+1].objId}}</span></a>
+                </view>
+              </swiper-slide>
+            </slot>
+          </swiper>
+        </template> -->
+    <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" vertical="{{vertical}}">
+      <block wx:for="{{message}}" wx:key="index" wx:for-item="item">
+        <swiper-item wx:if="{{index % 2 == 0}}">
+          <view class="swiper-container">
+            <view class="swiper-con">
+              <text class="user-name">{{item.user&&item.user.aliasName}}</text>
+              <text>获得{{item.type == 0 ? '美丽约会' : item.type == 1? item.objId+'乾坤币':item.objId}}</text>
+            </view>
+            <view class="swiper-con" wx:if="{{index+1 < message.length}}">
+              <text class="user-name">{{message[index+1]&&message[index+1].user&&message[index+1].user.aliasName}}</text>
+              <text>获得{{message[index+1]&&message[index+1].type== 0 ? '美丽约会' : message[index+1]&&message[index+1].type== 1? message[index+1]&&message[index+1].objId+'乾坤币':message[index+1]&&message[index+1].objId}}</text>
+            </view>
+          </view>
+        </swiper-item>
+      </block>
+    </swiper>
+  </view>
+  <view class="remark">
+    <view bindtap="showRule">规则</view>
+    <navigator hover-class="none" url="../safeHouse/myPrize">我的奖品</navigator>
+  </view>
+  <view wx:if="{{isiOSApp}}" style="font-size: 10px;color:#FFF;margin: 0 0.3rem;">
+    *该活动所获得任何奖励均与苹果公司无关。苹果公司既不作为赞助商也不以任何形式参与。
+  </view>
+</view>
+
+<view class='zhezhao' hidden="{{!showRule}}" bindtap="closeModal">
+  <!--这是一个遮罩层，在框弹出后遮住框外区域-->
+</view>
+<!--这是下拉框中的内容，一个文本框和一个按钮，按钮触发拉起事件，表示拉起下拉框-->
+<view class="rule-modal" style="{{!showRule? 'display:none;': ''}}">
+  <view class="center-dialog">
+    <view class="rule-container">
+      <view class="rule-con">
+        <image src="../../images/prizedraw/rulebg.png"></image>
+        <view class="rule-title">活动规则</view>
+        <icon class="iconfont icon-cha" bindtap="closeModal"></icon>
+        <view class="rule-remark">{{remarks}}</view>
+      </view>
+    </view>
+  </view>
+</view>

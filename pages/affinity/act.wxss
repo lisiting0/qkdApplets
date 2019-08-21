@@ -1,0 +1,234 @@
+.swiper-container {
+  position: relative;
+}
+
+.swiper-container .swiper {
+  width: 100%;
+  height: 565rpx;
+}
+
+.swiper-container .swiper image {
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+}
+
+.swiper-container view {
+  position: absolute;
+  color: #fff;
+}
+
+.swiper-container .swiper_count {
+  bottom: 40rpx;
+  right: 20rpx;
+  width: 16%;
+  height: 50rpx;
+  line-height: 50rpx;
+  color: #fff;
+  font-size: 30rpx;
+  border-radius: 20rpx;
+  background-color: rgba(0, 0, 0, 0.2);
+  text-align: center;
+}
+
+.jy_new_act_b {
+  position: relative;
+  z-index: 1;
+  padding: 0 20rpx 10rpx;
+  margin-top: -20rpx;
+}
+
+.jy_new_act_b .jy_new_act_block {
+  overflow: hidden;
+  border-radius: 20rpx;
+  background-color: #fff;
+  padding: 15rpx;
+  margin-bottom: 20rpx;
+  box-sizing: border-box;
+}
+
+.jy_new_act_b .jy_new_act_uinfo {
+  overflow: hidden;
+  padding: 10rpx 0 15rpx;
+}
+
+.jy_new_act_uinfo_img {
+  float: left;
+  width: 100rpx;
+  height: 100rpx;
+  border-radius: 50%;
+  margin-right: 20rpx;
+}
+
+.jy_new_act_b .jy_new_act_uinfo .one-row {
+  v: hidden;
+  font-size: 32rpx;
+  color: #080808;
+  font-weight: normal;
+}
+
+.right-text {
+  float: right;
+  font-size: 28rpx;
+  color: #a3a3a3;
+}
+
+.jy_auth_age, .jy_auth_level, .jy_auth_svip, .jy_auth_bond, .jy_auth_vip, .jy_xz {
+  display: inline-flex;
+  vertical-align: top;
+  text-align: center;
+  padding: 0 15rpx;
+  color: #fff;
+  border-radius: 40rpx;
+}
+
+.jy_auth_age_nv {
+  background-color: #fe84ab;
+}
+
+.jy_auth_age_man {
+  background-color: #00b4ff;
+}
+
+.jy_new_act_b .jy_new_act_p .jy_color_red {
+  color: #fe4100;
+  font-size: 28rpx;
+}
+
+.jy_new_act_b .jy_act_ico {
+  color: #fff;
+  padding: 0 20rpx;
+  border-radius: 40rpx;
+  display: inline-flex;
+  vertical-align: top;
+  background-color: #d0641c;
+  margin: 10rpx 0;
+}
+
+.jy-paytype {
+  padding: 0 20rpx;
+  background-color: #00aeff;
+  color: #fff;
+  border-radius: 40rpx;
+  margin: 10rpx 0;
+}
+
+.jy_new_act_b .jy_new_act_desc {
+  font-size: 36rpx;
+  color: #000;
+  font-weight: bold;
+  padding: 40rpx 0;
+  border-top: 1px solid #ebebeb;
+}
+
+icon {
+  display: inline-flex;
+  vertical-align: top;
+  margin-right: 20rpx;
+}
+
+.jy_new_act_b .jy_new_act_p {
+  position: relative;
+  font-size: 32rpx;
+  color: #191919;
+  padding: 30rpx 0;
+}
+
+.jy_new_act_b .jy_new_act_p + .jy_new_act_p {
+  border-top: 1px solid #ebebeb;
+}
+
+.jy_new_act_t {
+  padding: 20rpx 0;
+  border-bottom: 1px solid #ebebeb;
+}
+
+.jy_new_act_b .jy_new_act_hidden {
+  border-radius: 10rpx;
+  overflow: hidden;
+  margin-top: 30rpx;
+}
+
+.jy_new_act_b .jy_new_act_bmList {
+  position: relative;
+  overflow: hidden;
+  margin: 0 0 0 -12rpx;
+  border-radius: 10rpx;
+}
+
+.jy_new_act_b .jy_new_act_bmList_blur .jy_new_act_bmList:before {
+  content: "";
+  z-index: 1;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  filter: progid:DXImageTransform.Microsoft.gradient(enabled='true', startColorstr='#7F000', endColorstr='#7F000');
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 10rpx;
+}
+
+.jy_new_act_b .jy_new_act_bmList_blur .jy_new_act_bmList:after {
+  content: "亲，报名活动才能查看哦！";
+  z-index: 2;
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 100%;
+  text-align: center;
+  color: #fff;
+  font-size: 32rpx;
+  margin-top: -0.3rem;
+}
+
+.jy_new_act_b .jy_new_act_bmList .jy_new_act_bmList_li {
+  width: 25%;
+  float: left;
+  overflow: hidden;
+  margin: 10rpx 0;
+}
+
+.jy_new_act_b .jy_new_act_bmList .jy_new_act_bmList_li .a {
+  display: block;
+  width: 150rpx;
+  height: 150rpx;
+  background-size: cover;
+  background-position: center;
+  margin: 0 auto;
+  border-radius: 20rpx;
+}
+
+.jy_new_act_b .jy_new_act_bmList_blur .jy_new_act_bmList .jy_new_act_bmList_li .a {
+  -webkit-filter: blur(0.05rem);
+  filter: blur(0.05rem);
+}
+
+.identity_act {
+  width: 100%;
+  padding: 40rpx 0;
+  text-align: center;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  background-size: 100% 100%;
+  z-index: 100;
+}
+
+.identity_act text {
+  display: inline-block;
+  vertical-align: top;
+  width: 200rpx;
+  height: 80rpx;
+  line-height: 80rpx;
+  font-size: 32rpx;
+  color: #fff;
+  border-radius: 30rpx;
+  background: -webkit-gradient(linear, left top, right top, from(#ff5a00), color-stop(#f16113), to(#f35600));
+  background: linear-gradient(to right, #ff5a00, #f16113, #f35600);
+  margin: 0 10rpx;
+}
+
+.identity_act text.grey {
+  background: #b5afaf;
+}

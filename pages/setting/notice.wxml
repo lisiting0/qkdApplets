@@ -1,0 +1,43 @@
+<!-- 通知 -->
+<view class="page gray">
+  <view class="top-bottom-gray"></view>
+  <view class="jy_block_t">
+    <view class="jy_aInfo_line tui-menu-list">
+      <text>消息免打扰</text>
+      <switch class="tui-fr" color="#FF9000" checked="{{xswitch.all}}" bindchange="switchClick"/>
+    </view>
+  </view>
+  <view class="jy_p_tit">活动通知</view>
+  <view class="jy_block_t" style="margin-top:0;">
+    <view class="jy_aInfo_line tui-menu-list">
+      <text>活动即将开始</text>
+      <switch class="tui-fr {{disabled? 'switch-opacity':''}}" color="#FF9000" checked="{{xswitch.activity}}" disabled="{{disabled}}"/>
+    </view>
+    <view class="jy_aInfo_line tui-menu-list">
+      <text>约会即将开始</text>
+      <switch class="tui-fr {{disabled? 'switch-opacity':''}}" color="#FF9000" checked="{{xswitch.engagement}}" disabled="{{disabled}}"/>
+    </view>
+    <view class="jy_aInfo_line tui-menu-list">
+      <text>活动审核成功</text>
+      <switch class="tui-fr {{disabled? 'switch-opacity':''}}" color="#FF9000" checked="{{xswitch.auditing}}" disabled="{{disabled}}"/>
+    </view>
+  </view>
+  <view class="jy_p_tit">消息通知</view>
+  <view class="jy_block_t" style="margin-top:0;">
+    <view class="jy_aInfo_line tui-menu-list">
+      <text>聊天消息通知</text>
+      <switch class="tui-fr {{disabled? 'switch-opacity':''}}" color="#FF9000" checked="{{xswitch.message}}" disabled="{{disabled}}"/>
+    </view> 
+  </view>
+  <view class="jy_p_tit">关注通知</view>
+  <view class="jy_block_t" style="margin-top:0;">
+    <view class="jy_aInfo_line tui-menu-list">
+      <text>新粉丝通知</text>
+      <switch class="tui-fr {{disabled? 'switch-opacity':''}}" color="#FF9000" checked="{{xswitch.fans}}" disabled="{{disabled}}"/>
+    </view>
+    <view class="jy_aInfo_line tui-menu-list">
+      <text>关注活动通知</text>
+      <switch class="tui-fr {{disabled? 'switch-opacity':''}}" color="#FF9000" checked="{{xswitch.follow}}" disabled="{{disabled}}"/>
+    </view> 
+  </view>
+</view>

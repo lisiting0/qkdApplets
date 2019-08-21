@@ -1,0 +1,54 @@
+<view class="page gray">
+  <view class="top-bottom-gray"></view>
+  <view class="content-top" style="background-color: #f2f2f2">
+    <view class="content bg_white">
+      <image wx:if="{{user.headimgAttachmentId}}" class="backImageCover" style="width:100rpx;height:100rpx;border-radius: 50%;margin-right: 30rpx;'" src="{{user.headimgAttachmentId}}"></image>
+      <text wx:if="{{user.aliasName}}">给 <text class="user-name">{{user.aliasName}}</text>送礼物</text>
+      <text class="select-friend"  bindtap="selectFriend">{{user.aliasName==''?'选择好友':'更换好友'}}</text>
+    </view>
+    <view class="content2 bg_white">
+      <text class="balance-panel">余额：<text class="balance-text">{{userInfo.userMoney}}</text>乾坤币</text>
+      <navigator hover-class="none" url="../../pages/safeHouse/recharge" class="linkTo">获取乾坤币</navigator>
+    </view>
+  </view>
+
+  <scroll-view scroll-y style="width: 100%; height:{{myScrollerHeight+'px'}};">
+    <view class="content3">
+      <view class="gift-info" wx:for="{{giftList}}" wx:key="index" wx:for-item="val" data-id="{{val.id}}" bindtap="sendgift">
+        <image src="{{val.giftImage}}"></image>
+        <view class="gift-name">{{val.giftName}}</view>
+        <view class="gift-val">乾坤币 {{val.jiaobi}}</view>
+      </view>
+    </view>
+  </scroll-view>
+</view>
+
+<!--隐藏区域  -->
+<view class='maskLayer' wx:if="{{chooseFriend}}" bindtap='hideModal'></view>
+<view class='choose' wx:if="{{chooseFriend}}" animation='{{animationData}}'>
+  <view class="weui-search-bar search-box">
+    <view class="weui-search-bar__form">
+      <view class="weui-search-bar__box">
+        <icon class="weui-icon-search_in-box" type="search" size="14"></icon>
+        <input type="text" class="weui-search-bar__input" placeholder="搜索" value="{{inputVal}}" focus="{{inputShowed}}" bindinput="inputTyping" />
+        <view class="weui-icon-clear" wx:if="{{inputVal.length > 0}}" bindtap="clearInput">
+          <icon type="clear" size="14"></icon>
+        </view>
+      </view>
+      <label class="weui-search-bar__label" hidden="{{inputShowed}}" bindtap="showInput">
+        <icon class="weui-icon-search" type="search" size="14"></icon>
+        <view class="weui-search-bar__text">搜索</view>
+      </label>
+    </view>
+    <view class="weui-search-bar__cancel-btn" hidden="{{!inputShowed}}" bindtap="hideInput">取消</view>
+  </view>
+  <scroll-view scroll-y style="width: 100%; height:{{myselectGiftFriendHeight+'px'}};" class="selectGiftFriendContent">
+    <view class="friendItem" wx:for="{{friendList}}" wx:key="index" wx:for-item="item">
+      <image src="{{item.jiaoyouUser.headimgAttachmentId}}"></image>
+      <view>
+        <text>{{item.jiaoyouUser.aliasName}}</text>
+        <icon class="iconfont {{item.rid==selectUser.id?'select':''}}" data-item="{{item}}" bindtap="selectUserM"></icon>
+      </view>
+    </view>
+  </scroll-view>
+</view>

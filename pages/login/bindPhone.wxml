@@ -1,0 +1,26 @@
+<view class="page gray">
+  <view class="top-bottom-gray"></view>
+  <view class="bind-panel" hidden="{{!showOld}}">
+    <view class="m_bp_list">
+      <text>验证码</text>
+      <input type="number" placeholder="请输入验证码" placeholder-style='color:#c0c0c0;' bindinput="watchCode" />
+      <text class="send-code colorRed" hidden="{{!canCode}}" data-phone="{{userInfo.phoneNumber}}" bindtap="getCode">{{verificationCodeContent}}</text>
+      <text class="send-code" hidden="{{canCode}}">{{verificationCodeContent}}</text>
+    </view>
+    <view class="m_mdp_tip">验证码将发送到原手机中,请注意查收.</view>
+    <view class="jy_auth_btn" bindtap="checkCode">下一步</view>
+  </view>
+  <view class="bind-panel" hidden="{{showOld}}">
+    <view class="m_bp_list">
+      <text>新手机号</text>
+      <input type="number" placeholder="请输入新手机号" placeholder-style='color:#c0c0c0;' bindinput="watchNewPhone" style='width: 77%;'/> 
+    </view>
+    <view class="m_bp_list">
+      <text>验证码</text>
+      <input type="number" placeholder="请输入验证码" placeholder-style='color:#c0c0c0;' bindinput="watchNewCode" />
+      <text class="send-code colorRed" hidden="{{!canNewCode}}" data-phone="{{newPhone}}" bindtap="getCode">{{verificationCodeContent}}</text>
+      <text class="send-code" hidden="{{canNewCode}}">{{verificationCodeContent}}</text>
+    </view> 
+    <view class="jy_auth_btn" bindtap="editPhone">修改</view>
+  </view>
+</view>

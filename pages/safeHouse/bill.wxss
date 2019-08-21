@@ -1,0 +1,289 @@
+page {
+  overflow: hidden;
+}
+
+::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  color: transparent;
+}
+
+.weui-navbar {
+  position: relative;
+  border-bottom: none;
+  background-color: #fff;
+}
+
+.weui-navbar__item {
+  padding: 20rpx 0 0;
+  color: #9a9a9d;
+}
+
+.weui-navbar__item.weui-bar__item_on {
+  color: #000;
+}
+
+.weui-navbar__slider {
+  width: 2em;
+  background-color: #ff4300;
+}
+
+.weui-tab__panel {
+  padding-top: 0;
+}
+
+.menu-top {
+  z-index: 1500;
+}
+
+.marginBottom20{ 
+  margin-bottom: 20rpx;
+}
+
+.selFilter {
+  z-index: 1500;
+  width: 100%;
+  padding: 20rpx;
+  background-color: #fff;
+  border-bottom: 1px solid #f5f5f5;
+  font-size: 36rpx;
+}
+
+.selFilter.cur {
+  color: #4c7ffe;
+}
+
+.selFilter::after {
+  content: "\e600";
+}
+
+.zhezhao {
+  top: 17%;
+}
+
+.test1 {
+  top: 17%;
+  height: 56%;
+}
+
+.filter {
+  background-color: #efefef;
+}
+
+.jy_bill_sel {
+  padding: 0 25rpx;
+  background-color: #efefef;
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+}
+
+.jy_bill_sel .jy_bill_sel_tit {
+  font-size: 32rpx;
+  color: #89888c;
+  padding: 20rpx 0;
+}
+
+.jy_bill_sel .jy_bill_sel_list {
+  overflow: hidden;
+  border-bottom: 1px solid #b9b9b9;
+}
+
+.jy_bill_sel .jy_bill_sel_list view {
+  width: 25%;
+  float: left;
+  height: 60rpx;
+  line-height: 60rpx;
+  font-size: 30rpx;
+  color: #898989;
+  text-align: center;
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  border-radius: 10rpx;
+  border: 1px solid #efefef;
+  margin-bottom: 30rpx;
+}
+
+.jy_bill_sel .jy_bill_sel_list view.cur {
+  color: #47b43d;
+  border: 1px solid #6cba62;
+  background-color: #fff;
+}
+
+.jy_bill_sel_input {
+  height: 80rpx;
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+}
+
+.jy_bill_sel_input input {
+  display: inline-block;
+  outline: 0;
+  vertical-align: top;
+  height: 60rpx;
+  font-size: 28rpx;
+  color: #898989;
+  border-radius: 5px;
+  text-align: center;
+  background-color: #fff;
+  border: 1px solid #bfbfbf;
+  padding: 0 10rpx;
+}
+
+.jy_bill_sel .jy_bill_sel_input:before {
+  content: "";
+  position: absolute;
+  border-bottom: 1px solid #bfbfbf;
+  width: 40rpx;
+  left: 48%;
+  top: 46%;
+}
+
+.jy_bill_sel_btn {
+  width: 88%;
+  height: 68rpx;
+  line-height: 68rpx;
+  font-size: 36rpx;
+  color: #5ebe53;
+  text-align: center;
+  background-color: #fff;
+  border: 1px solid #c6c6c6;
+  border-radius: 10rpx;
+  margin: 40rpx auto;
+}
+
+.jy_bill_date {
+  background-color: #f5f5f5;
+  padding: 20rpx 30rpx;
+  position: relative;
+}
+
+.jy_bill_date::after, .jy_tran_date::after {
+  content: "\e6b6";
+  position: absolute;
+  right: 30rpx;
+  top: 50%;
+  margin-top: -24rpx;
+  color: #000;
+  font-size: 36rpx;
+}
+
+.jy_bill_date view:first-child {
+  font-size: 32rpx;
+  color: #202020;
+}
+
+.jy_bill_date view:last-child {
+  font-size: 30rpx;
+  color: #9b9b9b;
+}
+
+.jy_bill_date view:last-child text {
+  margin-right: 40rpx;
+}
+
+.jy_bill_list_li, .jy_transaction_list_li {
+  background-color: #fff;
+  padding: 20rpx 30rpx;
+  position: relative;
+}
+
+.jy_bill_list_li + .jy_bill_list_li,
+.jy_transaction_list_li + .jy_transaction_list_li {
+  border-top: 1px solid #f2f2f2;
+}
+
+.jy_bill_list_title text:first-child {
+  font-weight: normal;
+  font-size: 36rpx;
+  color: #1d1d1d;
+}
+
+.jy_bill_list_title text:last-child {
+  float: right;
+  font-size: 32rpx;
+  color: #ff5800;
+}
+
+.jy_bill_list_title text:last-child.off {
+  color: #111;
+}
+
+.jy_bill_list_date {
+  font-size: 30rpx;
+  color: #999;
+}
+
+.jy_tran_date {
+  font-size: 32rpx;
+  background-color: #f5f5f5;
+  padding: 20rpx 30rpx;
+  position: relative;
+}
+
+.jy_transaction_list_li {
+  display: flex;
+  align-items: center;
+}
+
+.jy_transaction_list_li .jy_tran_j {
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 50%;
+  margin-right: 20rpx;
+}
+
+.jy_transaction_list_title {
+  width: 68%;
+}
+
+.jy_transaction_list_title view:first-child,
+.jy_transaction_list_money view:first-child {
+  font-weight: normal;
+  font-size: 36rpx;
+  color: #1d1d1d;
+}
+
+.jy_transaction_list_title view:last-child,
+.jy_transaction_list_money view:last-child {
+  font-size: 30rpx;
+  color: #999;
+}
+
+.jy_transaction_list_money view, .jy_transaction_list_money {
+  text-align: right;
+}
+
+.jy_transaction_list_li icon {
+  position: relative;
+  overflow: hidden;
+  width: 80rpx;
+  height: 80rpx;
+  margin-right: 20rpx;
+  text-align: center;
+  border-radius: 50%;
+}
+
+.jy_tran_y {
+  background-color: #ff5a00;
+}
+
+.jy_transaction_list_li icon::before {
+  content: "\e651";
+  font-size: 30rpx;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  color: #fff;
+}
+
+.jy_tran_g {
+  background-color: #97c0dc;
+}
+
+.jy_transaction_list_li icon.jy_tran_g::before {
+  content: "\e632";  
+}
+

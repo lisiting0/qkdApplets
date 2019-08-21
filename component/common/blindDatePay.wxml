@@ -1,0 +1,26 @@
+<view class="page gray">
+  <view class="jy_qb_block">
+    <view class="jy_qb_rc">入场报名费</view>
+    <view class="jy_qb_hmon" wx:if="{{orderInfo&&orderInfo.price!=orderInfo.money&&!isUnion&&!channel.isUnion}}">
+      <del>￥{{orderInfo.price}}</del>
+    </view>
+    <view class="jy_qb_mon" wx:if="{{orderInfo}}">￥{{orderInfo.money}}</view>
+  </view>
+  <view class="jy_qb_block" wx:if="{{orderInfo&&(isUnion||channel.isUnion)&&orderInfo.price-orderInfo.money>0}}">
+    <view class="jy_qb_yh">
+      <i>￥{{orderInfo.price-orderInfo.money}}</i>{{channel.name?channel.name+"优惠":"优惠"}}</view>
+  </view>
+  <view class="jy_qb_block">
+    <view class="jy_qb_tit">支付方式</view>
+    <view class="jy_qb_pay_list">
+      <block wx:for="{{payType}}" wx:key="index" wx:for-index="pIndex" wx:for-item="items">
+        <view class="jy_qb_pay_list_li {{pIndex==payIndex?'cur':''}} iconfont {{pIndex=='alipay'?'icon-icon-alipay':''}} {{pIndex=='wxpay'?'icon-weixindenglu':''}}" wx:if="{{payIndex!='alipay' || (payIndex=='alipay')}}" data-payindex="{{pIndex}}" bindtap="bindPayIndex">{{items}}
+        </view>
+      </block>
+    </view>
+  </view>
+  <view wx:if="{{orderInfo}}" class="jy_qb_pay_all">应付
+    <text>{{orderInfo.money}}</text>元{{orderInfo.price!=orderInfo.money?'(已优惠'+orderInfo.price-orderInfo.money+'元)':''}}
+  </view>
+  <view class="jy_qb_btn jy_qb_btn_abs" catchtap="recharge">立即付款</view>
+</view>

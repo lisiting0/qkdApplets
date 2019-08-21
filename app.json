@@ -1,0 +1,144 @@
+{
+  "pages": [
+    "pages/login/login",
+    "pages/login/modifyPassword",
+    "pages/login/forgetPassword",
+    "pages/login/bindPhone",
+    "pages/index/index",
+    "pages/index/newIndex",
+
+    "pages/blindDate/publishBlindDate",
+    "pages/blindDate/myBlindDate",
+    "pages/blindDate/registrationActivity",
+    "pages/blindDate/blindDateDetail",
+    "pages/blindDate/registrationStaff",
+    "pages/blindDate/publish/address",
+    "pages/blindDate/publish/navigation",
+    "pages/blindDate/publish/activityProcess",
+    "pages/blindDate/publish/organizer",
+    "pages/blindDate/publish/activityTips",
+    "pages/blindDate/publish/unit",
+    "pages/blindDate/publish/channel",
+    "pages/blindDate/publish/sharingChannel",
+
+    "pages/affinity/love",
+    "pages/affinity/act",
+    "pages/affinity/publishAppointment",
+    "pages/affinity/publishDate", 
+
+    "pages/news/friend",
+
+    "pages/search/search",
+    "pages/search/moments",
+    "pages/search/nearbyPeople",
+    "pages/search/nearbyDating",
+    "pages/search/myComments",
+
+    "pages/user/user",
+    "pages/user/userInfo",
+    "pages/user/modify",
+    "pages/user/recentVisit",
+    "pages/user/myFocus",
+    "pages/user/myOffer",
+    "pages/user/safeHouse",
+    "pages/user/safeHouseOld",
+    "pages/safeHouse/putforward",
+    "pages/safeHouse/recharge",
+    "pages/safeHouse/gift",
+    "pages/safeHouse/bond",
+    "pages/safeHouse/qrCode",
+    "pages/safeHouse/agent",
+    "pages/safeHouse/subAgent",
+    "pages/safeHouse/bill",
+    "pages/safeHouse/sendGift",
+    "pages/safeHouse/prizeDraw",
+    "pages/safeHouse/myPrize",
+    "pages/safeHouse/earnCoin",
+    "pages/safeHouse/qkdIntroduce",
+    "pages/safeHouse/signOn",
+    "pages/user/myEvaluation", 
+    "pages/user/certificationCenter",
+    "pages/certificationCenter/identityAuth",
+    "pages/certificationCenter/carAuth",
+    "pages/certificationCenter/houseAuth",
+    "pages/certificationCenter/healthyAuth",
+    "pages/certificationCenter/videoAuth",
+    "pages/user/apply",
+    "pages/user/energyRanking",
+    "pages/user/setting",
+    "pages/user/help",
+    "pages/user/QA",
+
+    "pages/setting/accountSecurity",
+    "pages/setting/bindLogin",
+    "pages/setting/notice",
+    "pages/setting/blacklist",
+    "pages/setting/about",
+
+    "pages/other/shop",
+
+    "component/common/androidConfirmModal",
+    "component/common/addMoment",
+    "component/common/commentDetail",
+    "component/common/gifts",
+    "component/common/blindDatePay",
+    "component/common/pickerYMDHM",
+    "component/common/pickerYMDH",
+    
+    "pages/logs/logs"
+  ],
+  "window": {
+    "enablePullDownRefresh": true,
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "乾坤岛",
+    "navigationBarBackgroundColor": "#ffffff"
+  },
+  "tabBar": {
+    "color": "#000000",
+    "backgroundColor": "#ffffff",
+    "selectedColor": "#ff03a9",
+    "list": [
+      {
+        "pagePath": "pages/index/newIndex",
+        "text": "首页",
+        "iconPath": "images/icon_home.png",
+        "selectedIconPath": "images/icon_home_active.png"
+      },
+      {
+        "pagePath": "pages/news/friend",
+        "text": "消息",
+        "iconPath": "images/icon_news.png",
+        "selectedIconPath": "images/icon_news_active.png"
+      },
+      {
+        "pagePath": "pages/affinity/love",
+        "text": "约会",
+        "iconPath": "images/icon_love.png",
+        "selectedIconPath": "images/icon_love_active.png"
+      },
+      {
+        "pagePath": "pages/search/search",
+        "text": "发现",
+        "iconPath": "images/icon_f.png",
+        "selectedIconPath": "images/icon_f_active.png"
+      },
+      {
+        "pagePath": "pages/user/user",
+        "text": "我的",
+        "iconPath": "images/icon_user.png",
+        "selectedIconPath": "images/icon_user_active.png"
+      }
+    ]
+  },
+  "networkTimeout": {
+    "request": 10000,
+    "downloadFile": 10000
+  },
+  "permission": {
+    "scope.userLocation": {
+      "desc": "你的位置信息将用于小程序位置接口的效果展示"
+    }
+  },
+  "debug": true,
+  "sitemapLocation": "sitemap.json"
+}

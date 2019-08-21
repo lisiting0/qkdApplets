@@ -1,0 +1,14 @@
+<view class="page">
+  <view class="content">
+    <image src="../../images/introduce/introduce_02.jpg"></image> 
+    <video class="video" src="http://qkd.iceinfo.net/userfiles/qkdIntroduce.mp4" poster="../../images/introduce/poster.jpg" autoplay></video>
+    <image src="../../images/introduce/introduce_04.jpg"></image>
+    <image src="../../images/introduce/introduce_05.jpg"></image>
+    <image src="../../images/introduce/introduce_06.jpg"></image>
+    <image src="../../images/introduce/introduce_07.jpg"></image>
+    <view class="relative">
+      <image src="../../images/introduce/introduce_08.jpg"></image>
+      <image src="../../images/introduce/qrcode.png" class="qrcode"></image>
+    </view>
+  </view>
+</view>

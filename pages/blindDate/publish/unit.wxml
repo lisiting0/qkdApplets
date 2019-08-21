@@ -1,0 +1,66 @@
+<!--单位选择-->
+<view class="page gray">
+  <view class="top-bottom-gray"></view>
+  <view class="page_bd menu-top">
+    <view class="weui-search-bar">
+      <view class="weui-search-bar__form">
+        <view class="weui-search-bar__box">
+          <icon class="weui-icon-search_in-box" type="search" size="14"></icon>
+          <input type="text" class="weui-search-bar__input" placeholder="搜索" value="{{searchKey}}" focus="{{inputShowed}}" bindinput="inputTyping" />
+          <view class="weui-icon-clear" wx:if="{{searchKey.length > 0}}" bindtap="clearInput">
+            <icon type="clear" size="14"></icon>
+          </view>
+        </view>
+        <label class="weui-search-bar__label" hidden="{{inputShowed}}" bindtap="showInput">
+          <icon class="weui-icon-search" type="search" size="14"></icon>
+          <view class="weui-search-bar__text">搜索</view>
+        </label>
+      </view>
+      <view class="weui-search-bar__cancel-btn" hidden="{{!inputShowed}}" bindtap="hideInput">取消</view>
+    </view>
+  </view>
+  <view class="header" hidden="{{hideHeader}}">
+    <view>下拉刷新中……</view>
+  </view>
+
+  <scroll-view scroll-y style="width: 100%; height:{{scroll_height+'px'}};" bindscrolltoupper="refresh" bindscrolltolower="loadMore">
+    <view class="organizers_container" style="margin-top:0;">
+      <view class="organizers_panel">
+        <view wx:if="{{isOrganizer==1}}">
+          <view class="organizers" wx:for="{{organizerList}}" wx:key="oIndex" wx:for-index="oIndex" wx:for-item="oItem">
+            <view class="left_title">
+              <image class="logo" src="{{oItem.logoUrl}}" wx:if="{{oItem.logoUrl}}"></image>
+              <image class="logo" style="background-color: #d6d6d6" wx:else>logo</image>
+              {{oItem.unitName}}
+            </view>
+            <view class="right_text">
+              <checkbox-group data-index="{{oIndex}}" class='checkboxList' bindchange="checkboxChange">
+                <label class="checkbox">
+                  <checkbox value="{{oIndex}}" checked="{{oItem.checked}}" />
+                </label>
+              </checkbox-group>
+            </view>
+          </view>
+        </view>
+        <view wx:else>
+          <view class="organizers" wx:for="{{organizerList}}" wx:key="coIndex" wx:for-index="coIndex" wx:for-item="coItem">
+            <view class="left_title">
+              <image class="logo" src="{{coItem.logoUrl}}" wx:if="{{coItem.logoUrl}}"></image>
+              <image class="logo" style="background-color: #d6d6d6" wx:else>logo</image>
+              {{coItem.unitName}}
+            </view>
+            <view class="right_text circle"> 
+              <checkbox-group data-index="{{coIndex}}" class='checkboxList' bindchange="checkboxChange">
+                <label class="checkbox">
+                  <checkbox value="{{coIndex}}" checked="{{coItem.checked}}" />
+                </label>
+              </checkbox-group>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="bottom" hidden="{{hideBottom}}">已加载全部数据</view>
+  </scroll-view>
+  <view class='bottom-btn' bindtap='confirmOranizer'>确定</view>
+</view>

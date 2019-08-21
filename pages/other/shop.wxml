@@ -1,0 +1,3 @@
+<view class="page gray">
+  <web-view src="{{shopLink}}"></web-view> 
+</view>

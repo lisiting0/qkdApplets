@@ -1,0 +1,89 @@
+<!--我的约会-->
+<view class="page gray">
+  <view class="top-bottom-gray"></view>
+  <view class="page_bd menu-top">
+    <view class="weui-tab">
+      <view class="weui-navbar">
+        <block wx:for="{{tabs}}" wx:key="*this">
+          <view id="{{index}}" class="weui-navbar__item {{activeIndex == index ? 'weui-bar__item_on' : ''}}" bindtap="tabClick">
+            <view class="weui-navbar__title">{{item}}</view>
+          </view>
+        </block>
+        <view class="weui-navbar__slider" style="left: {{sliderLeft}}px; transform: translateX({{sliderOffset}}px); -webkit-transform: translateX({{sliderOffset}}px);"></view>
+      </view>
+    </view>
+  </view>
+  <view class="header" hidden="{{hideHeader}}">
+    <view>下拉刷新中……</view>
+  </view>
+  <scroll-view scroll-y style="width: 100%; height:{{scroll_height+'px'}};background-color:#ffffff;" bindscrolltoupper="refresh" bindscrolltolower="loadMore">
+    <view class="weui-tab__panel tab-panel-padding">
+      <view class="weui-tab__content">
+        <view class="blindDate_container">
+          <view class="blindDate_con" wx:for="{{list}}" wx:key="*this">
+            <navigator hover-class="none" url="">
+              <view class="blindDate_panel" style="background-image:url('{{item.coverimgImages}}')">
+                <view wx:if="{{item.state==3&&item.isCandidate==0}}">
+                  <text class="blindDate_tips" wx:if="{{item.state==3&&item.isStartEnroll==0&&item.isStopEnroll==0}}">报名开始时间\n                          {{item.datingDetailsExt.extDatetime}}</text>
+                  <text class="blindDate_tips" wx:elif="{{item.state==3&&item.isStartEnroll==1&&item.isStopEnroll==0}}">报名截止时间\n{{item.datingDetailsExt.extDatetime}}</text>
+                  <text class="blindDate_tips" wx:elif="{{item.state==3&&item.isCandidate==0&&item.isStopEnroll==1}}">报名已截止</text>
+                </view>
+                <view wx:elif="{{item.state==5}}">
+                  <text class="blindDate_tips">活动已结束</text>
+                </view>
+              </view>
+            </navigator>
+            <view class="blindDate_detail {{(item.state==3&&item.isCandidate==0)?'active':((item.state==3&&item.isCandidate==1) || item.state==6)?'live':'end'}}">
+              <view class="blindDate_title">
+                <text wx:if="{{item.datingDetailsExt}}">[{{lineType[item.datingDetailsExt.extInt]}} · {{specialType[item.datingDetailsExt.extInt5]}}专场]</text>
+                <text>{{item.datingTitle}}</text>
+              </view>
+              <view class="blindDate_desc">
+                <view class="blindDate_address">
+                  <icon class="iconfont icon-weizhi"></icon>
+                  <text>{{item.datingLocation}}</text>
+                </view>
+                <view class="blindDate_count">
+                  <view class="blindDate_gz">
+                    <icon class="iconfont icon-guanzhu"></icon>
+                    <text>{{item.followCount}}</text>人关注
+                  </view>
+                  <view class="blindDate_bm">
+                    <icon class="iconfont icon-heart"></icon>
+                    <text>{{item.enrollCount}}</text>人报名
+                  </view>
+                </view>
+                <view class="blindDate_date">
+                  <image src="../../images/osj_icon.png" wx:if="{{((item.state==3&&item.isCandidate==1) || item.state==6)}}"></image>
+                  <image src="../../images/rsj_icon.png" wx:elif="{{item.state==3&&item.isCandidate==0}}"></image>
+                  <image src="../../images/gsj_icon.png" wx:else></image>
+                  <text>{{item.activityStarttime}}</text>
+                </view>
+              </view>
+              <view class='blindDate_act' wx:if="{{item.type==1}}">
+                <text>编辑</text>
+              </view>
+              <view class='blindDate_act' wx:elif="{{item.type==2||item.type==3}}">
+                <text>进入现场</text>
+              </view>
+              <view class='blindDate_act' wx:elif="{{item.type==6}}">
+                <text wx:if="{{item.enrollFee>0}}">立即报名\n{{item.enrollFee}}元</text>
+                <text wx:else>立即报名</text>
+              </view>
+              <view class='blindDate_act' wx:elif="{{item.type==4}}">
+                <text>活动结束</text>
+              </view>
+              <view class='blindDate_act' wx:elif="{{item.type==7}}">
+                <text>即将开始</text>
+              </view>
+              <view class='blindDate_act' wx:elif="{{item.type==5}}">
+                <text>报名结束</text>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+      <view class="bottom" hidden="{{hideBottom}}">已加载全部数据</view>
+    </view>
+  </scroll-view>
+</view>

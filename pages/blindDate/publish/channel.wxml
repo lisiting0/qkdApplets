@@ -1,0 +1,31 @@
+<!-- 选择合伙人 -->
+<view class="page gray">
+  <view class="top-bottom-gray"></view>
+  <view class="page_bd menu-top">
+    <view class="weui-search-bar">
+      <view class="weui-search-bar__form">
+        <view class="weui-search-bar__box">
+          <icon class="weui-icon-search_in-box" type="search" size="14"></icon>
+          <input type="text" class="weui-search-bar__input" placeholder="搜索" value="{{searchKey}}" focus="{{inputShowed}}" bindinput="inputTyping" />
+          <view class="weui-icon-clear" wx:if="{{searchKey.length > 0}}" bindtap="clearInput">
+            <icon type="clear" size="14"></icon>
+          </view>
+        </view>
+        <label class="weui-search-bar__label" hidden="{{inputShowed}}" bindtap="showInput">
+          <icon class="weui-icon-search" type="search" size="14"></icon>
+          <view class="weui-search-bar__text">搜索</view>
+        </label>
+      </view>
+      <view class="weui-search-bar__cancel-btn" hidden="{{!inputShowed}}" bindtap="hideInput">取消</view>
+    </view>
+  </view>
+  <view class="hhr_view"> 
+    <block wx:for="{{hhrList}}" wx:key="id" wx:for-item="v">
+      <view class="partner" data-item="{{v}}" bindtap='setAdd'>
+        <image src="{{v.user.headimgAttachmentId}}"></image> 
+        <label>{{v.agentName}}</label>
+        <label>{{v.user.phoneNumber}}</label>
+      </view>
+    </block>
+  </view>
+</view>

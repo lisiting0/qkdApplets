@@ -1,0 +1,176 @@
+<!-- 我的邀约 -->
+<view class="page gray">
+  <view class="top-bottom-gray"></view>
+  <view class="page_bd menu-top">
+    <view class="weui-tab">
+      <view class="weui-navbar">
+        <block wx:for="{{tabs}}" wx:key="*this">
+          <view id="{{index}}" class="weui-navbar__item {{activeIndex == index ? 'weui-bar__item_on' : ''}}" bindtap="tabClick">
+            <view class="weui-navbar__title">{{item}}</view>
+          </view>
+        </block>
+        <view class="weui-navbar__slider" style="left: {{sliderLeft}}px; transform: translateX({{sliderOffset}}px); -webkit-transform: translateX({{sliderOffset}}px);"></view>
+      </view>
+    </view>
+  </view>
+  <view class="header" hidden="{{hideHeader}}">
+    <view>下拉刷新中……</view>
+  </view>
+
+  <view class="weui-tab__panel tab-panel-padding" style="background-color:#ffffff;">
+    <scroll-view scroll-y style="width: 100%; height:{{scroll_height+'px'}};" bindscrolltoupper="refresh" bindscrolltolower="loadMore">
+      <view class="weui-tab__content" hidden="{{activeIndex == 1 || activeIndex==2  || activeIndex==3 }}">
+        <view class="content">
+          <view class="jxz_list">
+            <view class="jxz_title">进行中</view>
+            <view class="myOffer_list">
+              <view class="myOffer_list_li" wx:for="{{list}}" wx:key="index" style="border-bottom: none;">
+                <view class="processing" style="width: 235rpx;height: 194rpx;background-image:url({{item.coverimgImages?item.coverimgImages:item.jiaoyouUser.headimgAttachmentId}});'" data-activityMethod="{{item.activityMethod}}" data-datingId="{{item.id}}" bindtap="toActScene">
+                  <text class="jy-type xy" wx:if="{{item.activityMethod==1}}">选缘</text>
+                  <text class="jy-type qy" wx:if="{{item.activityMethod==2}}">抢缘</text>
+                  <text class="jy-type jy" wx:if="{{item.activityMethod==3}}">竞缘</text>
+                  <text class="jy-type zy" wx:if="{{item.activityMethod==4}}">中缘</text>
+                  <text class="jy-type py" wx:if="{{item.activityMethod==5}}">配缘</text>
+                  <view class="playing" wx:if="{{item.state==6}}">
+                    <text></text>
+                    <text></text>
+                    <text></text>
+                  </view>
+                  <image class="user-image" src="{{item.jiaoyouUser.headimgAttachmentId}}" data-id="{{item.jiaoyouUser.id}}" data-silentState="{{item.jiaoyouUser.silentState}}" catchtap="toUserInfo" />
+                  <block wx:if="{{item.state==3&&copyList&&copyList.length>0}}">
+                    <view class="countdown" wx:if="{{copyList[index]['djs']&&copyList[index]['djs'].length<=8}}">
+                      <image class="countdown_icon" src="../../images/countdown_icon.gif"></image>
+                      {{copyList[index]["djs"]}}
+                    </view>
+                    <view class="time" wx:else>  
+                        <icon class="iconfont icon-shijian" style="font-size: 30rpx;display:inline-flex;"></icon>
+                        {{copyList[index]["djs"]}} 
+                    </view>
+                  </block>
+                </view>
+                <view class="aliasName">{{item.jiaoyouUser.aliasName}}</view>
+                <view class="datingDesc">{{item.datingDesc}}</view>
+              </view>
+            </view>
+          </view>
+          <view class="top-bottom-gray clear" style="height: 10rpx;"></view>
+          <view class="yjs_list">
+            <view class="yjs_title">已结束</view>
+            <block wx:for="{{endList}}" wx:key="id" wx:for-item="item">
+              <view class="myOffer_list_end_li" data-id="{{item.id}}" bindtap="toActiveDetail">
+                <image class="end-user-image" src="{{item.coverimgImages?item.coverimgImages:item.jiaoyouUser.headimgAttachmentId}}"></image>
+                <view class="offer_desc">
+                  <view class="offer_title">
+                    <text class="jy-type xy" wx:if="{{item.activityMethod==1}}">选缘</text>
+                    <text class="jy-type qy" wx:elif="{{item.activityMethod==2}}">抢缘</text>
+                    <text class="jy-type jy" wx:elif="{{item.activityMethod==3}}">竞缘</text>
+                    <text class="jy-type zy" wx:elif="{{item.activityMethod==4}}">中缘</text>
+                    <text class="jy-type py" wx:elif="{{item.activityMethod==5}}">配缘</text> 一起{{item.datingThemes==1?'去旅行':item.datingThemes==2?'吃饭':item.datingThemes==3?'看电影':item.datingThemes==4?'唱歌':item.datingThemes==5?'运动':''}}{{item.datingThemes==1?item.datingLocation&&' · '+item.datingLocation:item.datingThemes==2?item.datingLocation&&' · '+item.datingLocation:item.datingThemes==3?item.datingTitle&&' · '+item.datingTitle:item.datingThemes==4?item.datingLocation&&' · '+item.datingLocation:item.datingThemes==5?item.datingTitle&&' · '+item.datingTitle:item.datingTitle&&item.datingTitle}}
+                  </view>
+                  <view class="offer_con">
+                    <view class="iconfont" wx:if="{{item.datingChoseShopName}}">{{item.datingChoseShopName}}</view>
+                    <view class="iconfont" wx:if="{{item.datingLocation}}">{{item.datingLocation}}</view>
+                    <view class="iconfont">{{item.activityStarttime}}</view>
+                    <view class="iconfont" wx:if="{{item.datingDesc}}">{{item.datingDesc}}</view>
+                    <view class="iconfont" wx:else>{{item.allowCompanion==0?'不允许带好友':'可协商携带好友'}}</view>
+                  </view>
+                </view>
+              </view>
+            </block>
+          </view>
+        </view>
+      </view>
+
+      <view class="weui-tab__content" hidden="{{activeIndex == 0 || activeIndex == 3}}">
+      <block wx:for="{{list}}" wx:key="index" wx:for-item="items"> 
+        <view class="myOffer_list_end_li" data-index="{{index}}" data-id="{{items.id}}" bindtap="toActiveDetail" bindtouchstart="drawStart" bindtouchmove="drawMove" bindtouchend="drawEnd" style="right:{{items.right}}rpx">          
+            <image class="end-user-image" src="{{items.coverimgImages?items.coverimgImages:items.jiaoyouUser.headimgAttachmentId}}">
+              <view class="playing" style="position: absolute;right: 0;bottom: 0;" wx:if="{{items.state==6}}">
+                <text></text>
+                <text></text>
+                <text></text>
+              </view>
+              <icon class="iconfont icon-shijian" style="font-size: 30rpx;position: absolute;right: 0;bottom: 0;" wx:if="{{items.state==3}}"></icon>
+            </image>
+            <view class="offer_desc">
+              <view class="offer_title">
+                <text class="jy-type xy" wx:if="{{items.activityMethod==1}}">选缘</text>
+                <text class="jy-type qy" wx:elif="{{items.activityMethod==2}}">抢缘</text>
+                <text class="jy-type jy" wx:elif="{{items.activityMethod==3}}">竞缘</text>
+                <text class="jy-type zy" wx:elif="{{items.activityMethod==4}}">中缘</text>
+                <text class="jy-type py" wx:elif="{{items.activityMethod==5}}">配缘</text> 一起{{items.datingThemes==1?'去旅行':items.datingThemes==2?'吃饭':items.datingThemes==3?'看电影':items.datingThemes==4?'唱歌':items.datingThemes==5?'运动':''}}{{items.datingThemes==1?items.datingLocation&&' · '+items.datingLocation:items.datingThemes==2?items.datingLocation&&'  · '+items.datingLocation:items.datingThemes==3?items.datingTitle&&' · '+items.datingTitle:items.datingThemes==4?items.datingLocation&&' · '+items.datingLocation:items.datingThemes==5?items.datingTitle&&' · '+items.datingTitle:items.datingTitle&&items.datingTitle}}
+              </view>
+              <view class="offer_con">
+                <view class="iconfont" wx:if="{{items.datingChoseShopName}}">{{items.datingChoseShopName}}</view>
+                <view class="iconfont" wx:if="{{items.datingLocation}}">{{items.datingLocation}}</view>
+                <view class="iconfont">{{items.activityStarttime}}</view>
+                <view class="iconfont" wx:if="{{items.datingDesc}}">{{items.datingDesc}}</view>
+                <view class="iconfont" wx:else>{{items.allowCompanion==0?'不允许带好友':'可协商携带好友'}}</view>
+              </view>
+              <block wx:if="{{activeIndex==1}}">
+                <text class="action-btn jrxc" data-activityMethod="{{item.activityMethod}}" data-datingId="{{item.id}}" catchtap="toActScene">进入现场</text>
+                <text class="ygz_state" wx:if="{{items.state==5}}">已结束</text>
+              </block>
+              <block wx:if="{{activeIndex==2}}">
+                <block wx:if="{{items.state!=5}}">
+                  <text class="action-btn zdyy" wx:if="{{items.state==2}}" data-id="{{items.id}}">编辑</text>
+                  <text class="action-btn zdyy" wx:elif="{{items.toTop==0}}" data-id="{{items.id}}" data-index="{{index}}" catchtap="toTop">置顶邀约</text>
+                  <text class="action-btn qxzd" wx:elif="{{items.toTop==1}}" data-id="{{items.id}}" data-index="{{index}}" catchtap="unToTop">取消置顶</text>
+                </block>
+                <text class="action-btn jrxc {{items.state!=5?'top2':''}}" data-id="{{items.id}}" data-activityMethod="{{items.activityMethod}}" catchtap="toActScene">进入现场</text>
+                <text class="ygz_state" wx:if="{{items.state==5}}">已结束</text>
+              </block>
+            </view> 
+            <view class="touch-btn"> 
+              <view class="qxgz" data-id="{{items.id}}" data-index="{{index}}" catchtap="unfollowActivity" wx:if="{{activeIndex==1}}">取消关注</view>
+              <view class="remove" data-id="{{items.id}}" data-index="{{index}}" catchtap="unPulish" wx:elif="{{activeIndex==2}}">删除邀约</view>
+            </view>
+        </view>
+        </block>
+      </view>
+      <view class="weui-tab__content" hidden="{{activeIndex == 0 || activeIndex == 1 || activeIndex == 2}}">
+        <block wx:for="{{list}}" wx:key="index" wx:for-item="items"> 
+          <view class="myOffer_list_end_li" data-id="{{items.id}}" bindtap="toActiveDetail" bindtouchstart="handletouchtart">          
+            <image class="end-user-image" src="{{items.coverimgImages?items.coverimgImages:items.jiaoyouUser.headimgAttachmentId}}">
+              <view class="playing" style="position: absolute;right: 0;bottom: 0;" wx:if="{{items.state==6}}">
+                <text></text>
+                <text></text>
+                <text></text>
+              </view>
+              <icon class="iconfont icon-shijian" style="font-size: 30rpx;position: absolute;right: 0;bottom: 0;" wx:if="{{items.state==3}}"></icon>
+            </image>
+            <view class="offer_desc">
+              <view class="offer_title">
+                <text class="jy-type xy" wx:if="{{items.activityMethod==1}}">选缘</text>
+                <text class="jy-type qy" wx:elif="{{items.activityMethod==2}}">抢缘</text>
+                <text class="jy-type jy" wx:elif="{{items.activityMethod==3}}">竞缘</text>
+                <text class="jy-type zy" wx:elif="{{items.activityMethod==4}}">中缘</text>
+                <text class="jy-type py" wx:elif="{{items.activityMethod==5}}">配缘</text> 一起{{items.datingThemes==1?'去旅行':items.datingThemes==2?'吃饭':items.datingThemes==3?'看电影':items.datingThemes==4?'唱歌':items.datingThemes==5?'运动':''}}{{items.datingThemes==1?items.datingLocation&&' · '+items.datingLocation:items.datingThemes==2?items.datingLocation&&'  · '+items.datingLocation:items.datingThemes==3?items.datingTitle&&' · '+items.datingTitle:items.datingThemes==4?items.datingLocation&&' · '+items.datingLocation:items.datingThemes==5?items.datingTitle&&' · '+items.datingTitle:items.datingTitle&&items.datingTitle}}
+              </view>
+              <view class="offer_con">
+                <view class="iconfont" wx:if="{{items.datingChoseShopName}}">{{items.datingChoseShopName}}</view>
+                <view class="iconfont" wx:if="{{items.datingLocation}}">{{items.datingLocation}}</view>
+                <view class="iconfont">{{items.activityStarttime}}</view>
+                <view class="iconfont" wx:if="{{items.datingDesc}}">{{items.datingDesc}}</view>
+                <view class="iconfont" wx:else>{{items.allowCompanion==0?'不允许带好友':'可协商携带好友'}}</view>
+              </view>
+               <view class="action-btn jrxc" data-index="{{index}}" data-id="{{items.id}}" catchtap="showComment">
+                <icon class="iconfont icon-bianji" style='font-size:30rpx;display:inline-flex;margin-right:5rpx;'></icon>
+                待评价
+              </view>
+            </view>  
+          </view>
+        </block> 
+      </view>
+      <view class="bottom" hidden="{{hideBottom}}">已加载全部数据</view>
+    </scroll-view>
+  </view>
+</view>
+
+
+<form bindsubmit="sendComment" report-submit="true">
+  <view wx:if="{{showTextarea}}" class="commentAdd">
+    <textarea placeholder-class="input_null" fixed="true" maxlength="-1" show-confirm-bar="false" cursor-spacing="15" auto-height="true" placeholder="请输入..." name="comment"></textarea>
+    <button class="send-btn" form-type="submit">发送</button>
+  </view>
+</form>

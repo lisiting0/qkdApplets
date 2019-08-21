@@ -1,0 +1,23 @@
+<view class="page">
+  <view class="top-bottom-gray"></view>
+  <scroll-view scroll-y style="width: 100%; height:{{scroll_height+'px'}};" bindscrolltoupper="refresh" bindscrolltolower="loadMore">
+    <view class="myPrize" wx:for="{{listArr}}" wx:key="index">
+      <view class="left_info">
+        <view>{{item.type==1?"乾坤币":item.objId}}</view>
+        <view>{{item.createDate}}</view>
+      </view>
+      <view class="right_info">
+        <view wx:if="{{item.type==1}}">+ {{item.objId}}</view>
+        <navigator hover-class="none" class="dating_info" wx:elif="{{item.dating&&item.dating.jiaoyouUser&&item.type==0}}">
+          <image src="{{item.dating.jiaoyouUser.headimgAttachmentId}}"></image>>
+          <view class="dating_detail">
+            <view>{{item.dating.datingDesc}}</view>
+            <view>{{item.dating.datingStarttime}}</view>
+          </view>
+        </navigator>
+        <view class="jb" wx:else>+ {{1}}</view>
+      </view>
+    </view>
+    <view class="bottom" hidden="{{hideBottom}}">已加载全部数据</view>
+  </scroll-view>
+</view>

@@ -1,0 +1,92 @@
+<view class="page">
+  <view class="content" style='background-image:url({{bgImg}})'>
+    <view class='content-one'>
+      <text>累签乾坤币</text>
+      <icon class="iconfont icon-question"></icon>
+    </view>
+    <view class='content-two'>
+      <text>{{totalCoins}}</text>
+      <view class='qd-btn' wx:if="{{showSigned}}">已签到</view>
+      <view class='qd-btn' catchtap='showSign' wx:else>点击签到</view>
+    </view>
+  </view>
+  <view class="rili">
+    <view class="rili-panel" style='background-image:url({{riliImg}})'>
+      <view class="rili-title">{{title}}</view>
+      <view class="rili-px">
+        <text>日</text>
+        <text>一</text>
+        <text>二</text>
+        <text>三</text>
+        <text>四</text>
+        <text>五</text>
+        <text>六</text>
+      </view>
+      <view class="rili-day">
+        <block wx:for="{{dateArr}}" wx:key="index">
+          <text class="{{item.type===1?'cicle':''}}">{{item.value==null?'':item.value}}</text>
+        </block>
+      </view>
+    </view>
+  </view>
+  <view class="rili3">
+    <view class="rili3-title">累计签到奖励：</view>
+    <view class="rili3-list">
+      <view class='line'>
+        <view class='red-line' style="width:{{signOnWidth}}%"></view>
+      </view>
+      <view class='ul'>
+        <view class="li {{signOnList.length>=5?'active':''}}">
+          <view class="qd-days">
+            <text>5天</text>
+            <icon class='iconfont'></icon>
+          </view>
+          <view class='tips'>
+            <text>乾坤币+5</text>
+            <text>活跃+5</text>
+          </view>
+        </view>
+        <view class="li {{signOnList.length>=10?'active':''}}">
+          <view class="qd-days">
+            <text>10天</text>
+            <icon class='iconfont'></icon>
+          </view>
+          <view class='tips'>
+            <view>乾坤币+10</view>
+            <view>活跃+10</view>
+          </view>
+        </view>
+        <view class="li {{signOnList.length>=15?'active':''}}">
+          <view class="qd-days">
+            <text>15天</text>
+            <icon class='iconfont'></icon>
+          </view>
+          <view class='tips'>
+            <view>乾坤币+15</view>
+            <view>活跃+15</view>
+          </view>
+        </view>
+        <view class="li {{signOnList.length>=20?'active':''}}">
+          <view class="qd-days">
+            <text>20天</text>
+            <icon class='iconfont'></icon>
+          </view>
+          <view class='tips'>
+            <view>乾坤币+20</view>
+            <view>活跃+20</view>
+          </view>
+        </view>
+        <view class="li {{signOnList.length>=25?'active':''}}">
+          <view class="qd-days"> 
+            <text>25天</text>
+            <icon class='iconfont'></icon>
+          </view>
+          <view class='tips'>
+            <view>乾坤币+25</view>
+            <view>活跃+25</view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,36 @@
+<!--金屋/乾坤币-->
+<view class="page gray jy_qb">
+  <view class="top-bottom-gray"></view>
+  <view class="jy_qb_block">
+    <view class="jy_qb_t">
+      <view class="jy_qb_p">账号：{{userInfo.aliasName}}</view>
+      <view class="jy_qb_p">余额：
+        <text class="jy_qb_coin">{{userInfo.userMoney}}</text>
+      </view>
+    </view>
+    <view class="jy_qb_tit">乾坤币数量</view>
+    <view class="jy_qb_list">
+      <view class="jy_qb_list_li {{jbIndex==index?'cur':''}}" wx:for="{{jbList}}" wx:key='index' wx:for-index="index" data-index="{{index}}" bindtap="bindIndex">
+        <view class="a {{jbIndex==index?'iconfont icon-duigou':''}}">
+          {{isiOSApp?Math.round(item.amount*0.7):item.amount}}
+          <text class="give-text" wx:if="{{item.giveAmount&&item.giveAmount>0}}">(送{{item.giveAmount}})</text>
+          <text class="em">{{item.price}}元</text>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view wx:if="{{!isiOSApp}}" class="jy_qb_block">
+    <view class="jy_qb_tit">支付方式</view>
+    <view class="jy_qb_pay_list">
+      <block wx:for="{{payType}}" wx:key="index" wx:for-index="pIndex" wx:for-item="items" >
+        <view class="jy_qb_pay_list_li {{pIndex==payIndex?'cur':''}} iconfont {{pIndex=='alipay'?'icon-icon-alipay':''}} {{pIndex=='wxpay'?'icon-weixindenglu':''}}" wx:if="{{payIndex!='alipay' || (payIndex=='alipay'&&!isWeixin)}}" data-payindex="{{pIndex}}" bindtap="bindPayIndex">{{items}}
+        </view>
+      </block>
+    </view>
+  </view>
+  <view wx:if="{{jbList.length>0}}" class="jy_qb_pay_all">应付
+    <text>{{jbList[jbIndex].price}}</text>元
+  </view>
+  <view class="jy_qb_xy iconfont icon-zhuyi">充值成功后，到账可能有一定延迟，请耐心等待。若长时间未到账，您可以在 我的-帮助与反馈 中联系我们。</view>
+  <view class="jy_qb_btn" bindtap="recharge">立即充值</view>
+</view>

@@ -1,0 +1,32 @@
+<view class="page gray jy_setting">
+  <view class="top-bottom-gray"></view>
+  <view class="jy_block_t">
+    <view class="iconfont jy_aInfo_line">
+      <navigator hover-class="none" url="/pages/setting/accountSecurity">账号安全</navigator>
+    </view>
+  </view>
+  <view class="jy_block_t">
+    <view class="iconfont jy_aInfo_line">
+      <navigator hover-class="none" url="/pages/setting/notice">消息通知</navigator>
+    </view>
+    <view class="iconfont jy_aInfo_line">
+      <navigator hover-class="none" url="/pages/setting/blacklist">黑名单</navigator>
+    </view>
+    <view class="jy_aInfo_line tui-menu-list">
+      <text>不允许别人看我</text>
+      <switch class="tui-fr" color="#FF9000" checked="{{onOff}}" bindchange="onClick" />
+    </view>
+  </view>
+  <view class="jy_block_t">
+    <view class="iconfont jy_aInfo_line" bindtap="clearCache"> 清理缓存</view>
+  </view>
+  <view class="jy_block_t">
+    <view class="iconfont jy_aInfo_line">
+      <navigator hover-class="none" url="/pages/setting/about">关于</navigator>
+    </view>
+  </view>
+  <view class="jy_auth_btn" bindtap="logout">退出当前账号</view>
+
+  <androidConfirmModal id='confrimModal' title='温馨提示' content='开启“不允许别人看我”期间，你将无法看到Ta的信息，同时Ta也无法看到你的信息，确定要开启？' btn_ok='确认' bind:cancel="_cancel" bind:confirm="_confirm">
+  </androidConfirmModal>
+</view>

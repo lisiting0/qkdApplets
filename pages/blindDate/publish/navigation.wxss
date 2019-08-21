@@ -1,0 +1,39 @@
+page {
+  height: 100%;
+}
+
+.container {
+  margin: 20rpx 0;
+  position: relative;
+}
+
+.input_view {
+  font-size: 32rpx;
+  line-height: 36rpx;
+  border-width: 15rpx 20rpx;
+  border-style: solid;
+  border-color: #fff;
+  outline: 0;
+  background-color: #fff;
+  word-wrap: break-word;
+}
+
+.img_view {
+  display: flex;
+  padding: 4px;
+  background-color: white;
+  margin-left: 10px;
+  flex-direction: row;
+  align-items: flex-start;
+}
+
+.toWrite {
+  width: 100rpx;
+  height: 100rpx;
+  line-height: 100rpx;
+  position: fixed;
+  right: 30rpx;
+  bottom: 150rpx;
+  border-radius: 50%;
+  background-color: #F2F2F2;
+} 

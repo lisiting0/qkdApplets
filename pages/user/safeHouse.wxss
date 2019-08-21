@@ -1,0 +1,265 @@
+.main-content {
+  background-color: #fff;
+  padding: 45rpx 30rpx 55rpx;
+  color: #fff;
+}
+
+.money {
+  background-size: cover;
+  background-position: center;
+  height: 260rpx;
+  border-radius: 8px;
+}
+
+.qkb {
+  margin-top: 40rpx;
+  background-size: cover;
+  background-position: center;
+  height: 260rpx;
+  border-radius: 8px;
+}
+
+.money, .qkb {
+  box-shadow: 0 5px 10px #ccc;
+  position: relative;
+}
+
+.money .one-panel, .qkb .one-panel {
+  padding: 24rpx 0 0 27rpx;
+  display: flex;
+  justify-content: space-between;
+}
+
+.money .one-panel .left-panel, .qkb .one-panel .left-panel {
+  display: inline-flex;
+  align-items: center;
+}
+
+.money .one-panel .left-panel image, .qkb .one-panel .left-panel image {
+  width: 60rpx;
+  height: 60rpx;
+}
+
+.money .one-panel .left-panel view, .qkb .one-panel .left-panel view {
+  margin-left: 30rpx;
+  font-weight: 500;
+  font-size: 30rpx;
+}
+
+.money .one-panel .right-panel, .qkb .one-panel .right-panel {
+  display: inline-flex;
+  align-items: center;
+}
+
+.money .one-panel .right-panel view, .qkb .one-panel .right-panel view {
+  font-size: 30rpx;
+}
+
+.money .one-panel .right-panel view:last-child,
+.qkb .one-panel .right-panel view:last-child {
+  width: 200rpx;
+  margin-left: 30rpx;
+  font-weight: 500;
+  font-size: 30rpx;
+}
+
+.money .two-panel, .qkb .two-panel {
+  margin: 30rpx 0 0;
+  display: flex;
+}
+
+.two-panel .jrsr, .two-panel .jrzc {
+  width: 35%;
+  text-align: center;
+}
+
+.money .two-panel view .jrsr, .qkb .two-panel view .jrsr {
+  width: 35%;
+  text-align: center;
+  border-radius: 10rpx;
+}
+
+.money .two-panel .jrsr view:first-child, .qkb .two-panel .jrsr view:first-child {
+  padding-left: 10rpx;
+  font-size: 30rpx;
+}
+
+.tubiao {
+  position: absolute;
+  right: -13rpx;
+  top: 120rpx;
+  width: 200rpx;
+  height: 60rpx;
+  line-height: 60rpx;
+  background-color: #0b628a;
+  border-radius: 40rpx 0 0 40rpx;
+  display: flex;
+  justify-content: space-between;
+  padding-left: 40rpx;
+}
+
+.tubiao icon {
+  display: flex;
+  font-size: 14px;
+}
+
+.tubiao text {
+  font-size: 30rpx;
+}
+
+.tubiao text.text-line {
+  background-color: #0b628a;
+  display: inline-block;
+  height: 100rpx;
+  width: 15rpx;
+}
+
+.tuiguang {
+  display: flex;
+  justify-content: space-between;
+  margin: 30rpx;
+  align-items: center;
+  background-color: #fff;
+  border-radius: 5px;
+  -webkit-box-shadow: 0 0 10px #ccc;
+  box-shadow: 0 0 10px #ccc;
+}
+
+.tuiguang .tuiguang-link {
+  flex-grow: 1;
+  padding: 30rpx 0 40rpx;
+  text-align: center;
+  font-size: 30rpx;
+}
+
+.tuiguang icon {
+  font-size: 22px;
+  margin-bottom: 8rpx;
+}
+
+.earncoin {
+  margin: 30rpx;
+  background-color: #fff;
+  border-radius: 5px;
+  -webkit-box-shadow: 0 0 10px #ccc;
+  box-shadow: 0 0 10px #ccc;
+}
+
+.zqkb {
+  display: flex;
+  justify-content: space-between;
+  padding: 35rpx 27rpx 10rpx;
+  font-size: 30rpx;
+}
+
+.zqkb-img {
+  width: 30rpx;
+  height: 30rpx;
+  padding: 10rpx;
+  background-color: #be8d52;
+  margin-right: 10rpx;
+  border-radius: 3px;
+}
+
+.zqkb-img image {
+  width: 100%;
+  height: 100%;
+}
+
+.zqkb-text {
+  padding-left: 10rpx;
+  flex-grow: 1;
+}
+
+.zqkb-text text {
+  height: 40rpx;
+  font-size: 32rpx;
+  font-weight: 500;
+}
+
+.zqkb-link {
+  color: #cacaca;
+}
+
+.zqkb-link icon {
+  display: inline-flex;
+}
+
+.zqkb-tips {
+  padding-left: 85rpx;
+}
+
+.zqkb-tips text {
+  font-size: 30rpx;
+  color: #cacaca;
+}
+
+.rwzx-list {
+  padding: 0 27rpx 30rpx;
+}
+
+.jy_earn_list {
+  margin-top: 45rpx;
+  overflow: hidden;
+}
+
+.jy_earn_list_li {
+  display: flex;
+  position: relative;
+  padding: 32rpx 0;
+  align-items: center;
+  overflow: hidden;
+}
+
+.jy_earn_img {
+  width: 130rpx;
+  height: 130rpx;
+  margin-right: 30rpx;
+}
+
+.center-text {
+  width: 50%;
+}
+
+.center-one {
+  color: #333;
+  font-size: 30rpx;
+  margin: 0;
+  font-weight: normal;
+}
+
+.center-one text:first-child {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.center-one text:last-child {
+  margin-left: 20rpx;
+  font-size: 32rpx;
+  color: #00b1f7;
+}
+
+.center-two {
+  font-size: 28rpx;
+  color: #c6c6c6;
+}
+
+.action-btn {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  margin-top: -40rpx;
+  width: 130rpx;
+  height: 60rpx;
+  line-height: 60rpx;
+  border-radius: 40rpx;
+  font-size: 28rpx;
+  color: #fff;
+  text-align: center;
+  background-color: #e85244;
+}
+
+.finished {
+  background-color: #c6c6c6;
+}

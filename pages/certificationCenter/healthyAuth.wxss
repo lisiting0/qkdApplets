@@ -1,0 +1,14 @@
+.jy_info_block {
+  margin: 0 20rpx;
+}
+
+.rz_block .rz_container {
+  width: 20%;
+}
+
+.jy_auth .jy_auth_up4 {
+  width: 360rpx;
+  height: 230rpx;
+  margin-bottom: 20rpx;
+  border-radius: 20rpx;
+}

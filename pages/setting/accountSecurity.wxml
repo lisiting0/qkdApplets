@@ -1,0 +1,27 @@
+<!-- 账号安全 -->
+<view class="page gray">
+  <view class="top-bottom-gray"></view>
+  <view class="jy_block_t">
+    <view class="iconfont jy_aInfo_line">
+      <navigator hover-class="none" url="/pages/login/modifyPassword">密码修改</navigator>
+    </view>
+    <view class="iconfont jy_aInfo_line">
+      <navigator hover-class="none" url="/pages/login/bindPhone">手机绑定
+        <text>更换手机</text>
+      </navigator>
+    </view>
+  </view>
+  <view class="jy_p_tit">账号绑定</view>
+  <view class="jy_block_t" style="margin-top:0;">
+    <view class="iconfont jy_aInfo_line">
+      <navigator hover-class="none" url="/pages/setting/bindLogin?type=wechat">微信绑定
+        <text>{{userInfo.wechatId?'已绑定':'未绑定'}}</text>
+      </navigator>
+    </view>
+    <view class="iconfont jy_aInfo_line">
+      <navigator hover-class="none" url="/pages/setting/bindLogin?type=qq">QQ绑定
+        <text>{{userInfo.qqId?'已绑定':'未绑定'}} </text>
+      </navigator>
+    </view>
+  </view>
+</view>

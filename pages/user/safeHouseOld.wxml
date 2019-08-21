@@ -1,0 +1,98 @@
+<!-- 金屋 -->
+<view class="page gray jy_jw">
+  <view class="jy_jw_top">
+    <image src="../../images/jw_top.jpg"></image>
+    <view class='jy_jw_top_position'>
+      <view class="jy_jw_top_p">余额(元）</view>
+      <view class="jy_jw_top_m">
+        ￥
+        <text>{{userIncome}}</text>
+        <navigator hover-class="none" url="/pages/safeHouse/putforward" class="jy_jw_tx">提现</navigator>
+      </view>
+    </view>
+  </view>
+  <view class="jy_jw_money">
+    <navigator hover-class="none" class="jy_jw_money_li" url="/pages/safeHouse/recharge">
+      <text>乾坤币\n</text>
+      <text>{{userInfo.userMoney}}</text>
+    </navigator>
+    <navigator hover-class="none" class="jy_jw_money_li" url="/pages/safeHouse/gift">
+      <text>今日收入\n</text>
+      <text>{{dayCount}}</text>
+    </navigator>
+    <navigator hover-class="none" class="jy_jw_money_li" url="/pages/safeHouse/bond">
+      <text>保证金\n</text>
+      <text>{{userInfo.depositMoney}}</text>
+    </navigator>
+  </view>
+  <view class="jy_jw_tit">推广服务</view>
+  <view class="jy_jw_money">
+    <navigator hover-class="none" class="jy_jw_money_li" url="/pages/safeHouse/qrCode">
+      <icon class="iconfont icon-qr-code" style="color: #87a7d6;"></icon>
+      <text class="tg_text">\n我的二维码</text>
+    </navigator>
+    <navigator hover-class="none" class="jy_jw_money_li" url="/pages/safeHouse/agent">
+      <icon class="iconfont icon-huiyiguanli" style="color: #3bb3fa;"></icon>
+      <text class="tg_text">\n我的代理</text>
+    </navigator>
+    <navigator hover-class="none" class="jy_jw_money_li" url="/pages/safeHouse/bill">
+      <image src="../../images/zd_icon.png"></image>
+      <text class="tg_text">账单</text>
+    </navigator>
+  </view>
+  <view class="jy_jw_tit">乾坤服务</view>
+  <view class="jy_jw_money" style='height: 240rpx;'>
+    <view class="jy_jw_money_li">
+      <image src="../../images/icon_shop.png"></image>
+      <text class="tg_text">购物</text>
+    </view>
+    <navigator hover-class="none" class="jy_jw_money_li" url="/pages/safeHouse/sendGift">
+      <image src="../../images/icon_gift2.png"></image>
+      <text class="tg_text">选礼</text>
+    </navigator>
+    <navigator hover-class="none" class="jy_jw_money_li" url="/pages/safeHouse/prizeDraw">
+      <image src="../../images/icon_prize3.png"></image>
+      <text class="tg_text">抽奖</text>
+    </navigator>
+    <navigator hover-class="none" class="jy_jw_money_li" url="/pages/safeHouse/earnCoin">
+      <image src="../../images/icon_jb.png"></image>
+      <text class="tg_text">赚乾坤币</text>
+    </navigator>
+  </view>
+  <view class="jy_jw_tit">
+    推荐邀约
+    <view class="view-more">
+      <navigator hover-class="none" url="/pages/affinity/love" open-type="switchTab">查看更多</navigator>
+      <icon class="iconfont icon-arrow_r" style="display:inline-flex;"></icon>
+    </view>
+  </view>
+
+  <view class="clearfix function_container">
+    <view class="fjjy_con" wx:for="{{nearArr}}" wx:key="*this">
+      <view class="fjyy_panel" style="background-image:url('{{item.coverimgImages?item.coverimgImages:item.jiaoyouUser.headimgAttachmentId}}')">
+        <view class="left_con xy" wx:if="{{item.activityMethod==1}}">选缘-{{item.datingTitle}}</view>
+        <view class="left_con qy" wx:elif="{{item.activityMethod==2}}">抢缘-{{item.datingTitle}}</view>
+        <view class="left_con jy" wx:elif="{{item.activityMethod==3}}">竞缘-{{item.datingTitle}}</view>
+        <view class="left_con zy" wx:elif="{{item.activityMethod==4}}">中缘-{{item.datingTitle}}</view>
+        <view class="left_con py" wx:else="{{item.activityMethod==5}}">配缘-{{item.datingTitle}}</view>
+        <view class="bottom_con clearfix">
+          <view class="bottom_lf fl">
+            <icon class="iconfont icon-shijianlishijilujishizhongbiaomianxing fl"></icon>
+            <view class="starttime">{{item.datingStarttime}}</view>
+          </view>
+          <view class="bottom_rf fl">
+            <icon class="iconfont icon-weizhi"></icon>
+            <view>{{item.areaName}}</view>
+          </view>
+        </view>
+      </view>
+      <view class="fjyy_name">{{item.datingDesc}}</view>
+      <view class="fjyy_icon fl">
+        <image src="../../images/message/3.png" wx:if="{{item.state==3}}"></image>
+        <image src="../../images/message/6.png" wx:elif="{{item.state==6}}"></image>
+      </view>
+      <view class="fjyy_time">{{item.activityStarttime}}</view>
+    </view>
+  </view>
+</view>
+

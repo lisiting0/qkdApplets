@@ -1,0 +1,196 @@
+<!--相亲详情-->
+<import src="../../utils/wxParse/wxParse.wxml" />
+<view class="page gray {{(blindDateSingle.state==3 && blindDateSingle.isCandidate==0)?'active':((blindDateSingle.state==3&&blindDateSingle.isCandidate==1) || blindDateSingle.state==6)?'live':'end'}}">
+  <view class="at_img at_img_auto" wx:if="{{blindDateSingle.datingDetailsExt}}">
+    <image class="at_i_img" src="{{blindDateSingle.datingDetailsExt.extString}}" />
+    <view class="at_zc">{{specialType[blindDateSingle.datingDetailsExt.extInt5]}}专场</view>
+  </view>
+  <view class="at_desc">
+    <view class="at_title">
+      <text wx:if="{{blindDateSingle.datingDetailsExt}}">[{{lineType[blindDateSingle.datingDetailsExt.extInt]}}·{{specialType[blindDateSingle.datingDetailsExt.extInt5]}}专场]</text>{{blindDateSingle.datingTitle}}
+    </view>
+    <view class="at_count">
+      <icon class="iconfont icon-guanzhu"></icon>
+      <text class="{{blindDateSingle.state==3&&blindDateSingle.isCandidate==0?'active':''}}">{{blindDateSingle.followCount}}</text>人关注
+      <icon class="iconfont icon-heart" style="margin-left: 10rpx;"></icon>
+      <text class="{{blindDateSingle.state==3&&blindDateSingle.isCandidate==0?'active':''}}">{{blindDateSingle.enrollCount}}</text>人报名
+    </view>
+  </view>
+  <view class="at_con">
+    <icon class="iconfont icon-rili"></icon>
+    <text>{{blindDateSingle.activityStarttime}}</text>
+  </view>
+  <view class="at_con at_address">
+    <icon class="iconfont icon-weizhi"></icon>
+    <text>{{blindDateSingle.datingLocation}}</text>
+  </view>
+
+  <view class="at_con" wx:if="{{blindDateSingle.enrollFee!=undefined}}">
+    <icon class="iconfont icon-dashang3"></icon>
+    <block wx:if="{{channel.money!=blindDateSingle.enrollFee}}">
+      <text class="money del">{{blindDateSingle.enrollFee||0}}元</text>，
+    </block>
+    <text class="money">{{channel.money||0}}</text> 元
+    <block wx:if="{{channel.money!=blindDateSingle.enrollFee}}">
+      <text class="money">
+    {{channel.name?channel.money==0?'('+channel.name+"免费 )":'('+channel.name+"优惠 "+blindDateSingle.enrollFee-channel.money+"元)":''}}</text>
+    </block>
+  </view>
+
+  <view class="at_con" wx:if="{{blindDateSingle.datingDetailsExt}}">
+    <icon class="iconfont icon-feiji"></icon>{{specialType[blindDateSingle.datingDetailsExt.extInt5]}}专场
+  </view> 
+  <view class="ybm_list" wx:if="{{blindDateSingle.state!=5 && blindDateSingle.candidateList}}"> 
+    <view wx:if="{{((isLogin&&blindDateSingle.isCandidate !=1) || !isLogin) && !isManage && !isAdmin}}" class="ac_list_fix">
+      <view class="at_con at_con_bm">
+        <icon class="iconfont icon-qunzu"></icon>已报名人员{{enrollPepple.maxBoy!=undefined?'(男: '+enrollPepple.boy+'/'+enrollPepple.maxBoy+' 女: '+enrollPepple.girl+'/'+enrollPepple.maxGirl+')':blindDateSingle.enrollCount+'(男:'+enrollPepple.boy+',女:'+enrollPepple.girl+')/'+blindDateSingle.datingDetailsExt.extInt4}}
+      </view>
+      <view class="ybm_user_list tips">
+        <view class="ybm_user_list_li" wx:for="{{blindDateSingle.candidateList}}" wx:key="id" wx:for-item="candidateList" wx:if="index<7">
+          <view class='a' style="background-image:url({{candidateList.jiaoyouUser.headimgAttachmentId}});">
+            <icon class="iconfont icon-xinaixin heart" wx:if="{{candidateList.jiaoyouUser.isGood==0 && userInfo.sex!=candidateList.candidateSex}}"></icon>
+            <icon class="iconfont icon-heart heart" style="color: #ff0000;font-size: 0.8rem;top: -0.1rem;" wx:if="{{candidateList.jiaoyouUser.isGood==1&&userInfo.sex!=candidateList.candidateSex}}"></icon>
+            <view class="bottom_info">  
+              <text class="username">{{candidateList.jiaoyouUser.aliasName}}</text>
+              <view class="sex" style="{{candidateList.candidateSex==2?'background-color: #00b4ff;':'background-color: #ff3883'}}">
+                <icon class="iconfont icon-xingbie" wx:if="{{candidateList.candidateSex==2}}"></icon>
+                <icon class="iconfont icon-xingbie-nv" wx:if="{{candidateList.candidateSex==1}}"></icon>
+                <text>{{candidateList.jiaoyouUser.age}}</text>
+                </view>
+            </view>
+          </view>
+        </view>
+        <view style="width:2.28rem;height:2.28rem;background-color: #fd5359;border-radius: 0.2rem;color: #ffffff;line-height: 2.28rem;" wx:if="{{blindDateSingle.candidateList.length>=7}}">更多
+        </view>
+      </view>
+    </view>
+    <view wx:elif="{{blindDateSingle.isCandidate ==1 || showMb}}">
+      <navigator hover-class="none" url="../../pages/blindDate/registrationStaff?id={{id}}" class="at_con at_con_bm" wx:if="{{blindDateSingle.candidateList}}">
+        <icon class="iconfont icon-qunzu"></icon>已报名人员{{enrollPepple.maxBoy!=undefined?'(男: '+enrollPepple.boy+'/'+enrollPepple.maxBoy+' 女: '+enrollPepple.girl+'/'+enrollPepple.maxGirl+')':blindDateSingle.enrollCount+'(男:'+enrollPepple.boy+',女:'+enrollPepple.girl+')/'+blindDateSingle.datingDetailsExt.extInt4}}
+        <icon class="iconfont icon-arrow_r right" style="color:#b2b2b2;position:absolute;right:0;"></icon>
+      </navigator>
+      <view class="ybm_user_list"> 
+        <view class="ybm_user_list_li" wx:for="{{blindDateSingle.candidateList}}" wx:key="id" wx:for-index="index" wx:if="{{index<7}}">
+          <view class='a' style="background-image:url({{item.jiaoyouUser.headimgAttachmentId}});'" data-url="userInfo" data-userid='{{item.jiaoyouUser.id}}' data-id="{{item.id}}" data-state="{{item.jiaoyouUser.silentState}}" catchtap='toLink'> 
+            <icon class="iconfont icon-xinaixin heart" data-userid='{{item.jiaoyouUser.id}}' data-index='{{index}}' catchtap="addGood" wx:if="{{item.jiaoyouUser.isGood==0 && userInfo.sex!=item.candidateSex}}"></icon> 
+            <icon class="iconfont icon-heart heart" style="color: #ff0000;font-size:38rpx;" data-userid='{{item.jiaoyouUser.id}}' data-index='{{index}}' catchtap="delGood" wx:if="{{item.jiaoyouUser.isGood==1&& userInfo.sex!=item.candidateSex}}"></icon>
+            <view class="bottom_info">
+              <text class="username">{{item.jiaoyouUser.aliasName}}</text>
+              <view class="sex" style="{{item.candidateSex==2?'background-color: #00b4ff;':'background-color: #ff3883'}}">
+                <icon class="iconfont icon-xingbie" wx:if="{{item.candidateSex==2}}"></icon>
+                <icon class="iconfont icon-xingbie-nv" wx:if="{{item.candidateSex==1}}"></icon>
+                <text>{{item.jiaoyouUser.age }}</text>
+              </view>
+            </view>
+          </view>
+        </view> 
+        <view style="width:2.28rem;height:2.28rem;background-color: #fd5359;border-radius: 0.2rem;color: #ffffff;line-height: 2.28rem;"  data-url="registrationStaff" data-id="{{id}}" catchtap="toLink" wx:if="{{blindDateSingle.candidateList.length>=7}}">更多
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="ct_intro_title">活动</view>
+  <view class="ct_intro">
+    <view class="ct_into_con">
+      <view class="title">主题</view>
+      <view class="desc">{{blindDateSingle.datingDesc}}</view>
+    </view>
+    <view class="ct_into_con">
+      <view class="title">报名时间</view>
+      <view wx:if="{{blindDateSingle.datingDetailsExt}}" class="desc">
+        {{blindDateSingle.datingDetailsExt.extDatetime}} 至 {{blindDateSingle.datingDetailsExt.extDatetime2}}
+      </view>
+    </view>
+    <view class="ct_into_con">
+      <view class="title">活动时间</view>
+      <view class="desc">{{blindDateSingle.activityStarttime}}</view>
+    </view>
+    <view class="ct_into_con">
+      <view class="title">活动地点</view>
+      <view class="desc">{{blindDateSingle.cityName}}{{blindDateSingle.areaName}}{{blindDateSingle.datingLocation}}</view>
+      <view style="padding-left: 20rpx;">地址导航：</view>
+      <!--  @click="showBigImg($event)" -->
+      <view class="contentDetail">
+        <template is="wxParse" data="{{wxParseData: contentCpt.nodes}}" />
+      </view>
+    </view>
+    <view class="ct_into_con">
+      <view class="title">活动流程</view>
+      <view class="contentDetail">
+        <template is="wxParse" data="{{wxParseData: activityProcessHtml.nodes}}" />
+      </view>
+    </view>
+    <view class="ct_into_con" wx:if="{{blindDateSingle.hostPartyList&&blindDateSingle.hostPartyList.length>0}}">
+      <view class="title">主办单位</view>
+      <view class="logo_list">
+        <view wx:for="{{blindDateSingle.hostPartyList}}" wx:key="id" wx:for-item="hostParty">
+          <image src="{{hostParty.company.logoUrl}}" alt="" class="logo"></image>
+          <view style="text-align: center;font-size: 32rpx;color: #666666">{{hostParty.company.unitName}}</view>
+        </view>
+      </view>
+    </view>
+    <view class="ct_into_con" wx:if="{{blindDateSingle.assistingPartyList&&blindDateSingle.assistingPartyList.length>0}}">
+      <view class="title">协办单位</view>
+      <view class="logo_list">
+        <view wx:for="{{blindDateSingle.assistingPartyList}}" wx:key="id" wx:for-item="assistingParty">
+          <image src="{{assistingParty.company.logoUrl}}" alt="" class="logo"></image>
+          <view style="text-align: center;font-size: 32rpx;color: #666666">{{assistingParty.company.unitName}}</view>
+        </view>
+      </view>
+    </view>
+    <view class="ct_into_con">
+      <view class="title">温馨提示</view>
+      <view class="contentDetail">
+        <template is="wxParse" data="{{wxParseData: tipsHtml.nodes}}" />
+        </view>
+    </view>
+  </view>
+  <view class="action_footer">
+    <view class="gzfx"> 
+      <button class="btn" bindtap="unfollowBlindDating" wx:if="{{blindDateSingle.isFollow==1}}">
+        <icon class="iconfont icon-shoucang1"></icon>
+        <view>取消关注</view>
+      </button> 
+      <button class="btn" bindtap="followBlindDating" wx:else>
+        <icon class="iconfont icon-quxiaoshoucang"></icon>
+        <view>关注</view>
+      </button> 
+      <button class="btn" open-type="share">
+        <icon class="iconfont icon-fenxiang"></icon>
+        <view>分享</view>
+      </button>
+    </view>
+    <!-- 主持人 什么时候都能进--> 
+    <view wx:if="{{isManage||isAdmin}}" class="jrxc" catchtap="blindDateNew">进入现场</view>
+    <!-- 报名没开始 -->
+    <view wx:elif="{{blindDateSingle.isStartEnroll==0}}" class="gzfx ljbm">即将开始</view>
+    <!-- 没登录 -->
+    <block wx:elif="{{!isLogin}}">
+      <!-- 能报名 --> 
+      <view wx:if="{{canEnroll}}" class="gzfx ljbm" catchtap="bmBlindDating">立即报名</view>
+      <!-- 不能报名 -->
+      <view wx:else class="gzfx ljbm">报名截止</view>
+    </block>
+    <!-- 登录 -->
+    <block wx:elif="{{isLogin}}">
+      <!-- 没报名 -->
+      <block wx:if="{{blindDateSingle.isCandidate !=1}}">
+        <!-- 能报名 -->
+        <view wx:if="{{blindDateSingle.isAbsent==1}}" class="gzfx grey">已登记缺席</view> 
+        <view wx:elif="{{canEnroll}}" class="gzfx ljbm" catchtap="bmBlindDating">立即报名</view>
+        <!-- 不能报名 -->
+        <view wx:else class="gzfx ljbm">报名截止</view>
+      </block>
+      <!-- 已报名 -->
+      <block wx:else>
+        <!-- 可以报名 --> 
+        <view wx:if="{{canEnroll}}" class="gzfx ljbm" style="width:25%;" bindtap="unbmBlindDating">缺席登记</view>
+        <!-- 活动已结束 -->
+        <view class="gzfx jrxc" style="width:50%;" wx:if="{{blindDateSingle.state==5}}" catchtap="blindDateNew">活动结束</view>
+        <!-- 活动没结束 -->
+        <view class="gzfx jrxc" style="width:50%;" wx:else catchtap="blindDateNew">进入现场</view>
+      </block>
+    </block>
+  </view> 
+</view>
+

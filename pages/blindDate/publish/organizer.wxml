@@ -1,0 +1,41 @@
+<!-- 选择举办单位 -->
+<view class="page gray">
+  <view class="top-bottom-gray"></view>
+  <scroll-view scroll-y style="width: 100%; height:{{scroll_height+'px'}};">
+    <view class="organizers_container">
+      <view class="organizers_panel">
+        <view class="organizers">
+          <view class="left_title">主办单位</view>
+          <view class="right_text" data-index="1" bindtap="select">选择主办单位</view>
+        </view>
+        <block wx:if="{{checkOrganizerList && checkOrganizerList.length>0}}">
+          <view class="organizers" wx:for="{{checkOrganizerList}}" wx:key="index" wx:for-index="index" wx:for-item="item">
+            <view class="left_title">
+              <image class="logo" src="{{item.logoUrl}}" wx:if="{{item.logoUrl}}"></image>
+              <image class="logo" style="background-color: #d6d6d6" wx:else>logo</image>
+              {{item.unitName}}
+            </view>
+            <view class="right_text action" data-index="{{index}}" data-id="{{item.id}}" bindtap="removeOrganizer">移除</view>
+          </view>
+        </block>
+      </view>
+      <view class="organizers_panel">
+        <view class="organizers">
+          <view class="left_title">协办单位</view>
+          <view class="right_text" data-index="2" bindtap="select">选择协办单位</view>
+        </view>
+        <block wx:if="checkCoOrganizerList && checkCoOrganizerList.length>0">
+          <view class="organizers" wx:for="{{checkCoOrganizerList}}" wx:key="coIndex" wx:for-index="coIndex" wx:for-item="coItem">
+            <view class="left_title">
+              <image class="logo" src="{{coItem.logoUrl}}" wx:if="{{coItem.logoUrl}}"></image>
+              <image class="logo" style="background-color: #d6d6d6" wx:else>logo</image>
+              {{coItem.unitName}}
+            </view>
+            <view class="right_text action" data-index="{{coIndex}}" data-id="{{coItem.id}}" bindtap="removeCoOrganizer">移除</view>
+          </view>
+        </block>
+      </view>
+    </view>
+  </scroll-view> 
+    <view class='bottom-btn' bindtap='confirmSelect'>确定</view>
+</view>

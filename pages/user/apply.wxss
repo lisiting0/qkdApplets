@@ -1,0 +1,58 @@
+.content {
+  padding: 0 30rpx;
+}
+
+.apply-panel {
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: 160rpx;
+  border-bottom: 1px solid #f2f2f2;
+}
+
+.apply-panel image {
+  width: 100rpx;
+  height: 100rpx;
+  border-radius: 50%;
+  margin-right: 20rpx;
+}
+
+.userinfo {
+  width: 50%;
+}
+
+.userinfo view:first-child {
+  font-size: 36rpx;
+}
+
+.userinfo view:last-child {
+  font-size: 30rpx;
+  color: #9a9a9d;
+}
+
+.action-panel {
+  position: absolute;
+  right: 0;
+  text-align: center;
+  color: #ffa443;
+  font-size: 30rpx;
+}
+
+.action-panel text {
+  margin-right: 20rpx;
+  border-radius: 5px;
+  padding: 5rpx 20rpx;
+}
+
+.action-panel text:first-child {
+  border: 1px solid #ffa443;
+}
+
+.action-panel text:last-child {
+  border: 1px solid #d0cdd1;
+  color: #d0cdd1;
+}
+
+.gray_text {
+  color: #d0cdd1;
+}

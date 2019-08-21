@@ -1,0 +1,25 @@
+<!-- 关于 -->
+<view class="page gray">
+  <view class="content">
+    <image src="../../images/home/logo.png" class="logo"></image>
+    <view class="qkd-version">乾坤岛V {{version}}</view>
+    <view class="version">
+      <view>
+        <text>版本信息</text>
+        <text>V {{version}}</text>
+      </view>
+      <view>
+        <text>联系电话</text>
+        <text>400-8086-521</text>
+      </view>
+      <view>
+        <text>微信公众号</text>
+        <image src="../../images/home/qrcode.jpg"></image>
+      </view>
+    </view>
+    <view class="footer">
+      <text decode="true" bindtap="showAgreement=true">&lt;&lt;乾坤岛用户协议及隐私政策&gt;&gt;</text>
+      <view>Copyright@2018 All Rights Reserved</view>
+    </view>
+  </view>
+</view>

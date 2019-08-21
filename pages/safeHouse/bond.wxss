@@ -1,0 +1,197 @@
+.jy_bond_top {
+  width: 100%;
+  height: 300rpx;
+  position: relative;
+}
+
+.jy_bond_top .top-bg {
+  width: 100%;
+  height: 100%;
+}
+
+.jy_bond_top_ul {
+  width: 100%;
+  position: absolute;
+  top: 33%;
+  padding: 0 20rpx 0;
+}
+
+.jy_bond_top_li {
+  float: left;
+  width: 33%;
+  margin: 0 auto;
+  text-align: center;
+  color: #fff;
+  border-right: 1px solid #f2f2f2;
+}
+
+.jy_bond_top_li view:first-child {
+  font-size: 54rpx;
+  margin-bottom: 10rpx;
+}
+
+.jy_bond_top_li view:nth-of-type(2) {
+  font-size: 28rpx;
+}
+
+.weui-tab {
+  margin-top: 20rpx;
+}
+
+.weui-navbar {
+  background-color: #fff;
+  border-bottom: 1rpx solid #f2f2f2;
+}
+
+.weui-tab__panel {
+  margin-top: 125rpx;
+  height: 500rpx;
+  overflow-x: hidden;
+  overflow-y: auto;
+  padding: 5rpx 0 0;
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -webkit-overflow-scrolling: touch;
+}
+
+.weui-navbar__item {
+  padding: 30rpx 10rpx 0;
+  border-right: 1px solid #f2f2f2;
+}
+
+.weui-navbar__title {
+  font-size: 30rpx;
+}
+
+.weui-navbar__item.weui-bar__item_on {
+  color: #ff3ce1;
+}
+
+.weui-navbar__slider {
+  background-color: inherit;
+}
+
+.jy_bond_sm_li, .jy_bond_sm{
+  font-size: 30rpx;
+  padding: 15rpx 20rpx;
+}
+
+.jy_bond_sm_li text:nth-of-type(2) {
+  font-size: 26rpx;
+  color: #a3a3a3;
+}
+
+.jy_bill_list { 
+  padding: 15rpx 20rpx;
+}
+
+.jy_bill_list view:first-child {
+  font-weight: normal;
+  line-height: 65rpx;
+  font-size: 36rpx;
+  color: #1d1d1d;
+}
+
+.jy_bill_list view:first-child text:first-of-type {
+  float: right;
+  font-size: 32rpx;
+  color: #ff5800;
+}
+
+.jy_bill_list view:nth-child(2) {
+  line-height: 50rpx;
+  font-size: 30rpx;
+  color: #999;
+}
+
+.jy_bill_list view:nth-child(2) text:first-of-type {
+  float: right;
+  font-size: 34rpx;
+  color: #9b9b9b;
+}
+
+.jy_auth_btn {
+  background-color: #ff9000;
+}
+
+.jy_bond_block .jy_qb_tit {
+  color: #a1a1a1;
+  font-size: 30rpx;
+  background-color: #fff;
+  padding: 12rpx 20rpx;
+  margin-top: 13rpx;
+}
+
+.jy_bond_block .jy_qb_pay_list {
+  background-color: #fff;
+  padding: 12rpx 20rpx;
+  color: #202020;
+}
+
+.jy_qb_pay_list .jy_qb_pay_list_li {
+  position: relative;
+  border-top: 1px solid #dcdcdc;
+  padding: 20rpx 0;
+  font-size: 30rpx;
+  line-height: 60rpx;
+}
+
+.jy_qb_pay_list .jy_qb_pay_list_li.cur:after {
+  content: "\e7a6";
+  color: #fea201;
+  position: absolute;
+  margin-top: -0.2rem;
+  right: 0;
+  top: 50%;
+  line-height: 1;
+}
+
+.jy_qb_pay_list {
+  font-size: 32rpx;
+  color: #202020;
+}
+
+.jy_qb_pay_list .jy_qb_pay_list_li {
+  position: relative;
+  border-top: 1px solid #dcdcdc;
+  padding: 28rpx 0;
+  line-height: 36rpx;
+}
+
+.jy_qb_pay_list .jy_qb_pay_list_li.icon-weixindenglu:before {
+  content: "\e681";
+  color: #00c800;
+  vertical-align: top;
+  margin-right: 10rpx;
+  font-size: 36rpx;
+}
+
+.jy_qb_pay_list .jy_qb_pay_list_li.cur:after {
+  content: "\e7a6";
+  color: #fea201;
+}
+
+.jy_qb_pay_list .jy_qb_pay_list_li {
+  position: relative;
+  border-top: 1px solid #dcdcdc;
+  padding: 028rpx 0;
+  line-height: 36rpx;
+}
+
+.jy_qb_pay_list .jy_qb_pay_list_li.icon-icon-alipay:before {
+  content: "\e65e";
+  color: #0aaaf0;
+  vertical-align: top;
+  margin-right: 10rpx;
+  font-size: 36rpx;
+}
+
+.jy_qb_pay_list .jy_qb_pay_list_li:after {
+  content: "\e746";
+  position: absolute;
+  margin-top: -0.2rem;
+  right: 0;
+  top: 50%;
+  line-height: 1;
+  color: #dbdbdb;
+}

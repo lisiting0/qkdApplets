@@ -1,0 +1,49 @@
+/**app.wxss**/
+@import "./style/iconfont.wxss";
+@import "./style/weui.wxss";
+@import "./style/common.wxss";
+
+/**index.wxss**/
+/********** 初始化 **********/
+view,scroll-view,swiper,swiper-item,icon,text,progress,mask,input,button,label,form,checkbox,checkbox-group,picker,picker-item,radio,radio-group,switch,slider,slector-item,action-sheet,action-sheet-cancel,action-sheet-item,loading,toast,modal,navigator,image,audio,video,map,canvas,native{
+  margin:0;
+  padding: 0;
+}
+page{
+  min-width: 320px;
+  font: 14px/150% "微软雅黑", Verdana, Arial, Helvetica, sans-serif;
+  color: #222;
+  -webkit-text-size-adjust: none;
+  padding: 0;
+  margin: 0;
+  background-color: #FFF;
+}
+
+input,button {-webkit-appearance: none;appearance: none;}
+textarea {resize: none;}
+/* 禁止长按链接与图片弹出菜单 */
+navigator,image {-webkit-touch-callout: none;touch-callout: none;}
+/*去掉手持设备点击时出现的透明层*/
+navigator,button,input {-webkit-tap-highlight-color: transparent;tap-highlight-color: transparent;}
+input{outline:0;border:0;}
+/********** 公共样式 **********/
+/*伸缩的盒子*/
+.box {display: -webkit-box;display: -webkit-flex;display: box;display: flex;}
+.flex1 {-webkit-flex: 1;-webkit-box-flex: 1;box-flex: 1;flex: 1;}
+.flex2 {-webkit-flex: 2;-webkit-box-flex: 2;box-flex: 2;flex: 2;}
+.flex3 {-webkit-flex: 3;-webkit-box-flex: 3;box-flex: 3;flex: 3;}
+/*box-sizing包括边框的宽度*/
+.box-sizing {-moz-box-sizing: border-box;-o-box-sizing: border-box;box-sizing: border-box;}
+/*图片大小自适应*/
+image{width: 100%;vertical-align: top;display: block;}
+/*文字超出隐藏*/
+.text-elli {overflow: hidden;white-space: nowrap;text-overflow: ellipsis;}
+/*清除浮动样式*/
+.clear {clear: both;height: 0;overflow: hidden;}
+.clearfix{zoom: 1; clear:both;}
+.clearfix:after {display: block;height: 0;overflow: hidden;content: " ";visibility: hidden;clear: both;}
+.fl{float: left;}
+.fr{float: right;}
+.hidden{display: none;}
+.block{display: block;}
+.mt30 {margin-top: 30rpx;}

@@ -1,0 +1,280 @@
+page {
+  overflow: hidden;
+}
+
+::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  color: transparent;
+}
+
+.six-menu {
+  background-color: #fff;
+  padding: 0 20rpx;
+  overflow: hidden;
+}
+
+.six-menu view {
+  float: left;
+  width: 16.66%;
+  font-size: 32rpx;
+  text-align: center;
+  padding: 20rpx 0;
+}
+
+.six-menu view.active text {
+  color: #ff5400;
+}
+
+.six-menu image {
+  width: 60rpx;
+  height: 56rpx;
+  margin: 0 auto;
+}
+
+.six-menu text.qb_text {
+  color: #b3b3b3;
+}
+
+.six-menu text.xy_text {
+  color: #ee9ac7;
+}
+
+.six-menu text.qy_text {
+  color: #aab2ed;
+}
+
+.six-menu text.jy_text {
+  color: #efc18b;
+}
+
+.six-menu text.zy_text {
+  color: #ffa6a6;
+}
+
+.six-menu text.py_text {
+  color: #a2e4dd;
+}
+
+.six-type {
+  padding: 0 20rpx;
+}
+
+.six-type view {
+  width: 16.6%;
+  text-align: center;
+}
+
+.six-type view text {
+  font-size: 30rpx;
+  color: #999;
+  padding: 10rpx 20rpx;
+  border: 1px solid #dcdcdc;
+  border-radius: 30rpx;
+  text-align: center;
+}
+
+.six-type view.live text {
+  color: #fff;
+  background-color: #ff5400;
+  border: 0 solid #dcdcdc;
+}
+
+.love-info {
+  margin: 20rpx;
+  background-color: #fff;
+  border-radius: 10rpx;
+}
+
+.love-top {
+  width: 100%;
+  padding: 20rpx;
+}
+
+.love-top .headImage {
+  float: left;
+  width: 100rpx;
+  height: 100rpx;
+  margin-right: 20rpx;
+}
+
+.love-top .headImage image {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+}
+
+.love-top .two-panel .age {
+  display: inline-block;
+  width: 100rpx;
+  height: 40rpx;
+  line-height: 40rpx;
+  border-radius: 20rpx;
+  text-align: center;
+  color: #fff;
+}
+
+.love-top .two-panel .age.girl {
+  background-color: #fe84ab;
+}
+
+.love-top .two-panel  .age.boy {
+  background-color: #00b4ff;
+}
+
+.love-top .two-panel .age icon {
+  display: inline-flex;
+  font-size: 32rpx;
+}
+
+.love-top .two-panel .age text {
+  font-size: 30rpx;
+}
+
+.love-top .two-panel .md {
+  float: right;
+  border: 1px solid #ff706c;
+  font-size: 30rpx;
+  color: #ff706c;
+  border-radius: 10rpx;
+  padding: 0 10rpx;
+  margin-right: 40rpx;
+}
+
+.love-bottom {
+  width: 100%;
+  padding: 10rpx;
+  display: flex;
+}
+
+.love-bottom .left-content {
+  width: 240rpx;
+  height: 240rpx;
+  margin: 0 20rpx 20rpx;
+  border-radius: 20rpx;
+  background-repeat: no-repeat;
+  background-position: center top;
+  background-size: cover;
+}
+
+.love-bottom .right-content .right-first text:first-child {
+  padding: 5rpx;
+  text-align: center;
+  border-radius: 50%;
+  color: #fff;
+  font-size: 26rpx;
+  margin-right: 20rpx;
+}
+
+.love-bottom .right-content .right-first .jy_new_love_tit_1 {
+  background-color: #4b7dfa;
+}
+
+.love-bottom .right-content .right-first .jy_new_love_tit_2 {
+  background-color: #f785ff;
+}
+
+.love-bottom .right-content .right-first .jy_new_love_tit_3 {
+  background-color: #ffb533;
+}
+
+.love-bottom .right-content .right-first .jy_new_love_tit_4 {
+  background-color: #6f78fa;
+}
+
+.love-bottom .right-content .right-first .jy_new_love_tit_5 {
+  background-color: #24c532;
+}
+
+.love-bottom .right-content .right-first text:last-child {
+  color: #000;
+  font-size: 32rpx;
+}
+
+.love-bottom .right-content view {
+  font-size: 32rpx;
+  line-height: 32rpx;
+  color: #a1a1a1;
+  padding: 13rpx 0;
+}
+
+.love-bottom .right-content view icon {
+  display: inline-flex;
+  margin-right: 20rpx;
+}
+
+.dialog-chooseThemes .chooseThemes {
+  background-color: #fff;
+  width: 90%;
+  margin: auto;
+  overflow: hidden;
+  border-radius: 10px;
+  padding: 0 0 30rpx;
+}
+
+.dialog-chooseThemes .chooseThemes .publish-title {
+  position: relative;
+  padding: 40rpx 0;
+  font-size: 36rpx;
+}
+
+.dialog-chooseThemes .chooseThemes .publish-sel {
+  width: 94%;
+  margin: 0 auto 30rpx;
+  color: #8e8e8e;
+  font-size: 32rpx;
+  display: flex;
+  justify-content: space-between;
+}
+
+.dialog-chooseThemes .chooseThemes .publish-panel {
+  width: 48%;
+  background-color: #f2f4fc;
+  border-radius:5%; 
+}
+
+.dialog-chooseThemes .chooseThemes .publish-panel .publish-img {
+  display: inline-flex;
+  align-items: flex-end;
+  padding: 20rpx 0;
+}
+
+.publish-img image {
+  width: 90rpx;
+  height: 100rpx;
+}
+
+.theme-title {
+  font-size: 32rpx;
+  font-weight: 500;
+  margin: 0 0 15rpx;
+}
+
+.theme-desc {
+  color: #b5b6ba;
+  font-size: 30rpx;
+  line-height: 40rpx;
+  text-align: left;
+  margin: 0 15rpx;
+  padding: 20rpx 0;
+  table-layout: fixed;
+  word-wrap: break-word;
+  word-break: break-all;
+  border-top: 1px solid #e4e5e7;
+}
+
+.dialog-chooseThemes .arrow {
+  position: relative;
+  height: 60rpx;
+}
+
+.dialog-chooseThemes .arrow::after {
+  content: '';
+  z-index: 5002;
+  position: absolute;
+  top: -60rpx;
+  right: 150rpx;
+  border-width: 60rpx;
+  border-style: dashed solid dashed dashed;
+  border-color: transparent #fff transparent transparent;
+}

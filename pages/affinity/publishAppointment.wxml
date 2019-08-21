@@ -1,0 +1,386 @@
+<view class="page">
+  <view class="top-bottom-gray"></view>
+  <view class="publish-menu">
+    <view class="timeline-text {{menu.type==1?'active':''}}" data-index="1" bindtap="menuClick">
+      <view class="text">选择类型</view>
+    </view>
+    <view class="timeline-text {{menu.detail?'active':''}}" data-index="2" bindtap="menuClick">
+      <view class="text">约会详情</view>
+    </view>
+    <view class="timeline-text {{menu.require?'active':''}}" data-index="3" bindtap="menuClick">
+      <view class="text">资格要求</view>
+    </view>
+  </view>
+
+  <scroll-view scroll-y style="width: 100%; height:{{scroll_height+'px'}};">
+    <block wx:if="{{panel==1}}">
+      <view class="panel">
+        <textarea value="{{datingDesc}}" placeholder="空泛的说明，是没有人报名的" style="height:150rpx;border: none;margin: 40rpx 0 0;color: #a3a3a4;font-size: 32rpx;" bindinput="datingDescInput"></textarea>
+      </view>
+      <view class='gray'></view>
+
+      <view class="first-panel panel">
+        <view class="title">约会类型</view>
+        <!--1、旅行 2、吃饭 3、电影 4、唱歌 5、运动 99、其他-->
+        <view class="check-box">
+          <view class="check-type {{datingThemes==2?'active':''}}" data-theme="2" catchtap="chooseDatingThemes">
+            <icon class="iconfont icon-meishi"></icon>
+            <text>吃饭</text>
+          </view>
+          <view class="check-type {{datingThemes==4?'active':''}}" data-theme="4" catchtap="chooseDatingThemes">
+            <icon class="iconfont icon-changge"></icon>
+            <text>K歌</text>
+          </view>
+          <view class="check-type {{datingThemes==3?'active':''}}" data-theme="3" catchtap="chooseDatingThemes">
+            <icon class="iconfont icon-dianyingpiaoiocn"></icon>
+            <text>电影</text>
+          </view>
+          <view class="check-type {{datingThemes==1?'active':''}}" data-theme="1" catchtap="chooseDatingThemes">
+            <icon class="iconfont icon-weibiaoti-"></icon>
+            <text>旅行</text>
+          </view>
+          <view class="check-type {{datingThemes==5?'active':''}}" data-theme="5" catchtap="chooseDatingThemes">
+            <icon class="iconfont icon-yundong-"></icon>
+            <text>运动</text>
+          </view>
+          <view class="check-type {{datingThemes==99?'active':''}}" data-theme="99" catchtap="chooseDatingThemes">
+            <icon class="iconfont icon-qita"></icon>
+            <text>其他</text>
+          </view>
+        </view>
+      </view>
+      <view class='gray'></view>
+      <view class="panel">
+        <view class="title">选择对象方式</view>
+        <view class="check-box">
+          <block wx:for="{{datingMethodList}}" wx:key="index" wx:for-index="index" wx:for-item="item">
+            <view class="check-method {{item.value==datingMethod?'active':''}}" data-index="{{index}}" catchtap="chooseDatingMethod">{{item.label}}</view>
+          </block>
+        </view>
+        <view class="tips">
+          <view style="font-size:34rpx;">{{datingMethodTitle}}说明:</view>
+          <view style="font-size:30rpx;">{{datingMethodDesc}}</view>
+        </view>
+      </view>
+    </block>
+
+    <block wx:if="{{panel==2}}">
+      <view class="panel select_panel">
+        <!-- 吃饭 唱歌 电影-->
+        <block wx:if="{{datingThemes==2||datingThemes==4||datingThemes==3}}">
+          <view wx:if="{{datingThemes==3}}" class="flex">
+            <view class="select_con_title">电影名称</view>
+            <view class="select_con_container">
+              <input class="datingTitle" value="datingTitle" placeholder="请输入影片名称" />
+            </view>
+          </view>
+          <view class="select_con">
+            <view class="select_con_title">{{datingThemes==3?'观影地点':'约会地点'}}</view>
+            <view class="select_con_container" style="justify-content: flex-end;" catchtap="selectAddress">
+              {{addressText==""?"选择地点": addressText}}
+            </view>
+            <view class="select_con_right">
+              <icon class="iconfont icon-arrow_r"></icon>
+            </view>
+          </view>
+
+          <view class="select_con">
+            <view class="select_con_title">{{datingThemes==3?'观影时间':'约会时间'}}</view>
+            <view class="select_con_container" style="justify-content: flex-end;" catchtap="shDatingTime">
+              <pickerYMDH bind:onPickerChange="onPickerDatingTime" date="{{datingTimeText}}"></pickerYMDH>
+            </view>
+            <view>
+              <icon class="iconfont icon-arrow_r"></icon>
+            </view>
+          </view>
+        </block>
+
+        <!-- 旅行 -->
+        <block wx:elif="{{datingThemes==1}}">
+          <view class="select_con">
+            <view class="select_con_title">目的地</view>
+            <view class="select_con_container" style="justify-content: flex-end;" catchtap="selectAddress">
+              {{addressText==""?"选择地点": addressText}}
+            </view>
+            <view class="select_con_right">
+              <icon class="iconfont icon-arrow_r"></icon>
+            </view>
+          </view>
+
+          <view class="select_con">
+            <view class="select_con_title">出发时间</view>
+            <view class="select_con_container" style="justify-content: flex-end;">
+              <pickerYMDH bind:onPickerChange="onPickerDatingTime" date="{{datingTimeText}}"></pickerYMDH>
+            </view>
+            <view>
+              <icon class="iconfont icon-arrow_r"></icon>
+            </view>
+          </view>
+
+          <view class="select_con">
+            <view class="select_con_title">预计时间</view>
+            <view class="select_con_container" style="justify-content: flex-end;">
+              <picker bindchange="bindTripTimeChange" value="{{tripTimeLengthIndex}}" range="{{tripTimeLengthList}}">
+                <view style="width:100%;text-align:center;">{{tripTimeLengthList[tripTimeLengthIndex]}} </view>
+              </picker>
+            </view>
+            <view>
+              <icon class="iconfont icon-arrow_r"></icon>
+            </view>
+          </view>
+
+          <view class="select_con">
+            <view class="select_con_title">出行方式</view>
+            <view class="select_con_container" style="justify-content: flex-end;">
+              <picker bindchange="bindTripModeChange" value="{{tripModeIndex}}" range="{{tripModeList}}">
+                <view style="width:100%;text-align:center;">{{tripModeList[tripModeIndex]}} </view>
+              </picker>
+            </view>
+            <view>
+              <icon class="iconfont icon-arrow_r"></icon>
+            </view>
+          </view>
+        </block>
+
+        <!-- 运动和其他 -->
+        <block wx:elif="{{datingThemes==5||datingThemes==99}}">
+          <view class="select_con">
+            <view class="select_con_title">{{datingThemes==99?'主题':'运动项目'}}</view>
+            <view class="select_con_container" style="justify-content: flex-end;" bindtap="selectDatingTitle">
+              {{datingTitle===''?datingThemes==99?'选择主题':'选择运动项目':datingTitle}}
+            </view>
+            <view class="select_con_right">
+              <icon class="iconfont icon-arrow_r"></icon>
+            </view>
+          </view>
+
+          <view class="select_con">
+            <view class="select_con_title">约会地点</view>
+            <view class="select_con_container" style="justify-content: flex-end;" catchtap="selectAddress">
+              {{addressText==""?"选择地点": addressText}}
+            </view>
+            <view class="select_con_right">
+              <icon class="iconfont icon-arrow_r"></icon>
+            </view>
+          </view>
+
+          <view class="select_con">
+            <view class="select_con_title">约会时间</view>
+            <view class="select_con_container" style="justify-content: flex-end;" catchtap="shDatingTime">
+              <pickerYMDH bind:onPickerChange="onPickerDatingTime" date="{{datingTimeText}}"></pickerYMDH>
+            </view>
+            <view>
+              <icon class="iconfont icon-arrow_r"></icon>
+            </view>
+          </view>
+        </block>
+
+        <!--  -->
+        <view class="select_con">
+          <view class="select_con_title">选择对象时间</view>
+          <view class="select_con_container" style="justify-content: flex-end;">
+            <pickerYMDHM bind:onPickerChange="onPickerObjTimeText" date="{{objTimeText}}" minuteList="{{minuteList}}" pickText="选择约会对象时间"></pickerYMDHM>
+          </view>
+          <view>
+            <icon class="iconfont icon-arrow_r"></icon>
+          </view>
+        </view>
+
+        <view class="select_con">
+          <view class="select_con_title">活动费用</view>
+          <view class="select_con_container" style="justify-content: flex-end;" catchtap="setFeePopul">
+            {{pay==0?'AA':pay==1?'我请客':pay==3?'男A女免':pay==4?'视情况而定':'请设置费用'}}
+          </view>
+          <view>
+            <icon class="iconfont icon-arrow_r"></icon>
+          </view>
+        </view>
+      </view>
+      <view class='gray'></view>
+
+      <view class="panel select_panel">
+        <view class="select_con">
+          <view class="select_con_title">对象性别</view>
+          <view class="select_con_container row-check-box">
+            <view class="box {{sex==2?'active':''}}" data-sex="2" catchtap="chooseSex">
+              <icon class="iconfont icon-nansheng" style="font-size: 46rpx;"></icon>
+            </view>
+            <view class="box {{sex==1?'active':''}}" data-sex="1" catchtap="chooseSex">
+              <icon class="iconfont icon-nv" style="font-size: 46rpx;"></icon>
+            </view>
+            <view class="box {{sex==9?'active':''}}" data-sex="9" catchtap="chooseSex">不限</view>
+          </view>
+        </view>
+        <!-- carryingFriends -->
+        <view class="select_con">
+          <view class="select_con_title"></view>
+          <view class="select_con_container row-check-box">
+            <radio value="{{carryingFriends}}" checked="{{carryingFriends?'true':''}}" data-checked="{{carryingFriends}}" catchtap="bindCarryingFriends" />可携带好友
+          </view>
+        </view>
+      </view>
+
+      <view class='gray'></view>
+
+      <view class="panel img-panel">
+        <view class="checkbox-panel" style="font-size:32rpx; color: rgb(207, 206, 212);">
+          <radio value="1" checked="{{expShowPic==1?'true':''}}" data-checked="1" catchtap="bindtapPic" />使用商家图片
+          <text style="margin-right:80rpx;"></text>
+          <radio value="2" checked="{{expShowPic==2?'true':''}}" data-checked="2" catchtap="bindtapPic" />使用我的相册
+        </view>
+
+        <view class="photo-cls" style="margin:60rpx 0">
+          <view class="weui-uploader__files">
+            <block wx:for="{{feedImg}}" wx:key="*this">
+              <view class="weui-uploader__file img-view" bindtap="previewImage" src="item[0]" list="{{item}}">
+                <image class="weui-uploader__img" src="{{item}}" mode="aspectFill" />
+                <view>
+                  <icon type='cancel' bindtap='deletedImg' data-index='{{index}}' size='25' color='#ef8383' style='width:25px;height:25px;margin-left:-15px;margin-top:-25px;'></icon>
+                </view>
+              </view>
+            </block>
+          </view>
+          <view class="weui-uploader__input-box" hidden="{{feedImg.length==3}}">
+            <view class="weui-uploader__input" bindtap="chooseImage"></view>
+          </view>
+        </view>
+        <view class="user_img_desc">上传图片更吸引人呦（最多三张）</view>
+      </view>
+
+      <view class="panel">
+        <view class="title">约会后续</view>
+        <view class="check-box">
+          <block wx:for="{{followup}}" wx:key="follow" wx:for-index="followIndex" wx:for-item="followItem">
+            <view class="three-box {{followItem.isSelected?'active':''}}" data-index="{{followIndex}}" catchtap="followupClick">{{followItem.label}}</view>
+          </block>
+        </view>
+      </view>
+    </block>
+
+    <block wx:if="{{panel==3}}">
+      <view class="first-panel panel">
+        <view class="title">认证要求
+          <text>{{certificationText}}</text>
+        </view>
+        <!--不限、身份认证、视频认证、车辆认证、房产认证-->
+        <view class="check-box">
+          <view class="five-box {{certification.none==1?'active':''}}" data-certification="0" catchtap="certificationClick">不限</view>
+          <view class="five-box {{certification.idStatus==1?'active':''}}" data-certification="1" catchtap="certificationClick">
+            <icon class="iconfont icon-shimingrenzheng display-inlineflex"></icon>
+          </view>
+          <view class="five-box {{certification.videoStatus==1?'active':''}}" data-certification="2" catchtap="certificationClick">
+            <icon class="iconfont icon-shangjiashipinrenzheng display-inlineflex"></icon>
+          </view>
+          <view class="five-box {{certification.carStatus==1?'active':''}}" data-certification="3" catchtap="certificationClick">
+            <icon class="iconfont icon-cherenzheng display-inlineflex"></icon>
+          </view>
+          <view class="five-box {{certification.houseStatus==1?'active':''}}" data-certification="4" catchtap="certificationClick">
+            <icon class="iconfont icon-fangchanrenzheng display-inlineflex"></icon>
+          </view>
+        </view>
+      </view>
+      <view class='gray'></view>
+      <view class="panel">
+        <view class="title">学历要求</view>
+        <view class="check-box">
+          <view class="three-box {{education==-1?'active':''}}" data-education="-1" catchtap="educationClick">不限</view>
+          <view class="three-box {{education==9?'active':''}}" data-education="9" catchtap="educationClick">高中及以上</view>
+          <view class="three-box {{education==10?'active':''}}" data-education="10" catchtap="educationClick">大专及以上</view>
+          <view class="three-box {{education==11?'active':''}}" data-education="11" catchtap="educationClick">本科及以上</view>
+          <view class="three-box {{education==12?'active':''}}" data-education="12" catchtap="educationClick">硕士及以上</view>
+          <view class="three-box {{education==13?'active':''}}" data-education="13" catchtap="educationClick">博士及以上</view>
+        </view>
+      </view>
+      <view class='gray'></view>
+      <view class="panel">
+        <view class="title">年龄要求</view>
+        <view class="check-box">
+          <view class="three-box {{age==-1?'active':''}}" data-age="-1" catchtap="ageClick">不限</view>
+          <view class="three-box {{age==18?'active':''}}" data-age="18" catchtap="ageClick">18-23</view>
+          <view class="three-box {{age==24?'active':''}}" data-age="24" catchtap="ageClick">24-29</view>
+          <view class="three-box {{age==30?'active':''}}" data-age="30" catchtap="ageClick">30-35</view>
+          <view class="three-box {{age==35?'active':''}}" data-age="35" catchtap="ageClick">36-40</view>
+          <view class="three-box {{age==41?'active':''}}" data-age="41" catchtap="ageClick">41以上</view>
+        </view>
+      </view>
+      <view class='gray'></view>
+      <view class="panel">
+        <view class="title">身高要求</view>
+        <view class="check-box">
+          <view class="five-box {{height==-1?'active':''}}" data-height="-1" catchtap="heightClick">不限</view>
+          <view class="five-box {{height==150?'active':''}}" data-height="150" catchtap="heightClick">≥150</view>
+          <view class="five-box {{height==155?'active':''}}" data-height="155" catchtap="heightClick">≥155</view>
+          <view class="five-box {{height==160?'active':''}}" data-height="160" catchtap="heightClick">≥160</view>
+          <view class="five-box {{height==165?'active':''}}" data-height="165" catchtap="heightClick">≥165</view>
+          <view class="five-box {{height==170?'active':''}}" data-height="170" catchtap="heightClick">≥170</view>
+          <view class="five-box {{height==175?'active':''}}" data-height="175" catchtap="heightClick">≥175</view>
+          <view class="five-box {{height==180?'active':''}}" data-height="180" catchtap="heightClick">≥180</view>
+          <view class="five-box {{height==185?'active':''}}" data-height="185" catchtap="heightClick">≥185</view>
+          <view class="five-box {{height==190?'active':''}}" data-height="190" catchtap="heightClick">≥190</view>
+        </view>
+      </view>
+      <view class='gray'></view>
+      <view class="panel">
+        <view class="title">收入要求</view>
+        <view class="check-box">
+          <view class="three-box {{expIncomeLowerLimit==''&&expIncomeUpperLimit==''?'active':''}}" data-incomelower="" data-incomeuper="" catchtap="incomeClick">不限</view>
+          <view class="three-box {{expIncomeUpperLimit==2000?'active':''}}" data-incomelower="" data-incomeuper="2000" catchtap="incomeClick">两千以下</view>
+          <view class="three-box {{expIncomeLowerLimit==2000&&expIncomeUpperLimit==4000?'active':''}}" data-incomelower="2000" data-incomeuper="4000" catchtap="incomeClick">两千到四千</view>
+          <view class="three-box {{expIncomeLowerLimit==4000&&expIncomeUpperLimit==6000?'active':''}}" data-incomelower="4000" data-incomeuper="6000" catchtap="incomeClick">四千到六千</view>
+          <view class="three-box {{expIncomeLowerLimit==6000&&expIncomeUpperLimit==10000?'active':''}}" data-incomelower="6000" data-incomeuper="10000" catchtap="incomeClick">六千到一万</view>
+          <view class="three-box {{expIncomeLowerLimit==10000&&expIncomeUpperLimit==15000?'active':''}}" data-incomelower="10000" data-incomeuper="15000" catchtap="incomeClick">一万到一万五</view>
+          <view class="three-box {{expIncomeLowerLimit==15000&&expIncomeUpperLimit==20000?'active':''}}" data-incomelower="15000" data-incomeuper="20000" catchtap="incomeClick">一万五到两万</view>
+          <view class="three-box {{expIncomeLowerLimit==20000&&expIncomeUpperLimit==25000?'active':''}}" data-incomelower="20000" data-incomeuper="25000" catchtap="incomeClick">两万到两万五</view>
+          <view class="three-box {{expIncomeLowerLimit==50000?'active':''}}" data-incomelower="50000" data-incomeuper="" catchtap="incomeClick">五万以上</view>
+        </view>
+      </view>
+    </block>
+  </scroll-view>
+  <view class="publish_bd_btn {{staticPosition?'staticPosition':''}}">
+    <view class="bc" data-index="2" catchtap="finish">保存</view>
+    <view class="next" data-index="1" catchtap="finish" wx:if="{{panel==1 || panel==2}}">下一步</view>
+    <view class="next" wx:else data-index="3" catchtap="finish">发布</view>
+  </view>
+</view>
+
+
+<view class="modals modals-bottom-dialog" hidden="{{!showFeePopup}}">
+  <view class="bottom-dialog-body bottom-pos" style="height:66%;" animation='{{animationData}}'>
+    <view class="fee-popup">
+      <view class="fee-popup-title">设置费用</view>
+      <view class="fee-container">
+        <view class="title">活动费用</view>
+        <view class='fee-choose'>
+          <view style="background-color:{{paysel==1?'#FFF':'#EEE'}}" data-type="1" data-bool='true' data-num="0" catchtap="setDoinput">我请客</view>
+          <view style="background-color:{{paysel==0?'#FFF':'#EEE'}}" data-type="0" data-bool='false' catchtap="setDoinput">AA</view>
+          <view style="background-color:{{paysel==3?'#FFF':'#EEE'}}" data-type="3" data-bool='false' catchtap="setDoinput">男A女免</view>
+          <view style="background-color:{{paysel==4?'#FFF':'#EEE'}}" data-type="4" data-bool='true' data-num="0" catchtap="setDoinput">视情况而定</view>
+        </view>
+      </view>
+      <view class="fee-choose-child" style="margin:0;">
+        <text>{{paysel==0?'每人':paysel==3?'男士每人':''}}</text>
+        <input type="text" value="{{feesel}}" placeholder="请输入费用" disabled="{{(paysel==1||paysel==4)}}" bindinput="feeselInput" />
+        <text class="yuan">元</text>
+        <view class="radio-popup">
+          <radio value="{{extInt6__s}}" checked="{{extInt6__s}}" data-checked="{{extInt6__s}}" catchtap="radioChange" /> 多退少补
+        </view>
+      </view>
+      <view class="fee-container">
+        <view class="title">收费方式</view>
+        <view class="fee-choose-child" style="margin:0;">
+          <radio value="{{extInt__s}}" checked="{{extInt__s?'true':''}}" data-checked="{{extInt__s}}" catchtap="radioPTChange" /> 平台代收
+          <text style="margin-right:80rpx;"></text>
+          <radio value="{{extInt_1__s}}" checked="{{extInt_1__s}}" data-checked="{{extInt_1__s}}" catchtap="radioFQRChange" /> 发起人收取
+        </view>
+      </view>
+      <view class="fee-tips">
+        <text>说明：</text>
+        <text>平台收取为平台代收活动费用，报名结束后自动发放到发起人账户；发起人收取为活动费用直接由发起人线下收取</text>
+      </view>
+    </view>
+    <view class="footer">
+      <view catchtap="hideFreePopup">取消</view>
+      <view data-bool="true" catchtap="hideFreePopup">确定</view>
+    </view>
+  </view>
+</view>

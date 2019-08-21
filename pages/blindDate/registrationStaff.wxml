@@ -1,0 +1,96 @@
+<!-- 相亲活动 -->
+<view class="page gray">
+  <view class="search">
+    <view class="search_content">
+      <icon class="iconfont icon-shaixuan1" size='20'></icon>
+      <input type="search" disabled value="{{searchValue}}" />
+      <text class='shaixuan' bindtap='filter'>筛选</text>
+    </view>
+  </view>
+  <scroll-view scroll-y style="width: 100%; height:{{scroll_height+'px'}};background-color:#ffffff;" bindscrolltoupper="refresh" bindscrolltolower="loadMore">
+    <view class="registration_block">
+      <view class="registration_list_li" wx:for="{{listArr}}" wx:key="id" wx:for-index="index" wx:for-item="item">
+        <view class="registration_list_panel" style="background-image:url({{item.jiaoyouUser.headimgAttachmentId}});" data-id='{{item.id}}' data-userid='{{item.jiaoyouUser.id}}' data-state='{{item.jiaoyouUser.silentState}}' catchtap="linkTo">
+          <icon class="iconfont icon-xinaixin heart" wx:if="{{item.jiaoyouUser.isGood==0&&userInfo.identity!=1&&userInfo.sex!=item.candidateSex}}" data-userid='{{item.jiaoyouUser.id}}' data-index='{{index}}' catchtap="addGood"></icon>
+          <icon class="iconfont icon-heart heart" style="color: #ff0000;font-size: 46rpx;top: 0;" wx:if="{{item.jiaoyouUser.isGood==1&&userInfo.identity!=1&&userInfo.sex!=item.candidateSex}}" data-id='{{item.jiaoyouUser.id}}' data-index='{{index}}' catchtap="delGood"></icon>
+          <view class="gift_cicle" wx:if="{{userInfo.identity!=1&&userInfo.sex!=item.candidateSex}}" data-username='{{item.jiaoyouUser.aliasName}}' data-userid='{{item.jiaoyouUser.id}}' catchtap="clickShowGift">
+            <icon class="iconfont icon-liwu1 gift"></icon>
+          </view>
+          <view class="bottom_info">
+            <view class="bottom_first">
+              <text>{{item.jiaoyouUser.aliasName}}</text>
+              <icon class="iconfont jy_auth_age {{item.candidateSex==1? 'icon-xingbie-nv': 'icon-xingbie'}} {{item.candidateSex==2 ?'jy_auth_age_man':''}}">{{item.jiaoyouUser.age}}</icon>
+              <text wx:if="{{userInfo.identity!=1 && userInfo.sex!=item.candidateSex}}">{{item.jiaoyouUser.matchAgree}}%</text>
+            </view>
+            <view class="bottom_second">{{item.jiaoyouUser.userExt.height}}cm | {{educationTextArr[item.jiaoyouUser.userExt.education]}}
+              <text wx:if="{{userInfo.identity!=1 && userInfo.sex!=item.candidateSex}}">匹配度</text>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="bottom" hidden="{{hideBottom}}">已加载全部数据</view>
+  </scroll-view>
+  <gifts id='gifts' userMoney="{{userMoney}}" candidateId="{{candidateId}}" aliasName="{{aliasName}}" bind:reward="reward"></gifts>
+</view>
+
+
+<view class='zhezhao' hidden="{{flag}}" bindtap="closeFilter">
+  <!--这是一个遮罩层，在框弹出后遮住框外区域-->
+</view>
+<!--这是下拉框中的内容，一个文本框和一个按钮，按钮触发拉起事件，表示拉起下拉框-->
+<view class="filter {{test=='test1'?'test1':'test2'}}" style='display:{{yesorno}};'>
+  <view class="filter-panel">
+    <view class="filter-title">性别</view>
+    <view class="filter-content">
+      <view wx:for="{{sex}}" wx:key="*this" data-index="{{index}}" class='{{sexVal==index?"active":""}}' bindtap="sexClick">
+        {{item}}</view>
+    </view>
+  </view>
+  <view class="filter-panel">
+    <view class="filter-title">年龄</view>
+    <view class="filter-content">
+      <view data-val="0" class='{{ageVal==""?"active":""}}' bindtap="ageClick">不限</view>
+      <view class='{{ageVal==1?"active":""}}' style="width:60%;text-align:center;">
+        <picker class="picker" mode="multiSelector" bindchange="bindAgeChange" bindcolumnchange="bindMultiPickerColumnChange" value="{{ageIndex}}" range="{{ageList}}">
+          <view style="width:100%;text-align:center;" wx:if="{{ageList[0][ageIndex[0]]=='不限'}}">{{ageList[1][ageIndex[1]]}}以下 </view>
+          <view style="width:100%;text-align:center;" wx:elif="{{ageList[1][ageIndex[1]]=='不限'}}">{{ageList[0][ageIndex[0]]}}以上 </view>
+          <view style="width:100%;text-align:center;" wx:else>{{ageList[0][ageIndex[0]]}}--{{ageList[1][ageIndex[1]]}} </view>
+        </picker>
+      </view>
+    </view>
+  </view>
+  <view class="filter-panel">
+    <view class="filter-title">身高</view>
+    <view class="filter-content">
+      <view data-val="-1" class='{{heightVal=="-1"?"active":""}}' bindtap="heightClick">不限</view>
+      <view class='{{heightVal!="-1"?"active":""}}' style="width:60%;text-align:center;">
+        <picker bindchange="bindHeightChange" value="{{heightIndex}}" range="{{heightList}}">
+          <view style="width:100%;text-align:center;">{{heightList[heightIndex]}} </view>
+        </picker>
+      </view>
+    </view>
+  </view>
+  <view class="filter-panel">
+    <view class="filter-title">收入</view>
+    <view class="filter-content">
+      <view data-val="-1" class='{{incomeVal=="-1"?"active":""}}' bindtap="incomeClick">不限</view>
+      <view class='{{incomeVal!="-1"?"active":""}}' style="width:60%;text-align:center;">
+        <picker bindchange="bindIncomeChange" value="{{incomeIndex}}" range="{{incomeList}}">
+          <view style="width:100%;text-align:center;">{{incomeList[incomeIndex]}} </view>
+        </picker>
+      </view>
+    </view>
+  </view>
+  <view class="filter-panel">
+    <view class="filter-title">学历</view>
+    <view class="filter-content">
+      <view data-val="" class='{{educationVal==""?"active":""}}' bindtap="educationClick">不限</view> 
+      <view data-val="10" class='{{educationVal==10?"active":""}}' bindtap="educationClick">大专及以上</view>
+      <view data-val="11" class='{{educationVal==11?"active":""}}' bindtap="educationClick">本科及以上</view>
+      <view data-val="12" class='{{educationVal==12?"active":""}}' bindtap="educationClick">硕士及以上</view>
+      <view data-val="13" class='{{educationVal==13?"active":""}}' bindtap="educationClick">博士及以上</view>
+    </view>
+  </view>
+  <button class='btn' bindtap='confirm'>确定</button> 
+</view>

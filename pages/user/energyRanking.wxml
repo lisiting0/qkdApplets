@@ -1,0 +1,97 @@
+<!-- 能量排行 -->
+<view class="page gray">
+  <view class="top-bottom-gray"></view>
+  <view class="tips" data-showhide='{{showModal}}' catchtap="openHideModal">大奖说明</view>
+  <view class="header" hidden="{{hideHeader}}">
+    <view>下拉刷新中……</view>
+  </view>
+  <scroll-view scroll-y style="width: 100%; height:{{scroll_height+'px'}};background-color:#ffffff;" bindscrolltoupper="refresh" bindscrolltolower="loadMore">
+    <view class="energy_ul">
+      <block wx:for="{{rankingList}}" wx:key="id" wx:for-item="item">
+        <view class="energy_ul_li">
+          <view class="ranking_index {{index==0?'first':index==1 ? 'second':index==2 ? 'third':''}}">{{index+1}}</view>
+          <image class="headImg" src="{{item.headimgAttachmentId}}"></image>
+          <view class="ranking_info">
+            <view class="name">{{item.aliasName}}</view>
+            <view class="age" style="background-color:{{item.sex==1?'':'rgb(0, 180, 255)'}}">
+              <icon class="iconfont {{item.sex==1?'icon-xingbie-nv':'icon-xingbie'}}"></icon>
+              <text>{{item.age}}</text>
+            </view>
+          </view>
+          <view class="ranking_num">
+            <icon class="iconfont icon-huo"></icon>
+            <text>{{item.sumMoney}}</text>
+          </view>
+        </view>
+      </block>
+    </view>
+    <view class="bottom" hidden="{{hideBottom}}">已加载全部数据</view>
+  </scroll-view>
+</view>
+
+
+<view class="energy_wrap" wx:if="{{showModal}}">
+  <view class="energy_container">
+    <view class="energy_title">
+      <text>大奖说明</text>
+      <icon class="iconfont icon-cha1" data-showhide='{{showModal}}' catchtap="openHideModal"></icon>
+    </view>
+    <view class="energy_con">
+      <view class="energy_content">
+        <view class="desc">能量大奖是乾坤岛举行的个人脉能量比赛，每个月平台将会进行人脉能量排名，排名前10位即获得能量大奖。(能量值不低于1000)</view>
+        <view class="desc">用户可以通过分享平台指定的文章或邀请朋友注册来获得乾坤币（
+          <navigator hover-class='none' url="/pages/safeHouse/earnCoin" style="color: #e95548;display:inline;">立刻分享赚取乾坤币</navigator>
+          ），能量大奖活动以用户获得的乾坤币的数量为能量值，每增加一个查看您分享文章或注册的朋友，您的乾坤币就会增加，相应的您的能量值也会增加。
+        </view>
+        <view class="desc">能量值统计截止时间是每个月最后一天的23点59分，您可以通过微信的能量大奖排行实时看到自己的名次。</view>
+        <view class="desc">禁止采用非正常手段积累人脉能量值,一经发现取消参赛资格</view>
+        <view class="jxsz_title">奖项设置</view>
+        <view class='table'>
+          <view class="table-row table-title">
+            <view class="td">特等奖：1名</view>
+            <view class="td">一等奖：2名</view>
+          </view>
+          <view class="table-row table-td">
+            <view class="td">1.一年VIP会费</view>
+            <view class="td">1.一年VIP会费</view>
+          </view>
+          <view class="table-row table-td">
+            <view class="td">2.代理权</view>
+            <view class="td">2.代理权</view>
+          </view>
+          <view class="table-row table-td">
+            <view class="td">3.1000RMB</view>
+            <view class="td">3.500RMB</view>
+          </view>
+          <view class="table-row table-td">
+            <view class="td">4.5000个乾坤币</view>
+            <view class="td">4.3000个乾坤币</view>
+          </view>
+        </view>
+        <view class='table'>
+          <view class="table-row table-title">
+            <view class="td">二等奖：3名</view>
+            <view class="td">三等奖：4名</view>
+          </view>
+          <view class="table-row table-td">
+            <view class="td">1.一年VIP会费</view>
+            <view class="td">1.一年VIP会费</view>
+          </view>
+          <view class="table-row table-td">
+            <view class="td">2.代理权</view>
+            <view class="td">2.代理权</view>
+          </view>
+          <view class="table-row table-td">
+            <view class="td">3.200RMB</view>
+            <view class="td">3.100RMB</view>
+          </view>
+          <view class="table-row table-td">
+            <view class="td">4.2000个乾坤币</view>
+            <view class="td">4.1000个乾坤币</view>
+          </view>
+        </view>
+      </view>
+      <view class="red_btn" data-showhide='{{showModal}}' catchtap="openHideModal">确定</view>
+    </view>
+  </view>
+</view>

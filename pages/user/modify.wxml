@@ -1,0 +1,525 @@
+<!-- 修改资料 -->
+<view class="page gray">
+  <view class="top-bottom-gray"></view>
+  <view class="userInfo_panel">
+    <view class="userInfo_title">头像</view>
+    <view class="photo-cls">
+      <view class="weui-uploader__files">
+        <block wx:for="{{headimgAttachmentId}}" wx:key="headimgAttachmentId" wx:for-item="headimgItem">
+          <view class="weui-uploader__file img-view" catchtap="previewHeadImage" data-src="{{headimgItem[0]}}">
+            <image class="weui-uploader__img" src="{{headimgItem}}" mode="aspectFill" />
+            <view class="delImg" catchtap='deletedHeadImage'>
+              <icon type='cancel' size='25' color='#ef8383' style='width:25px;height:25px;margin-top:-25px;'></icon>
+            </view>
+          </view>
+        </block>
+      </view>
+      <view class="weui-uploader__input-box" hidden="{{headimgAttachmentId.length==1}}">
+        <view class="weui-uploader__input" catchtap="chooseHeadImage"></view>
+      </view>
+    </view>
+    <view class="clearBoth"></view>
+  </view>
+  <view class="userInfo_panel">
+    <view class="userInfo_title">封面</view>
+    <view class="clearBoth photo-cls">
+      <view class="weui-uploader__files">
+        <block wx:for="{{feedImg}}" wx:key="feedImg" wx:for-index="index" wx:for-item="feedImg">
+          <view class="weui-uploader__file img-view" catchtap="previewImage" data-src="{{feedImg}}">
+            <image class="weui-uploader__img" src="{{feedImg}}" mode="aspectFill" />
+            <view class="delImg" catchtap='deletedImg' data-index='{{index}}'>
+              <icon type='cancel' size='25' color='#ef8383' style='width:25px;height:25px;;margin-top:-25px;'></icon>
+            </view>
+          </view>
+        </block>
+      </view>
+      <view class="weui-uploader__input-box" hidden="{{feedImg.length==6}}">
+        <view class="weui-uploader__input" catchtap="chooseImage"></view>
+      </view>
+    </view>
+    <view class="clearBoth user_img_desc">上传图片更吸引人呦（最多6张）</view>
+  </view>
+
+  <view class="userInfo_panel">
+    <view class="userInfo_title">基本资料</view>
+    <view class="userInfo_con {{isValidate=='aliasName'?'cur':''}}" data-popup="shAliasName" data-sh="{{shAliasName}}" bindtap="bindPopupChange">
+      <view>昵称
+        <text class="isRequired" wx:if="{{isRequired}}">(必填)</text>
+      </view>
+      <view>
+        {{aliasName}}
+      </view>
+      <view>
+        <icon class="iconfont icon-arrow_r"></icon>
+      </view>
+    </view>
+    <view class="userInfo_con  {{isValidate=='birthday'?'cur':''}}">
+      <view>出生日期
+        <text class="isRequired" wx:if="{{isRequired&&emptyBirthday}}">(必填)</text>
+      </view>
+      <view>
+        <block wx:if="{{!emptyBirthday}}">
+          {{birthday}}
+        </block>
+        <block wx:else>
+          <picker mode="date" value="{{birthday}}" start="{{startDate}}" end="{{endDate}}" bindchange="bindDateChange">
+            <view class="flRight" style="width: 400rpx !important;">{{birthday}}</view>
+          </picker>
+        </block>
+      </view>
+      <view>
+        <icon class="iconfont icon-arrow_r" wx:if="{{emptyBirthday}}"></icon>
+      </view>
+    </view>
+    <view class="userInfo_con" data-popup="shSelfLabel" data-sh="{{shSelfLabel}}" bindtap="bindPopupChange">
+      <view>个性签名</view>
+      <view>
+        {{selfLabel===''?'个性签名？':selfLabel}}
+      </view>
+      <view>
+        <icon class="iconfont icon-arrow_r"></icon>
+      </view>
+    </view>
+    <view class="userInfo_con {{isValidate=='heightVal'?'cur':''}}">
+      <view>身高
+        <text class="isRequired" wx:if="{{isRequired}}">(必填)</text>
+      </view>
+      <view>
+        <picker value="{{heightIndex}}" range-key="name" range="{{heightList}}" bindchange="heightChange">
+          <view class="flRight" style="width:400rpx !important;" wx:if="{{heightVal}}">{{heightList[heightIndex].name}}</view>
+          <view class="flRight" wx:else>请选择</view>
+        </picker>
+      </view>
+      <view>
+        <icon class="iconfont icon-arrow_r"></icon>
+      </view>
+    </view>
+    <view class="userInfo_con {{isValidate=='educationVal'?'cur':''}}">
+      <view>学历
+        <text class="isRequired" wx:if="{{isRequired}}">(必填)</text>
+      </view>
+      <view>
+        <picker value="{{educationIndex}}" range-key="name" range="{{educationList}}" bindchange="educationChange">
+          <view class="flRight" wx:if="{{educationVal}}">{{educationList[educationIndex].name}}</view>
+          <view class="flRight" wx:else>请选择</view>
+        </picker>
+      </view>
+      <view>
+        <icon class="iconfont icon-arrow_r"></icon>
+      </view>
+    </view>
+    <view class="userInfo_con {{isValidate=='liveCityId'?'cur':''}}">
+      <view>居住地
+        <text class="isRequired" wx:if="{{isRequired}}">(必填)</text>
+      </view>
+      <view>
+        <picker class="picker" mode="multiSelector" bindchange="bindRegionChange" bindcolumnchange="bindMultiPickerColumnChange" value="{{liveIndex}}" range="{{liveList}}">
+          <view class="flRight" wx:if="{{liveProId}}">{{liveList[0][liveIndex[0]]}} {{liveList[1][liveIndex[1]]}} </view>
+          <view class="flRight" wx:else>请选择</view>
+        </picker>
+      </view>
+      <view>
+        <icon class="iconfont icon-arrow_r"></icon>
+      </view>
+    </view>
+    <view class="userInfo_con" data-popup="shSchool" data-sh="{{shSchool}}" bindtap="bindPopupChange">
+      <view>毕业院校</view>
+      <view>
+        {{school==''? '你的学校？':school}}
+      </view>
+      <view>
+        <icon class="iconfont icon-arrow_r"></icon>
+      </view>
+    </view>
+    <view class="userInfo_con {{isValidate=='profession'?'cur':''}}" data-popup="shProfession" data-sh="{{shProfession}}" bindtap="bindPopupChange">
+      <view>职业
+        <text class="isRequired" wx:if="{{isRequired}}">(必填)</text>
+      </view>
+      <view>
+        {{profession==''?'你的职业':profession}}
+      </view>
+      <view>
+        <icon class="iconfont icon-arrow_r"></icon>
+      </view>
+    </view>
+  </view>
+
+  <!-- 私密资料 -->
+  <view class="userInfo_panel">
+    <view class="userInfo_title">私密资料</view>
+    <view class="userInfo_con {{isValidate=='name'?'cur':''}}" data-popup="shName" bindtap="bindPopupChange">
+      <view>真实姓名
+        <text class="isRequired" wx:if="{{isRequired}}">(必填)</text>
+      </view>
+      <view>
+        {{name}}
+      </view>
+      <view>
+        <icon class="iconfont icon-arrow_r"></icon>
+      </view>
+    </view>
+    <view class="userInfo_con {{isValidate=='cityId'?'cur':''}}">
+      <view>家乡
+        <text class="isRequired" wx:if="{{isRequired}}">(必填)</text>
+      </view>
+      <view>
+        <picker class="picker" mode="multiSelector" bindchange="bindPlaceChange" bindcolumnchange="bindPlacePickerColumnChange" value="{{placeIndex}}" range="{{placeList}}">
+          <view class="flRight">{{placeList[0][placeIndex[0]]}} {{placeList[1][placeIndex[1]]}} </view>
+        </picker>
+      </view>
+      <view>
+        <icon class="iconfont icon-arrow_r"></icon>
+      </view>
+    </view>
+    <view class="userInfo_con {{isValidate=='emotion'?'cur':''}}">
+      <view>婚姻状况
+        <text class="isRequired" wx:if="{{isRequired}}">(必填)</text>
+      </view>
+      <view>
+        <picker value="{{emotionalIndex}}" range-key="name" range="{{emotionalStateList}}" bindchange="emotionChange">
+          <view class="flRight" wx:if="{{emotion}}">{{emotionalStateList[emotionalIndex].name}}</view>
+          <view class="flRight" wx:else>请选择</view>
+        </picker>
+      </view>
+      <view>
+        <icon class="iconfont icon-arrow_r"></icon>
+      </view>
+    </view>
+    <view class="userInfo_con {{isValidate=='incomeLVal'?'cur':''}}">
+      <view>月收入
+        <text class="isRequired" wx:if="{{isRequired}}">(必填)</text>
+      </view>
+      <view>
+        <picker value="{{incomeIndex}}" range-key="name" range="{{incomeList}}" bindchange="incomeChange">
+          <view class="flRight" wx:if="{{incomeLVal!=0}}">{{incomeList[incomeIndex].name}}</view>
+          <view class="flRight" wx:else>请选择</view>
+        </picker>
+      </view>
+      <view>
+        <icon class="iconfont icon-arrow_r"></icon>
+      </view>
+    </view>
+    <view class="userInfo_con {{isValidate=='smokingVal'?'cur':''}}">
+      <view>是否吸烟
+        <text class="isRequired" wx:if="{{isRequired}}">(必填)</text>
+      </view>
+      <view>
+        <picker value="{{smokingIndex}}" range-key="name" range="{{smokingList}}" bindchange="smokingChange">
+          <view class="flRight" wx:if="{{smokingVal}}">{{smokingList[smokingIndex].name}}</view>
+          <view class="flRight" wx:else>请选择</view>
+        </picker>
+      </view>
+      <view>
+        <icon class="iconfont icon-arrow_r"></icon>
+      </view>
+    </view>
+    <view class="userInfo_con {{isValidate=='drinkVal'?'cur':''}}">
+      <view>是否喝酒
+        <text class="isRequired" wx:if="{{isRequired}}">(必填)</text>
+      </view>
+      <view>
+        <picker value="{{drinkIndex}}" range-key="name" range="{{drinkList}}" bindchange="drinkChange">
+          <view class="flRight" wx:if="{{drinkVal}}">{{drinkList[drinkIndex].name}}</view>
+          <view class="flRight" wx:else>请选择</view>
+        </picker>
+      </view>
+      <view>
+        <icon class="iconfont icon-arrow_r"></icon>
+      </view>
+    </view>
+    <view class="userInfo_con">
+      <view>子女情况</view>
+      <view>
+        <picker value="{{childIndex}}" range-key="name" range="{{childList}}" bindchange="childChange">
+          <view class="flRight" style='width: 400rpx !important;'>{{childList[childIndex].name}}</view>
+        </picker>
+      </view>
+      <view>
+        <icon class="iconfont icon-arrow_r"></icon>
+      </view>
+    </view>
+    <view class="userInfo_con {{isValidate=='houseVal'?'cur':''}}">
+      <view>住房情况
+        <text class="isRequired" wx:if="{{isRequired}}">(必填)</text>
+      </view>
+      <view>
+        <picker value="{{houseIndex}}" range-key="name" range="{{houseList}}" bindchange="houseChange">
+          <view class="flRight" wx:if="{{houseVal}}">{{houseList[houseIndex].name}}</view>
+          <view class="flRight" wx:else>请选择</view>
+        </picker>
+      </view>
+      <view>
+        <icon class="iconfont icon-arrow_r"></icon>
+      </view>
+    </view>
+    <view class="userInfo_con {{isValidate=='carVal'?'cur':''}}">
+      <view>购车情况
+        <text class="isRequired" wx:if="{{isRequired}}">(必填)</text>
+      </view>
+      <view>
+        <picker value="{{carIndex}}" range-key="name" range="{{carList}}" bindchange="carChange">
+          <view class="flRight" wx:if="{{carVal}}">{{carList[carIndex].name}}</view>
+          <view class="flRight" wx:else>请选择</view>
+        </picker>
+      </view>
+      <view>
+        <icon class="iconfont icon-arrow_r"></icon>
+      </view>
+    </view>
+    <view class="userInfo_con">
+      <view>家中排行</view>
+      <view>
+        <picker value="{{rankingIndex}}" range-key="name" range="{{rankingList}}" bindchange="rankingChange">
+          <view class="flRight" style='width:400rpx !important;'>{{rankingList[rankingIndex].name}}</view>
+        </picker>
+      </view>
+      <view>
+        <icon class="iconfont icon-arrow_r"></icon>
+      </view>
+    </view>
+  </view>
+
+  <!-- 择偶意向 -->
+  <view class="userInfo_panel" style="margin-bottom:146rpx;">
+    <view class="userInfo_title">择偶意向</view>
+    <view class="userInfo_con {{isValidate=='ageLVal'?'cur':''}}">
+      <view>年龄
+        <text class="isRequired" wx:if="{{isRequired}}">(必填)</text>
+      </view>
+      <view>
+        <picker mode="multiSelector" bindchange="bindAgeChange" bindcolumnchange="bindAgePickerColumnChange" value="{{ageIndex}}" range="{{ageList}}">
+          <block wx:if="{{ageLVal!=0}}">
+            <view class="flRight" wx:if="{{ageList[0][ageIndex[0]]=='不限' && ageList[1][ageIndex[1]]=='不限'}}">不限 </view>
+            <view class="flRight" wx:elif="{{ageList[0][ageIndex[0]]=='不限' && ageList[1][ageIndex[1]]!='不限'}}">
+              {{ageList[1][ageIndex[1]]}}以下
+            </view>
+            <view class="flRight" wx:elif="{{ageList[1][ageIndex[1]]=='不限' && ageList[0][ageIndex[0]]!='不限'}}">
+              {{ageList[0][ageIndex[0]]}}以上
+            </view>
+            <view class="flRight" wx:else>{{ageList[0][ageIndex[0]]}}-{{ageList[1][ageIndex[1]]}} </view>
+          </block>
+          <view class="flRight" wx:else>请选择</view>
+        </picker>
+      </view>
+      <view>
+        <icon class="iconfont icon-arrow_r"></icon>
+      </view>
+    </view>
+    <view class="userInfo_con {{isValidate=='heightReLVal'?'cur':''}}">
+      <view>身高
+        <text class="isRequired" wx:if="{{isRequired}}">(必填)</text>
+      </view>
+      <view>
+        <picker value="{{heightReIndex}}" range-key="name" range="{{heightReList}}" bindchange="heightReChange">
+          <view class="flRight" style="width:400rpx !important" wx:if="{{heightReLVal!=0}}">{{heightReList[heightReIndex].name}}</view>
+          <view class="flRight" wx:else>请选择</view>
+        </picker>
+      </view>
+      <view>
+        <icon class="iconfont icon-arrow_r"></icon>
+      </view>
+    </view>
+    <view class="userInfo_con {{isValidate=='educationReVal'?'cur':''}}">
+      <view>学历
+        <text class="isRequired" wx:if="{{isRequired}}">(必填)</text>
+      </view>
+      <view>
+        <picker value="{{educationReIndex}}" range-key="name" range="{{educationReList}}" bindchange="educationReChange">
+          <view class="flRight" wx:if="{{educationReVal}}">{{educationReList[educationReIndex].name}}</view>
+          <view class="flRight" wx:else>请选择</view>
+        </picker>
+      </view>
+      <view>
+        <icon class="iconfont icon-arrow_r"></icon>
+      </view>
+    </view>
+    <view class="userInfo_con {{isValidate=='incomeReLVal'?'cur':''}}">
+      <view>收入情况
+        <text class="isRequired" wx:if="{{isRequired}}">(必填)</text>
+      </view>
+      <view>
+        <picker mode="multiSelector" bindchange="bindIncomeReChange" bindcolumnchange="bindIncomeRePickerColumnChange" value="{{incomeReIndex}}" range="{{incomeReList}}">
+          <block wx:if="{{incomeReLVal!=0}}">
+            <view class="flRight" wx:if="{{incomeReList[0][incomeReIndex[0]]=='不限' && incomeReList[1][incomeReIndex[1]]=='不限'}}">不限 </view>
+            <view class="flRight" wx:elif="{{incomeReList[0][incomeReIndex[0]]=='不限' && incomeReList[1][incomeReIndex[1]]!='不限'}}">
+              {{incomeReList[1][incomeReIndex[1]]}}以下
+            </view>
+            <view class="flRight" wx:elif="{{incomeReList[1][incomeReIndex[1]]=='不限' && incomeReList[0][incomeReIndex[0]]!='不限'}}">
+              {{incomeReList[0][incomeReIndex[0]]}}以上
+            </view>
+            <view class="flRight" wx:else>{{incomeReList[0][incomeReIndex[0]]}}-{{incomeReList[1][incomeReIndex[1]]}} </view>
+          </block>
+          <view class="flRight" wx:else>请选择</view>
+        </picker>
+      </view>
+      <view>
+        <icon class="iconfont icon-arrow_r"></icon>
+      </view>
+    </view>
+    <view class="userInfo_con {{isValidate=='smokingReVal'?'cur':''}}">
+      <view>是否吸烟
+        <text class="isRequired" wx:if="{{isRequired}}">(必填)</text>
+      </view>
+      <view>
+        <picker value="{{smokingReIndex}}" range-key="name" range="{{smokingReList}}" bindchange="smokingReChange">
+          <view class="flRight" wx:if="{{smokingReVal}}">{{smokingReList[smokingReIndex].name}}</view>
+          <view class="flRight" wx:else>请选择</view>
+        </picker>
+      </view>
+      <view>
+        <icon class="iconfont icon-arrow_r"></icon>
+      </view>
+    </view>
+    <view class="userInfo_con {{isValidate=='drinkReVal'?'cur':''}}">
+      <view>是否喝酒
+        <text class="isRequired" wx:if="{{isRequired}}">(必填)</text>
+      </view>
+      <view>
+        <picker value="{{drinkReIndex}}" range-key="name" range="{{drinkReList}}" bindchange="drinkReChange">
+          <view class="flRight" wx:if="{{drinkReVal}}">{{drinkReList[drinkReIndex].name}}</view>
+          <view class="flRight" wx:else>请选择</view>
+        </picker>
+      </view>
+      <view>
+        <icon class="iconfont icon-arrow_r"></icon>
+      </view>
+    </view>
+    <view class="userInfo_con {{isValidate=='houseReVal'?'cur':''}}">
+      <view>住房情况
+        <text class="isRequired" wx:if="{{isRequired}}">(必填)</text>
+      </view>
+      <view>
+        <picker value="{{houseReIndex}}" range-key="name" range="{{houseReList}}" bindchange="houseReChange">
+          <view class="flRight" style='width:400rpx !important;' wx:if="{{houseReVal}}">{{houseReList[houseReIndex].name}}</view>
+          <view class="flRight" wx:else>请选择</view>
+        </picker>
+      </view>
+      <view>
+        <icon class="iconfont icon-arrow_r"></icon>
+      </view>
+    </view>
+    <view class="userInfo_con {{isValidate=='carReVal'?'cur':''}}">
+      <view>购车情况
+        <text class="isRequired" wx:if="{{isRequired}}">(必填)</text>
+      </view>
+      <view>
+        <picker value="{{carReIndex}}" range-key="name" range="{{carReList}}" bindchange="carReChange">
+          <view class="flRight" wx:if="{{carReVal}}">{{carReList[carReIndex].name}}</view>
+          <view class="flRight" wx:else>请选择</view>
+        </picker>
+      </view>
+      <view>
+        <icon class="iconfont icon-arrow_r"></icon>
+      </view>
+    </view>
+    <view class="userInfo_con">
+      <view>子女情况</view>
+      <view>
+        <picker value="{{childReIndex}}" range-key="name" range="{{childReList}}" bindchange="childReChange">
+          <view class="flRight" style="width:400rpx !important;">{{childReList[childReIndex].name}}</view>
+        </picker>
+      </view>
+      <view>
+        <icon class="iconfont icon-arrow_r"></icon>
+      </view>
+    </view>
+    <view class="userInfo_con {{isValidate=='emotionStateReVal'?'cur':''}}">
+      <view>婚姻状况
+        <text class="isRequired" wx:if="{{isRequired}}">(必填)</text>
+      </view>
+      <view> 
+        <picker value="{{emotionalStateReIndex}}" range-key="name" range="{{emotionalStateReList}}" bindchange="emotionalStateReChange">
+          <view class="flRight" wx:if="{{emotionStateReVal}}">{{emotionalStateReList[emotionalStateReIndex].name}}</view>
+          <view class="flRight" wx:else>请选择</view>
+        </picker>
+      </view>
+      <view>
+        <icon class="iconfont icon-arrow_r"></icon>
+      </view>
+    </view>
+    <view class="userInfo_con">
+      <view>居住地</view>
+      <view>
+        <picker class="picker" mode="multiSelector" bindchange="bindLiveReChange" bindcolumnchange="bindLiveRePickerColumnChange" value="{{liveReIndex}}" range="{{liveReList}}">
+          <view class="flRight" style="width:100%;">{{liveReList[0][liveReIndex[0]]}} {{liveReList[1][liveReIndex[1]]}} </view>
+        </picker>
+      </view>
+      <view>
+        <icon class="iconfont icon-arrow_r"></icon>
+      </view>
+    </view>
+  </view>
+  <view class="publish_bd_btn">
+    <text class="ljfb" catchtap="save">保存</text>
+  </view>
+</view>
+
+<!-- 昵称 -->
+<view class="wx-dialog dialog-input" hidden="{{!shAliasName}}">
+  <view class="weui-mask" data-popup="shAliasName" data-sh="{{shAliasName}}" catchtap="bindPopupChange"></view>
+  <view class="weui-dialog" style="max-width: 100%; width: 100%; padding: 0.6rem 0px; background-color: transparent;">
+    <view class="input_content">
+      <view class="input_title">昵称</view>
+      <view class="input_con">
+        <input type="text" value="{{aliasName}}" placeholder="昵称" auto-focus bindinput="aliasNameInput"></input>
+      </view>
+      <view class="submitButton" data-popup="shAliasName" catchtap="bindPopupConfirm">确定</view>
+    </view>
+  </view>
+</view>
+
+<!-- 个性签名 -->
+<view class="wx-dialog dialog-input" hidden="{{!shSelfLabel}}">
+  <view class="weui-mask" data-popup="shSelfLabel" data-sh="{{shSelfLabel}}" catchtap="bindPopupChange"></view>
+  <view class="weui-dialog" style="max-width: 100%; width: 100%; padding: 0.6rem 0px; background-color: transparent;">
+    <view class="input_content">
+      <view class="input_title">个性签名</view>
+      <view class="input_con">
+        <textarea placeholder="个性签名" value="{{selfLabel}}" auto-focus bindinput="selfLabelInput"></textarea>
+      </view>
+      <view class="submitButton" data-popup="shSelfLabel" catchtap="bindPopupConfirm">确定</view>
+    </view>
+  </view>
+</view>
+
+<!-- 毕业院校 -->
+<view class="wx-dialog dialog-input" hidden="{{!shSchool}}">
+  <view class="weui-mask" data-popup="shSchool" data-sh="{{shSchool}}" catchtap="bindPopupChange"></view>
+  <view class="weui-dialog" style="max-width: 100%; width: 100%; padding: 0.6rem 0px; background-color: transparent;">
+    <view class="input_content">
+      <view class="input_title">毕业院校</view>
+      <view class="input_con">
+        <input type="text" value="{{school}}" placeholder="毕业院校" auto-focus bindinput="schoolInput"></input>
+      </view>
+      <view class="submitButton" data-popup="shSchool" catchtap="bindPopupConfirm">确定</view>
+    </view>
+  </view>
+</view>
+
+<!-- 职业 -->
+<view class="wx-dialog dialog-input" hidden="{{!shProfession}}">
+  <view class="weui-mask" data-popup="shProfession" data-sh="{{shProfession}}" catchtap="bindPopupChange"></view>
+  <view class="weui-dialog" style="max-width: 100%; width: 100%; padding: 0.6rem 0px; background-color: transparent;">
+    <view class="input_content">
+      <view class="input_title">职业</view>
+      <view class="input_con">
+        <input type="text" value="{{profession}}" placeholder="职业" auto-focus bindinput="professionInput"></input>
+      </view>
+      <view class="submitButton" data-popup="shProfession" catchtap="bindPopupConfirm">确定</view>
+    </view>
+  </view>
+</view>
+
+<!-- 真实姓名 -->
+<view class="wx-dialog dialog-input" hidden="{{!shName}}">
+  <view class="weui-mask" data-popup="shName" data-sh="{{shName}}" catchtap="bindPopupChange"></view>
+  <view class="weui-dialog" style="max-width: 100%; width: 100%; padding: 0.6rem 0px; background-color: transparent;">
+    <view class="input_content">
+      <view class="input_title">毕业院校</view>
+      <view class="input_con">
+        <input type="text" value="{{name}}" placeholder="毕业院校" auto-focus bindinput="nameInput"></input>
+      </view>
+      <view class="submitButton" data-popup="shName" catchtap="bindPopupConfirm">确定</view>
+    </view>
+  </view>
+</view>

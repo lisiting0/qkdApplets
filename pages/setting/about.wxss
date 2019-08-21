@@ -1,0 +1,47 @@
+.content {
+  padding-top: 110rpx;
+}
+
+.content .logo {
+  width: 260rpx;
+  height: 260rpx;
+  margin: 0 auto;
+  display: block;
+}
+
+.content .qkd-version {
+  margin-top: 30rpx;
+  font-size: 32rpx;
+  color: #ababab;
+  text-align: center;
+}
+
+.content .version {
+  margin: 100rpx 30rpx 0;
+}
+
+.content .version view {
+  display: flex;
+  align-items: center;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  font-size: 32rpx;
+  color: #ababab;
+  border-bottom: 1px solid #ededed;
+  padding: 20rpx 0;
+}
+
+.content .version view image {
+  width: 120rpx;
+  height: 120rpx;
+}
+
+.content .footer {
+    width: 100%;
+    position: absolute;
+    bottom: 50rpx;
+    font-size: 32rpx;
+    color: #ababab;
+    text-align: center;
+}

@@ -1,0 +1,298 @@
+<view class="page gray">
+  <view class="fix-action filter">
+    <icon class="iconfont icon-shaixuan1" style='line-height:60rpx;' bindtap='filter'></icon>
+  </view>
+  <view class="fix-action layout">
+    <icon class="iconfont icon-quanbu" style='font-size:20px;line-height:60rpx;' bindtap='changeLayout'></icon>
+  </view>
+
+  <!-- 模式4 -->
+  <view class="scroll-fullpage" wx:if="{{layoutType==4 && nearArr.length>0}}" bindtouchstart="scrollTouchstart" bindtouchend="scrollTouchend" style="transform:translateY(-{{scrollindex*100}}%);margin-top: {{margintop}}px">
+    <block wx:for="{{nearArr}}" wx:key="index" wx:for-index="index" wx:for-item="item">
+      <view class="section section{{(index+1)}} {{scrollindex==index?'active':''}}" data-id="{{item.id}}" bindtouchmove="drawMove">
+        <image mode="scaleToFill" src="{{item.coverimgAttachementId?item.coverimgAttachementId:item.headimgAttachmentId}}" style="height:100%;position:absolute;"></image>
+        <view class="cont">
+          <view class="bottom-text">
+            <view class="bottom-text-con">
+              <view class="username">{{item.aliasName}}
+                <icon class="iconfont icon-shimingrenzheng" wx:if="{{item.idStatus==1}}"></icon>
+                <icon class="iconfont icon-shangjiashipinrenzheng" wx:if="{{item.videoStatus==1}}"></icon>
+                <icon class="iconfont icon-cherenzheng" wx:if="{{item.carStatus==1}}"></icon>
+                <icon class="iconfont icon-fangchanrenzheng" wx:if="{{item.houseStatus==1}}"></icon>
+              </view>
+              <view class="userinfo">{{item.sex==1?'女':'男'}} · {{item.age}} {{item.userExt?item.sex==1?item.userExt.height?' · '+item.userExt.height+'cm':'':item.userExt.incomeLowerLimit&&item.userExt.incomeUpperLimit?(' · '+(item.userExt.incomeLowerLimit!=-1?(item.userExt.incomeLowerLimit/1000)+(item.userExt.incomeUpperLimit!=-1?'-':''):'')+(item.userExt.incomeUpperLimit!=-1?item.userExt.incomeUpperLimit/1000:'')+(item.userExt.incomeLowerLimit==-1?'以下':item.userExt.incomeUpperLimit==-1?'以上':'k')):'':''}}</view>
+              <view class="user-pos" wx:if="{{item.userExt&&(item.userExt.liveCityName||item.userExt.liveAreaName)}}">{{item.userExt.liveCityName||''}} {{item.userExt.liveAreaName||''}}
+                <text wx:if="{{item.distance}}">· {{item.distance}}km</text>
+              </view>
+              <view class="user-btn">
+                <icon class="iconfont icon-heart jy_nb_fl {{item.isFollow==1?'cur':''}}" data-item="{{item}}" data-index="{{index}}" data-id="{{item.id}}" catchtap="changeFollow"></icon>
+                <icon class="iconfont icon-duihua jy_nb_com" catchtap="intoChat(item.id,item.aliasName)"></icon>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </block>
+  </view>
+
+  <block wx:else>
+  <view class="header" hidden="{{hideHeader}}">
+    <view>下拉刷新中……</view>
+  </view>
+    <scroll-view scroll-y style="width: 100%; height:{{scroll_height+'px'}};" bindscrolltoupper="refresh" bindscrolltolower="loadMore">
+      <!-- 模式1 -->
+      <view wx:if="{{layoutType===1 && nearArr.length>0}}" class="content">
+        <block wx:for="{{nearArr}}" wx:key="id" wx:for-item="nearItem">
+          <view class="content-panel" wx:if="{{nearItem.id!=userInfo.id}}" data-id="{{nearItem.id}}" catchtap="toUserInfo">
+            <image mode="scaleToFill" src="{{nearItem.headimgAttachmentId}}"></image>
+            <view class="userinfo">
+              <text>{{nearItem.aliasName}}</text>
+              <text>{{nearItem.distance}}km</text>
+            </view>
+          </view>
+        </block>
+      </view>
+
+      <!-- 模式2 -->
+      <view wx:if="{{layoutType===2 && col1.length>0}}" class="content2">
+        <view class="users" style="width:100%">
+          <view class="user_item">
+            <block wx:for="{{col1}}" wx:key="col1Id" wx:for-index="col1Index" wx:for-item="col1Item">
+              <view class='user-panel' data-id="{{col1Item.id}}" catchtap="toUserInfo">
+                <view class="item_info" style="height:{{col1Item.height}}px;">
+                  <image src="{{col1Item.headimgAttachmentId}}" style="width:100%;height:{{col1Item.height}}px"></image>
+                  <view wx:if="{{col1Item.onlineStatus==1}}" class="jy_near_list_online">
+                    <icon class="iconfont icon-dian"></icon>在线
+                  </view>
+                  <view class="user_pos" wx:if="{{col1Item.userExt&&(col1Item.userExt.liveCityName||col1Item.userExt.liveAreaName)}}">
+                    <icon class="iconfont icon-location"></icon>{{col1Item.userExt.liveCityName||''}} · {{col1Item.userExt.liveAreaName||''}}
+                    <block wx:if="{{col1Item.distance}}"> · {{col1Item.distance}}km</block>
+                  </view>
+                  <view class="user-zan" wx:if="{{col1Item.isFollow==0}}">
+                    <icon class="iconfont icon-heart" data-index="{{col1Index}}" data-id="{{col1Item.id}}" data-col="1" catchtap="followFriend"></icon>
+                  </view>
+                  <view class="user-zan cur" wx:else>
+                    <icon class="iconfont icon-heart" data-index="{{col1Index}}" data-id="{{col1Item.id}}" data-col="1" catchtap="unfollowFriend"></icon>
+                  </view>
+                </view>
+                <view class="user-name">
+                  {{col1Item.aliasName}}
+                  <icon class="iconfont icon-shimingrenzheng" wx:if="{{col1Item.idStatus==1}}"></icon>
+                  <icon class="iconfont icon-shangjiashipinrenzheng" wx:if="{{col1Item.videoStatus==1}}"></icon>
+                  <icon class="iconfont icon-cherenzheng" wx:if="{{col1Item.carStatus==1}}"></icon>
+                  <icon class="iconfont icon-fangchanrenzheng" wx:if="{{col1Item.houseStatus==1}}"></icon>
+                  <icon class="iconfont icon-pinglun2 lt-right"></icon>
+                </view>
+                <view class="user-info">
+                  <text class="user-con">{{col1Item.sex==1?'女':'男'}} · {{col1Item.age}} {{col1Item.userExt?col1Item.sex==1||1?col1Item.userExt.height?' · '+col1Item.userExt.height+'cm':'':col1Item.userExt.incomeLowerLimit&&col1Item.userExt.incomeUpperLimit?(' · '+(col1Item.userExt.incomeLowerLimit!=-1?(col1Item.userExt.incomeLowerLimit/1000)+(col1Item.userExt.incomeUpperLimit!=-1?'-':''):'')+(col1Item.userExt.incomeUpperLimit!=-1?col1Item.userExt.incomeUpperLimit/1000:'')+(col1Item.userExt.incomeLowerLimit==-1?'以下':col1Item.userExt.incomeUpperLimit==-1?'以上':'k')):'':''}}
+                </text>
+                  <text class="user-talk" catchtap="intoChat(col1Item.id,col1Item.aliasName)">聊一聊</text>
+                </view>
+              </view>
+            </block>
+          </view>
+          <view class="user_item">
+            <block wx:for="{{col2}}" wx:key="col2Id" wx:for-index="col2Index" wx:for-item="col2Item">
+              <view class='user-panel' data-id="{{col2Item.id}}" catchtap="toUserInfo">
+                <view class="item_info" style="height:{{col2Item.height}}px;">
+                  <image src="{{col2Item.headimgAttachmentId}}" style="width:100%;height:{{col2Item.height}}px"></image>
+                  <view wx:if="{{col2Item.onlineStatus==1}}" class="jy_near_list_online">
+                    <icon class="iconfont icon-dian"></icon>在线
+                  </view>
+                  <view class="user_pos" wx:if="{{col2Item.userExt&&(col2Item.userExt.liveCityName||col2Item.userExt.liveAreaName)}}">
+                    <icon class="iconfont icon-location"></icon>{{col2Item.userExt.liveCityName||''}} · {{col2Item.userExt.liveAreaName||''}}
+                    <block wx:if="{{col2Item.distance}}"> · {{col2Item.distance}}km</block>
+                  </view>
+                  <view class="user-zan" wx:if="{{col2Item.isFollow==0}}">
+                    <icon class="iconfont icon-heart" data-index="{{col2Index}}" data-id="{{col2Item.id}}" data-col="2" catchtap="followFriend"></icon>
+                  </view>
+                  <view class="user-zan cur" wx:else>
+                    <icon class="iconfont icon-heart" data-index="{{col2Index}}" data-id="{{col2Item.id}}" data-col="2" catchtap="unfollowFriend"></icon>
+                  </view>
+                </view>
+                <view class="user-name">
+                  {{col2Item.aliasName}}
+                  <icon class="iconfont icon-shimingrenzheng" wx:if="{{col2Item.idStatus==1}}"></icon>
+                  <icon class="iconfont icon-shangjiashipinrenzheng" wx:if="{{col2Item.videoStatus==1}}"></icon>
+                  <icon class="iconfont icon-cherenzheng" wx:if="{{col2Item.carStatus==1}}"></icon>
+                  <icon class="iconfont icon-fangchanrenzheng" wx:if="{{col2Item.houseStatus==1}}"></icon>
+                  <icon class="iconfont icon-pinglun2 lt-right"></icon>
+                </view>
+                <view class="user-info">
+                  <text class="user-con">{{col2Item.sex==1?'女':'男'}} · {{col2Item.age}} {{col2Item.userExt?col2Item.sex==1||1?col2Item.userExt.height?' · '+col2Item.userExt.height+'cm':'':col2Item.userExt.incomeLowerLimit&&col2Item.userExt.incomeUpperLimit?(' · '+(col2Item.userExt.incomeLowerLimit!=-1?(col2Item.userExt.incomeLowerLimit/1000)+(col2Item.userExt.incomeUpperLimit!=-1?'-':''):'')+(col2Item.userExt.incomeUpperLimit!=-1?col2Item.userExt.incomeUpperLimit/1000:'')+(col2Item.userExt.incomeLowerLimit==-1?'以下':col2Item.userExt.incomeUpperLimit==-1?'以上':'k')):'':''}}
+                </text>
+                  <text class="user-talk" catchtap="intoChat(col2Item.id,col2Item.aliasName)">聊一聊</text>
+                </view>
+              </view>
+            </block>
+          </view>
+        </view>
+      </view>
+
+      <!-- 模式3 -->
+      <view wx:if="{{layoutType===3 && nearArr.length>0}}" class="content3">
+        <view class="layout-panel">
+          <block wx:for="{{nearArr}}" wx:key="item3Index" wx:for-index="item3Index" wx:for-item="item3">
+            <view wx:if="{{item3Index%3==0&&item3.id!=userInfo.id}}" data-id="{{item3.id}}" data-state="{{item3.silentState}}" catchtap="toUserInfo">
+              <view style="background-image:url({{item3.headimgAttachmentId}});">
+                <!-- @touchend="openVideo(getFullPath(item3.videoUrl))" -->
+                <image lazy-load="true" mode="" wx:if="{{item3.videoStatus==1}}" src="../../images/video.png" />
+              </view>
+              <view class="name-distance">
+                <text>{{item3.aliasName}}</text>
+                <text wx:if="{{item3.distance}}">{{item3.distance+'km'}}</text>
+              </view>
+            </view>
+          </block>
+        </view>
+        <view class="layout-panel">
+          <block wx:for="{{nearArr}}" wx:key="item33Index" wx:for-index="item33Index" wx:for-item="item33">
+            <view wx:if="{{item33Index%3==1&&item33.id!= userInfo.id}}" data-id="{{item33.id}}" data-state="{{item33.silentState}}" catchtap="toUserInfo">
+              <view style="background-image:url({{item33.headimgAttachmentId}})">
+                <!-- @touchend.stop="openVideo(getFullPath(item.videoUrl))" -->
+                <image lazy-load="true" wx:if="{{item33.videoStatus==1}}" src="../../images/video.png" />
+              </view>
+              <view class="name-distance">
+                <text>{{item33.aliasName}}</text>
+                <text wx:if="{{item33.distance}}">{{item33.distance +'km'}}</text>
+              </view>
+            </view>
+          </block>
+        </view>
+        <view class="layout-panel">
+          <block wx:for="{{nearArr}}" wx:key="id" wx:for-index="item333Index" wx:for-item="item333">
+            <view wx:if="{{item333Index%3==2&&item333.id!= userInfo.id}}" data-id="{{item333.id}}" data-state="{{item333.silentState}}" catchtap="toUserInfo">
+              <view style="background-image:url({{item333.headimgAttachmentId}});">
+                <!-- @touchend.stop="openVideo(getFullPath(item.videoUrl))" -->
+                <image lazy-load="true" wx:if="{{item333.videoStatus==1}}" src="../../images/video.png" />
+              </view>
+              <view class="name-distance">
+                <text>{{item333.aliasName}}</text>
+                <text wx:if="{{item333.distance}}">{{item333.distance +'km'}}</text>
+              </view>
+            </view>
+          </block>
+        </view>
+      </view>
+      <view class="bottom" hidden="{{hideBottom}}">已加载全部数据</view>
+    </scroll-view> 
+  </block>
+</view>
+
+<view style="display:none">
+  <block wx:if="{{layoutType==2 && nearArr.length>0}}">
+    <image wx:for="{{nearArr}}" wx:key="id" id="{{item.id}}" src="{{item.headimgAttachmentId}}" bindload="onUsersLoad"></image>
+  </block>
+</view>
+
+<view class='zhezhao' hidden="{{flag}}" bindtap="closeFilter">
+  <!--这是一个遮罩层，在框弹出后遮住框外区域-->
+</view>
+<!--这是下拉框中的内容，一个文本框和一个按钮，按钮触发拉起事件，表示拉起下拉框-->
+<view class="filter {{test=='test1'?'test1':'test2'}}" style='display:{{yesorno}};'>
+  <scroll-view scroll-y style="width: 100%; height:100%;">
+    <view class="filter-panel">
+      <view class="filter-title">性别</view>
+      <view class="filter-content">
+        <view data-num="-1" class='{{sex==-1?"active":""}}' catchtap="sexClick">不限</view>
+        <view data-num="2" class='{{sex==2?"active":""}}' catchtap="sexClick">男</view>
+        <view data-num="1" class='{{sex==1?"active":""}}' catchtap="sexClick">女</view>
+      </view>
+    </view>
+
+    <view class="filter-panel">
+      <view class="filter-title">地区</view>
+      <view class="filter-content">
+        <view data-num="-1" class='{{location==-1?"active":""}}' catchtap="locationClick">不限</view>
+        <picker class='picker-city' mode="region" bindchange="bindRegionChange" value="{{region}}">
+          <view class='border {{location==0?"active":""}}'>{{locationText}}</view>
+        </picker>
+      </view>
+    </view>
+
+    <view class="filter-panel">
+      <view class="filter-title">收入范围</view>
+      <view class="filter-content">
+        <view data-num="-1" class='{{incomeVal==-1?"active":""}}' catchtap="incomeClick">不限</view>
+        <picker class='picker-city' mode="multiSelector" bindchange="bindIncomeChange" bindcolumnchange="bindIncomeColumnChange" value="{{incomeIndex}}" range="{{incomeList}}">
+          <view class="border" wx:if="{{incomeVal==-1}}">请选择收入范围</view>
+          <block wx:else>
+            <view class='border {{incomeVal==0?"active":""}}' wx:if="{{incomeList[0][incomeIndex[0]]=='不限'}}">{{incomeList[1][incomeIndex[1]]}}以下 </view>
+            <view wx:elif="{{incomeList[1][incomeIndex[1]]=='不限'}}">{{incomeList[0][incomeIndex[0]]}}以上 </view>
+            <view wx:else>{{incomeList[0][incomeIndex[0]]}}-{{incomeList[1][incomeIndex[1]]}} </view>
+          </block>
+        </picker>
+      </view>
+    </view>
+
+    <view class="filter-panel">
+      <view class="filter-title">认证</view>
+      <view class="filter-content">
+        <view class="{{certification.none==1?'active':''}}" data-certification="0" catchtap="certificationClick">不限</view>
+        <view class="{{certification.idStatus==1?'active':''}}" data-certification="1" catchtap="certificationClick">
+          <icon class="iconfont icon-shimingrenzheng display-inlineflex"></icon>
+        </view>
+        <view class="{{certification.videoStatus==1?'active':''}}" data-certification="2" catchtap="certificationClick">
+          <icon class="iconfont icon-shangjiashipinrenzheng display-inlineflex"></icon>
+        </view>
+        <view class="{{certification.carStatus==1?'active':''}}" data-certification="3" catchtap="certificationClick">
+          <icon class="iconfont icon-cherenzheng display-inlineflex"></icon>
+        </view>
+        <view class="{{certification.houseStatus==1?'active':''}}" data-certification="4" catchtap="certificationClick">
+          <icon class="iconfont icon-fangchanrenzheng display-inlineflex"></icon>
+        </view>
+      </view>
+    </view>
+
+    <view class="filter-panel">
+      <view class="filter-title">学历</view>
+      <view class="filter-content">
+        <block wx:for="{{educationList}}" wx:key="value" wx:for-item="educationItem">
+          <view data-num="{{educationItem.value}}" class="{{education==educationItem.value?'active':''}}" catchtap="educationClick">
+            {{educationItem.label}}
+          </view>
+        </block>
+      </view>
+    </view>
+
+    <view class="filter-panel">
+      <view class="filter-title">身高要求</view>
+      <view class="filter-content five-box">
+        <view data-num="-1" class='{{minHeight==-1?"active":""}}' catchtap="heightClick">不限</view>
+        <view data-num="150" class='{{minHeight==150?"active":""}}' catchtap="heightClick">≥150</view>
+        <view data-num="155" class='{{minHeight==155?"active":""}}' catchtap="heightClick">≥155</view>
+        <view data-num="160" class='{{minHeight==160?"active":""}}' catchtap="heightClick">≥160</view>
+        <view data-num="165" class='{{minHeight==165?"active":""}}' catchtap="heightClick">≥165</view>
+        <view data-num="170" class='{{minHeight==170?"active":""}}' catchtap="heightClick">≥170</view>
+        <view data-num="175" class='{{minHeight==175?"active":""}}' catchtap="heightClick">≥175</view>
+        <view data-num="180" class='{{minHeight==180?"active":""}}' catchtap="heightClick">≥180</view>
+        <view data-num="185" class='{{minHeight==185?"active":""}}' catchtap="heightClick">≥185</view>
+        <view data-num="190" class='{{minHeight==190?"active":""}}' catchtap="heightClick">≥190</view>
+      </view>
+    </view>
+
+    <view class="filter-panel">
+      <view class="filter-title">年龄要求</view>
+      <view class="filter-content">
+        <view data-min="-1" data-max="-1" class='{{minAge==-1&&maxAge==-1?"active":""}}' catchtap="ageClick">不限</view>
+        <view data-min="18" data-max="23" class='{{minAge==18&&maxAge==23?"active":""}}' catchtap="ageClick">18-23</view>
+        <view data-min="24" data-max="29" class='{{minAge==24&&maxAge==29?"active":""}}' catchtap="ageClick">24-29</view>
+        <view data-min="30" data-max="35" class='{{minAge==30&&maxAge==35?"active":""}}' catchtap="ageClick">30-35</view>
+        <view data-min="36" data-max="40" class='{{minAge==36&&maxAge==40?"active":""}}' catchtap="ageClick">36-40</view>
+        <view data-min="41" data-max="-1" class='{{minAge==41&&maxAge==-1?"active":""}}' catchtap="ageClick">41以上</view>
+      </view>
+    </view>
+
+    <view class="filter-panel">
+      <view class="filter-title">距离</view>
+      <view class="filter-content">
+        <block wx:for="{{distanceArr}}" wx:key="val" wx:for-item="distanceItem">
+          <view data-num="{{distanceItem.val}}" class="{{distance==distanceItem.val?'active':''}}" catchtap="distanceClick">
+            {{distanceItem.text}}
+          </view>
+        </block>
+      </view>
+    </view>
+    <button class='btn' bindtap='confirm'>确定</button>
+  </scroll-view>
+</view>

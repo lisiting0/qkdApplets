@@ -1,0 +1,104 @@
+.my_agent {
+  width: 100%;
+  line-height: 60rpx;
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  background-color: #fff;
+  padding: 0 10rpx;
+  margin-bottom: 10rpx;
+}
+
+.agent_top {
+  background-color: #fff;
+  padding: 30rpx 20rpx;
+  margin-bottom: 10rpx;
+}
+
+.top_con, .bottom_con {
+  display: flex;
+  align-items: center;
+  background-color: #fff;
+  padding: 10rpx;
+}
+
+.icon {
+  width: 80rpx;
+  height: 80rpx;
+  margin-right: 20rpx;
+}
+
+.line {
+  width: 1px;
+  height: 60rpx;
+  border-left: 2px solid #f2f2f2;
+  margin: 0 40rpx;
+}
+
+.agent-panel {
+  display: flex;
+  align-items: center;
+  position: relative;
+  padding: 20rpx 0;
+  border-bottom: 1px solid #f2f2f2;
+}
+
+.agent-panel image {
+  width: 100rpx;
+  height: 100rpx;
+  line-height: 100rpx;
+  text-align: center;
+  margin-right: 20rpx;
+  border-radius: 50%;
+}
+
+.userinfo_center {
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+  flex: 1;
+  min-width: 0;
+  width: 75%;
+}
+
+.userinfo_center view:first-of-type {
+  padding: 0 0 0 20rpx;
+  font-size: 32rpx;
+  color: #a1a1a1;
+}
+
+.userinfo_center .jy_auth_age {
+  display: inline-block;
+  width: 100rpx;
+  height: 40rpx;
+  line-height: 40rpx;
+  border-radius: 20rpx;
+  text-align: center;
+  color: #fff;
+}
+
+.userinfo_center .jy_auth_age icon {
+  display: inline-flex;
+  font-size: 32rpx;
+}
+
+.userinfo_right{
+  position: relative;
+}
+
+.userinfo_right text{
+  color: #666;
+  font-size: 32rpx;
+  margin-right:20rpx;
+
+}
+
+.userinfo_right icon {
+  width: 18rpx;
+  height: 18rpx;
+  display: inline-block;
+  border-top: solid 1px #989898;
+  border-right: solid 1px #989898;
+  -webkit-transform: rotate(45deg);
+  position: absolute;
+  right: 0;
+  top: 18rpx;
+}

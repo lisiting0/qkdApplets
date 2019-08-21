@@ -1,0 +1,24 @@
+.content {
+  width: 100%;
+  height: 100%;
+}
+
+image {
+  width: 100%;
+}
+
+.video{
+  width: 100%; 
+}
+
+.relative{
+  position: relative;
+}
+
+.qrcode{
+  width: 180rpx;
+  height: 200rpx;
+  position: absolute;
+  left: 38%;
+  bottom: 56%;
+}

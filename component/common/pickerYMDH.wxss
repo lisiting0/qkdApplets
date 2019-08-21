@@ -1,0 +1,4 @@
+.showFont{
+  font-size: 28rpx;
+  width:100% !important; 
+}

@@ -1,0 +1,28 @@
+.setting view {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 40rpx;
+  height: 120rpx;
+  background-color: #fff;
+  align-items: center;
+  font-size: 32rpx;
+  border-bottom: 1px solid #f2f2f2;
+}
+
+.setting view input {
+  font-size: 32rpx;
+  width: 240rpx;
+  padding: 5px 0;
+}
+
+input::-moz-placeholder {
+  color: #ddd;
+}
+
+input::-webkit-input-placeholder {
+  color: #ddd;
+}
+
+input:-ms-input-placeholder {
+  color: #ddd;
+}

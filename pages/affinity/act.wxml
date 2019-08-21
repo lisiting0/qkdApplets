@@ -1,0 +1,210 @@
+<view class="page gray">
+  <view class="jy_new_act_top" wx:if="{{datingDetail}}">
+    <view class="swiper-container user_info_swiper">
+      <swiper class="swiper" indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" current="{{currIndex}}" bindchange="bindchange" wx:if="{{coverimgAttachement && coverimgAttachement.length>0}}">
+        <block wx:for="{{coverimgAttachement}}" wx:key="*this">
+          <swiper-item>
+            <image src="{{item}}" class="slide-image" mode="aspectFill" />
+          </swiper-item>
+        </block>
+      </swiper>
+      <image src="../../images/userInfoBg.jpg" class="slide-image" wx:else></image>
+      <view class="swiper_count" wx:if="{{coverimgAttachement&&coverimgAttachement.length>0}}">{{(currIndex+1)}} / {{coverimgAttachement.length}}</view>
+      <view class="swiper_count" wx:else>0 / 0</view>
+    </view>
+  </view>
+
+  <view class="jy_new_act_b" wx:if="{{datingDetail}}">
+    <view class="jy_new_act_block">
+      <view class="jy_new_act_uinfo">
+        <navigator hover-class="none" url="/pages/user/userInfo?id={{datingDetail.jiaoyouUser.id}}">
+          <image src="{{datingDetail.jiaoyouUser.headimgAttachmentId}}" class="jy_new_act_uinfo_img"></image>
+        </navigator>
+        <view class="one-row">
+          <text class="right-text">{{datingDetail.distance}}</text>{{datingDetail.jiaoyouUser.aliasName}}
+          <icon class="iconfont jy_auth_age {{datingDetail.jiaoyouUser.aliasName.sex==1?'icon-xingbie-nv jy_auth_age_nv':'icon-xingbie jy_auth_age_man'}}">
+            {{datingDetail.jiaoyouUser.age}}
+          </icon>
+        </view>
+        <view class="jy_new_act_uinfo_tip">
+          <text class="right-text jy-paytype" style="background-color: #50cbff;" wx:if="{{datingDetail.activityMethod==7}}">一对一</text>
+          <text class="right-text jy-paytype" style="background-color: #ff706c;" wx:elif="{{datingDetail.activityMethod==8}}">多人</text>
+          <icon class="iconfont jy_act_ico {{datingDetail.datingThemes==1?'icon-weibiaoti-':datingDetail.datingThemes==2?'icon-meishi':datingDetail.datingThemes==3?'icon-dianyingpiaoiocn':datingDetail.datingThemes==4?'icon-changge':datingDetail.datingThemes==5?'icon-yundong-':'icon-qita'}}">
+            <text style="font-size:30rpx;">{{datingTitles[datingDetail.datingThemes>5?6:datingDetail.datingThemes]}}</text>
+          </icon>
+          <icon wx:if="{{datingDetail.activityMethod!=7&&datingDetail.activityMethod!=8}}" class="iconfont jy_act_ico jy_act_ico_{{tmp[datingDetail.activityMethod]}}">{{jiaoyouType[datingDetail.activityMethod]}}</icon>
+          <!-- @click.stop="showRule=true" -->
+          <text wx:if="{{datingDetail.activityMethod!=7&&datingDetail.activityMethod!=8}}" class="iconfont icon-question jy_ico_ask"></text>
+        </view>
+      </view>
+      <view class="jy_new_act_desc" wx:if="{{datingDetail.datingDesc}}">{{datingDetail.datingDesc}}</view>
+    </view>
+    <view class="jy_new_act_block">
+      <block wx:if="{{datingDetail.datingThemes==1}}">
+        <view class="jy_new_act_p">
+          <icon class="iconfont icon-icon--time"></icon>出发时间：{{formatDate(datingDetail.datingStarttime)}}</view>
+        <view class="jy_new_act_p">
+          <icon class="iconfont icon-dingwei"></icon>目的地点：{{datingDetail.datingLocation}}</view>
+        <view class="jy_new_act_p">
+          <icon class="iconfont icon-yiliaohangyedeICON-"></icon>旅行周期：{{tripTimeLength[datingDetail.tripTimeLength]}}</view>
+        <view class="jy_new_act_p">
+          <icon class="iconfont icon-fabu"></icon>出行方式：{{tripMode[datingDetail.tripMode]}}</view>
+      </block>
+      <block wx:elif="datingDetail.datingThemes==2">
+        <view class="jy_new_act_p">
+          <icon class="iconfont icon-icon--time"></icon>用餐时间：{{formatDate(datingDetail.datingStarttime)}}</view>
+        <view class="jy_new_act_p">
+          <icon class="iconfont icon-dingwei"></icon>用餐地点：{{datingDetail.datingLocation}}</view>
+      </block>
+      <block wx:elif="datingDetail.datingThemes==3">
+        <view class="jy_new_act_p" wx:if="{{datingDetail.datingTitle}}">
+          <icon class="iconfont icon-biaoqian"></icon>影片名称：{{datingDetail.datingTitle}}</view>
+        <view class="jy_new_act_p">
+          <icon class="iconfont icon-icon--time"></icon>观影时间：{{formatDate(datingDetail.datingStarttime)}}</view>
+        <view class="jy_new_act_p">
+          <icon class="iconfont icon-dingwei"></icon>观影地点：{{datingDetail.datingLocation}}</view>
+      </block>
+      <block wx:elif="datingDetail.datingThemes==4">
+        <view class="jy_new_act_p">
+          <icon class="iconfont icon-icon--time"></icon>唱歌时间：{{formatDate(datingDetail.datingStarttime)}}</view>
+        <view class="jy_new_act_p">
+          <icon class="iconfont icon-dingwei"></icon>唱歌地点：{{datingDetail.datingLocation}}</view>
+      </block>
+      <block wx:elif="datingDetail.datingThemes==5">
+        <view class="jy_new_act_p" wx:if="{{datingDetail.datingTitle}}">
+          <icon class="iconfont icon-icon--time"></icon>运动项目：一起 {{datingDetail.datingTitle}}</view>
+        <view class="jy_new_act_p">
+          <icon class="iconfont icon-icon--time"></icon>运动时间：{{formatDate(datingDetail.datingStarttime)}}</view>
+        <view class="jy_new_act_p">
+          <icon class="iconfont icon-dingwei"></icon>运动地点：{{datingDetail.datingLocation}}</view>
+      </block>
+      <block wx:else>
+        <view class="jy_new_act_p" wx:if="{{datingDetail.datingTitle}}">
+          <icon class="iconfont icon-biaoqian"></icon>约会主题：一起 {{datingDetail.datingTitle}}</view>
+        <view class="jy_new_act_p">
+          <icon class="iconfont icon-icon--time"></icon>约会时间：{{formatDate(datingDetail.datingStarttime)}}</view>
+        <view class="jy_new_act_p">
+          <icon class="iconfont icon-dingwei"></icon>约会地点：{{datingDetail.datingLocation}}</view>
+      </block>
+      <view class="jy_new_act_p">
+        <icon class="iconfont icon-tongyongleiyonghunan"></icon>对象：{{expectSex[datingDetail.expectSex>2?3:datingDetail.expectSex]}}</view>
+      <view class="jy_new_act_p">
+        <icon class="iconfont icon-qian"></icon>
+        费用：{{payTypeText[datingDetail.payType]}} {{datingDetail.payType==0 ? " · 每人"+datingDetail.enrollFee+"元":datingDetail.payType==3 ? " · 男士每人"+datingDetail.enrollFee+"元":""}}
+        <text wx:if="{{datingDetail.datingDetailsExt&&datingDetail.datingDetailsExt.extInt==1}}" style="color:#ff4404;margin-left: 40rpx;">[平台代收]</text>
+      </view>
+      <view wx:if="{{datingDetail.datingDetailsExt&&datingDetail.datingDetailsExt.extInt==1}}" style="font-size: 30rpx;padding: 0 0 0 70rpx;color:#c6c6c6;">平台代收:平台代收活动费用，报名结束后自动发放到发起人账户</view>
+      <view wx:if="{{datingDetail.datingDetailsExt&&datingDetail.datingDetailsExt.extInt==0&&(datingDetail.payType==0||datingDetail.payType==3)}}" style="font-size: 30rpx;padding: 0 0 0 70rpx;color:#c6c6c6;">发起人收取:活动发起人线下收取活动费用</view>
+    </view>
+
+    <view wx:if="{{datingDetail.activityMethod!=7&&datingDetail.activityMethod!=8}}" class="jy_new_act_block">
+      <view style="font-size:36rpx;font-weight:500;padding:15rpx 0;">活动说明</view>
+      <view style="border-top: 0px solid #EBEBEB;padding:15rpx 0;" class="jy_new_act_time jy_new_act_p">选择对象时间：{{formatDate(datingDetail.activityStarttime)}}</view>
+      <view style="border-top: 0px solid #EBEBEB;padding: 15rpx 0;" class="jy_new_act_p">
+        <text>活动规则：{{rule[tmp[datingDetail.activityMethod]]||""}}</text>
+      </view>
+    </view>
+
+
+    <view class="jy_new_act_block">
+      <view class="jy_new_act_p">
+        <icon class="iconfont icon-yanzhengma"></icon>认证要求：
+        <block wx:if="{{!datingDetail.idStatus&&!datingDetail.videoStatus&&!datingDetail.carStatus&&!datingDetail.houseStatus}}">不限</block>
+        <block wx:else>
+          <icon class="iconfont icon-shimingrenzheng jy_color_red" wx:if="{{datingDetail.idStatus}}"></icon>
+          <icon class="iconfont icon-shangjiashipinrenzheng jy_color_red" wx:if="{{datingDetail.videoStatus}}"></icon>
+          <icon class="iconfont icon-cherenzheng jy_color_red jy_color_car_red" wx:if="{{datingDetail.carStatus}}"></icon>
+          <icon class="iconfont icon-fangchanrenzheng jy_color_red" wx:if="{{datingDetail.houseStatus}}"></icon>
+        </block>
+      </view>
+      <view class="jy_new_act_p">
+        <icon class="iconfont icon-nianling"></icon>年龄：{{!datingDetail.expAgeLowerLimit||datingDetail.expAgeLowerLimit==-1?'不限':datingDetail.expAgeUpperLimit==-1?datingDetail.expAgeLowerLimit+'以上':datingDetail.expAgeLowerLimit+"-"+datingDetail.expAgeUpperLimit}}</view>
+      <view class="jy_new_act_p">
+        <icon class="iconfont icon-shengao"></icon>身高：{{!datingDetail.expHeightLowerLimit||datingDetail.expHeightLowerLimit==-1?'不限':'不低于'+datingDetail.expHeightLowerLimit+'cm'}}</view>
+      <view class="jy_new_act_p">
+        <icon class="iconfont icon-xueli"></icon>学历：{{!datingDetail.expEdu||datingDetail.expEdu==-1?'不限':expEdu['e'+datingDetail.expEdu]}}</view>
+    </view>
+    <view wx:if="{{datingDetail.activityMethod!=7&&datingDetail.activityMethod!=8}}" class="jy_new_act_block">
+      <view class="jy_new_act_p">
+        <icon class="iconfont icon-zhuyi1"></icon>约会后续：
+        <text wx:for="{{datingDetail.furtherAction}}" wx:key="furIndex" wx:for-item="furItem">{{index>0?'、':''}}{{furItem}}</text>
+      </view>
+    </view>
+    <view class="jy_new_act_block" wx:if="{{enrollCount&&enrollCount>0}}">
+      <view class="jy_new_act_bmList_wrap {{datingDetail.isCandidate!=1&&(datingDetail.jiaoyouUser.id != userInfo.userId)?'jy_new_act_bmList_blur':''}}">
+        <!-- <view class="jy_new_act_t">
+          <navigator hover-class="none" url="actJoinMember?id={{id}}" wx:if="{{datingDetail.activityMethod!=7&&datingDetail.activityMethod!=8}}">
+            <icon class="iconfont icon-arrow_r"></icon>
+          </navigator>
+          <navigator hover-class="none" url="actJoinMemberGl?id={{id}}" wx:else>
+            <icon class="iconfont icon-arrow_r"></icon>
+          </navigator>
+          已报名({{enrollCount}})
+        </view> -->
+        <!-- @click.stop="toenter('actJoinMember',id)" -->
+        <view wx:if="{{datingDetail.activityMethod!=7&&datingDetail.activityMethod!=8}}" class="jy_new_act_t">
+          <icon class="iconfont icon-renyuan" style="color:#FF3527;font-size:28rpx;"></icon>
+          已报名({{enrollCount}}{{datingDetail.activityMethod==8?"/"+datingDetail.datingDetailsExt.extInt11:""}})</view>
+        <!-- @click.stop="toenter('actJoinMemberGl',id)" -->
+        <view wx:else class="jy_new_act_t">
+          <icon class="iconfont icon-renyuan" style="color:#FF3527;font-size:28rpx;"></icon>
+          已报名({{enrollCount}}{{datingDetail.activityMethod==8?"/"+datingDetail.datingDetailsExt.extInt11:""}})
+        </view>
+
+        <view class="jy_new_act_hidden">
+          <view class="jy_new_act_bmList" wx:if="{{baomingUser}}">
+            <view class="jy_new_act_bmList_li" wx:for="{{baomingUser}}" wx:key="baomingIndex" wx:for-item="baomingItem" wx:if="{{index<7}}">
+              <view class='a' style="background-image:url({{baomingItem.jiaoyouUser.headimgAttachmentId}});"></view>
+            </view>
+            <navigator hover-class="none" url="actJoinMemberGl?id={{id}}" class="jy_new_act_bmList_more" wx:if="{{datingDetail.activityMethod!=7&&datingDetail.activityMethod!=8&&baomingUser.length>6}}">
+              <icon class="iconfont icon-arrow_r"></icon>
+            </navigator>
+            <navigator hover-class="none" url="actJoinMemberGl?id={{id}}" wx:elif="{{baomingUser.length>6}}">
+              <icon class="iconfont icon-arrow_r"></icon>
+            </navigator>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="top-bottom-gray" style="height:140rpx;"></view>
+
+  <view class="identity_act" wx:if="{{datingDetail}}">
+    <!--活动发布者进入-->
+    <block wx:if="{{datingDetail.jiaoyouUser.id == $store.state.userId}}">
+      <text class="grey" wx:if="datingDetail.state==5">活动已结束</text>
+      <router-link tag="em" :to="{name:'publishAppointment',query:{id:datingDetail.id}}" class="grey" wx:elif="datingDetail.state==2">编辑</router-link>
+      <!-- @click="enter" -->
+      <text class="orange" wx:if="datingDetail.activityMethod!=7&&datingDetail.activityMethod!=8">进入现场</text>
+    </block>
+    <block wx:else>
+      <block wx:if="datingDetail.state==5">
+        <text class="grey" wx:if="datingDetail.state==5">活动已结束</text>
+        <!-- @click="enter" -->
+        <text class="orange" wx:if="(datingDetail.isCandidate==1||datingDetail.jiaoyouUser.id == $store.state.userId)&&datingDetail.activityMethod!=7&&datingDetail.activityMethod!=8">进入现场</text>
+      </block>
+      <block wx:else>
+        <block wx:if="!$store.state.isLogin">
+          <!--  @click="candidate" -->
+          <text class="pink">我要报名</text>
+          <!-- @click="followActivity" -->
+          <text class="blue">关注</text>
+        </block>
+        <block wx:if="datingDetail.isCandidate==0">
+          <!-- @click="candidate" -->
+          <text class="pink">我要报名</text>
+          <!-- @click="followActivity" -->
+          <text class="blue" wx:if="datingDetail.isFollow==0">关注</text>
+          <!-- @click="unfollowActivity" -->
+          <text class="blue" wx:if="datingDetail.isFollow==1">取消关注</text>
+        </block>
+        <block wx:else>
+          <!-- @click="enter" -->
+          <text class="orange" wx:if="(datingDetail.isCandidate==1||datingDetail.jiaoyouUser.id == $store.state.userId)&&datingDetail.activityMethod!=7&&datingDetail.activityMethod!=8">进入现场</text>
+          <!-- @click="cancelCandidate" -->
+          <text class="pink" wx:if="datingDetail.isCandidate==1">退出活动</text>
+        </block>
+      </block>
+    </block>
+  </view>
+</view>

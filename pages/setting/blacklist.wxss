@@ -1,0 +1,28 @@
+.order-item { 
+  width: 100%; 
+  position: relative;
+}
+
+.touch-btn {
+  width: 180rpx;
+  height: 100%;
+  color: white;
+  position: absolute;
+  top: 0;
+  right: -160px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.touch-btn view {
+  width: 180rpx;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.qxgz {
+  background-color: #1aad19;
+}

@@ -1,0 +1,100 @@
+::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  color: transparent;
+}
+
+.dy_mydt_list {
+  background-color: #fff;
+  padding: 0 30rpx 10rpx;
+}
+
+.dy_mydt_list .dy_mydt_year {
+  color: #000;
+  font-size: 44rpx;
+  font-weight: bold;
+  padding: 20rpx 0;
+  border-bottom: 1px solid #f2f2f2;
+}
+
+.dy_mydt_list .dy_mydt_day {
+  float: left;
+  font-weight: bold;
+  width: 120rpx;
+  font-size: 30rpx;
+  text-align: center;
+  color: #000;
+}
+
+.month-con {
+  position: relative;
+  margin: 20rpx 0;
+}
+
+.dy_mydt_ul_li {
+  overflow: hidden;
+  margin-bottom: 20rpx;
+  background-color: #f2f2f2;
+  border-radius: 10rpx;
+  padding: 20rpx;
+}
+
+.dy_mydt_ul_li .dy_mydt_con {
+  font-size: 30rpx;
+}
+
+.dy_mydt_ul_li .dy_mydt_tip {
+  color: #999;
+  font-size: 28rpx;
+  overflow: hidden;
+}
+
+.dy_mydt_ul_li .dy_mydt_tip .messageCount {
+  font-size: 28rpx;
+  float: right;
+}
+
+.dy_mydt_ul_li .dy_mydt_tip .messageCount::before {
+  content: "\e650";
+  font-size: 30rpx;
+  margin-right: 10rpx;
+}
+
+.one-img {
+  width: 120rpx;
+  height: 120rpx;
+  margin: 0 20rpx 0 0;
+  float: left;
+}
+
+.dy_dt_img {
+  float: left;
+  width: 166rpx;
+  height: 166rpx;
+  margin: 0 15rpx 15rpx 0;
+}
+
+.dy_mydt_ul_li image {
+  position: relative;
+  background-color: #f6f6f6;
+}
+
+.dy_mydt_ul_li .icon-zhaopian {
+  content: "\e650";
+  position: absolute;
+  line-height: 180rpx;
+  height: 100%;
+  width: 100%;
+  left: 0;
+  top: 0;
+  z-index: 0;
+  color: #fff;
+  font-size: 100rpx;
+  text-align: center;
+  filter: alpha(opacity=80);
+  opacity: 0.8;
+}
+
+.margin-left120{
+  margin-left: 120rpx;
+}

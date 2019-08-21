@@ -1,0 +1,7 @@
+{
+  "usingComponents": {
+    "pickerYMDH": "/component/common/pickerYMDH",
+    "pickerYMDHM": "/component/common/pickerYMDHM"
+  },
+  "enablePullDownRefresh": false
+}

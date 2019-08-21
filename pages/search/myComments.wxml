@@ -1,0 +1,40 @@
+<!--我的动态-->
+<view class="page gray">
+  <view class="top-bottom-gray"></view>
+  <view class="header" hidden="{{hideHeader}}">
+    <view>下拉刷新中……</view>
+  </view>
+  <scroll-view scroll-y style="width: 100%; height:{{scroll_height+'px'}};" bindscrolltoupper="refresh" bindscrolltolower="loadMore">
+    <view class="dy_mydt_list">
+      <block wx:for="{{list}}" wx:key="year" wx:for-index="year" wx:for-item="yearObj">
+        <view class="dy_mydt_year">{{year}}</view>
+        <view class="month-con" wx:for="{{yearObj}}" wx:key="day" wx:for-index="day" wx:for-item="dayObj">
+          <text class="dy_mydt_day">{{day}}</text>
+          <block wx:for="{{dayObj}}" wx:key="id" wx:for-item="item">
+            <view class="dy_mydt_ul_li {{dayObj.length>1?'margin-left120':''}}" bindtap="getDetail">
+              <image class="iconfont one-img" src="{{item.images[0]}}" wx:if="{{item.images.length==1}}">
+                <view class="iconfont icon-zhaopian" style="line-height:130rpx"></view>
+              </image>
+              <view class="dy_mydt_con">{{item.feedContent}}</view>
+              <view class="dy_mydt_tip">{{item.createDate}}
+                <text class="iconfont messageCount">{{item.commentLegth}}</text>
+              </view>
+              <view class="dy_mydt_img" wx:if="{{item.images.length>1}}">
+                <block wx:for="{{item.images}}" wx:key="imgIndex" wx:for-item="imgItem">
+                  <image class="dy_dt_img" src="{{imgItem}}">
+                    <view class="iconfont icon-zhaopian"></view>
+                  </image>
+                </block>
+              </view>
+            </view>
+          </block>
+        </view>
+      </block>
+    </view>
+    <view class="bottom" hidden="{{hideBottom}}">已加载全部数据</view>
+  </scroll-view>
+  <view class="publishButton" bindtap="publishmoment" hidden="{{!showHideMoment}}">
+    <icon class="iconfont icon-jiahao"></icon>
+  </view>
+  <addMoment id='addMoment' bind:publishEvent="publishEvent"></addMoment>
+</view>

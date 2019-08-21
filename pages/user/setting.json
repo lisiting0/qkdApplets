@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "androidConfirmModal": "/component/common/androidConfirmModal"
+  },
+  "enablePullDownRefresh": false  
+}

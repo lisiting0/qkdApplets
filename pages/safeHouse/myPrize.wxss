@@ -1,0 +1,65 @@
+.myPrize {
+  height: 160rpx;
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  border-bottom: 1px solid #f2f2f2;
+  padding: 0 30rpx;
+}
+
+.left_info view:first-child {
+  font-size: 36rpx;
+  color: #000;
+}
+
+.left_info view:last-child {
+  font-size: 32rpx;
+  color: #9a9a9d;
+}
+
+.right_info {
+  position: absolute;
+  right: 20rpx;
+}
+
+.right_info .jb {
+  top: 25%;
+  color: #ffa443;
+  font-size: 36rpx;
+  font-weight: bold;
+}
+
+.dating_info {
+  width: 120rpx;
+  height: auto;
+  border-radius: 50%;
+  background-color: #efefef;
+  text-align: left;
+  display: flex;
+  align-items: center;
+  padding: 20rpx 0;
+}
+
+.dating_info image {
+  width: 100rpx;
+  height: 100rpx;
+  margin: 0 20rpx;
+}
+
+.dating_detail view:first-child {
+  font-size: 34rpx;
+  color: #000;
+  width: 80rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.dating_detail view:first-child {
+  font-size: 30rpx;
+  color: #9a9a9d;
+}

@@ -1,0 +1,130 @@
+<!-- 乾坤动态 -->
+<view class="page gray" bindtap="handletouchtart">
+  <view class="top-bottom-gray"></view>
+  <view class="page_bd menu-top">
+    <view class="weui-tab">
+      <view class="weui-navbar">
+        <block wx:for="{{tabs}}" wx:key="*this">
+          <view id="{{index}}" class="weui-navbar__item {{activeIndex == index ? 'weui-bar__item_on' : ''}}" bindtap="tabClick" style="padding:20rpx 0 20rpx;">
+            <view class="weui-navbar__title">{{item}}</view>
+          </view>
+        </block>
+        <view class="weui-navbar__slider" style="left: {{sliderLeft}}px; transform: translateX({{sliderOffset}}px); -webkit-transform: translateX({{sliderOffset}}px);"></view>
+      </view>
+    </view>
+  </view>
+  <view class="header" hidden="{{hideHeader}}">
+    <view>下拉刷新中……</view>
+  </view>
+  <scroll-view scroll-y style="width: 100%; height:{{scroll_height+'px'}};background-color:#ffffff;" bindscrolltolower="loadMore" bindscrolltoupper="refresh" bindscrolltolower="loadMore">
+    <view class="weui-tab__panel tab-panel-padding">
+      <view class="weui-tab__content">
+        <view wx:for="{{list}}" wx:key="index" class="momentItem">
+          <image class="user-image" src="{{item.uploadingPerson.headimgAttachmentId}}"></image>
+          <view class="right-con">
+            <!-- 文字内容 -->
+            <view class="text-con">
+              <view class="aliasName">{{item.uploadingPerson.aliasName}}</view>
+              <view class="comment-con">
+                <text wx:if="{{item.feedContent.length>50&&!item.openContent&&item.uploadingPerson.id== userInfo.id}}" data-index='{{index}}' data-ismy="1" catchtap="getDetail">
+                  {{item.feedContent.substr(0,50)}}...
+                </text>
+                <text wx:elif="{{item.feedContent.length>50&&!item.openContent}}" data-index="{{index}}" catchtap="getDetail">{{item.feedContent.substr(0,50)}}...</text>
+                <text wx:if="{{item.feedContent.length>50&&!item.openContent}}" class="show_hide_text" data-index="{{index}}" catchtap="showHideComment">展开</text>
+
+                <text wx:if="{{item.feedContent.length<=50&&item.uploadingPerson.id==userInfo.id||item.openContent}}" data-index='{{index}}' data-ismy="1" catchtap="getDetail">{{item.feedContent}}</text>
+                <text wx:elif="{{item.feedContent.length<=50||item.openContent}}" data-index="{{index}}" catchtap="getDetail">{{item.feedContent}}</text>
+                <text wx:if="{{item.feedContent.length<=50||item.openContent}}" class="show_hide_text" data-index="{{index}}" hidden="{{item.feedContent.length<50}}" catchtap="showHideComment">收起</text>
+              </view>
+            </view>
+
+            <!-- 图片内容 -->
+            <view catchtap="showPhoto(0,item)" wx:if="{{item.images.length==1}}" class="one-cls">
+              <image src="{{item.images[0]}}" data-list="{{item.images}}" data-src="{{item.images[0]}}" catchtap="previewImg"></image>
+            </view>
+            <view wx:elif="item.images.length>1" class="img-cls">
+              <block wx:for="{{item.images}}" wx:key="imgIndex" wx:for-item="imgItem">
+                <image src="{{imgItem}}" data-list="{{item.images}}" data-src="{{imgItem}}" catchtap="previewImg"></image>
+              </block>
+            </view>
+
+            <!-- 操作 -->
+            <view class="publish-cls">
+              <text>{{item.time}}</text>
+              <view class="list-command-btn {{showHideComment?'slideInRight':'slideOutRight'}}" wx:if="{{tabId == item.id}}">
+                <view class="btn-command" data-index="{{index}}" catchtap="deleteFabulous" wx:if="{{item.isFabulous==1}}">
+                  <icon class="iconfont icon-xinaixin"></icon>
+                  <text>取消</text>
+                </view>
+                <view class="btn-command" data-index="{{index}}" data-val="0" catchtap="setFabulous" wx:else>
+                  <icon class="iconfont icon-xinaixin"></icon>
+                  <text>赞</text>
+                </view>
+                <view class="btn-command" data-username="{{item.uploadingPerson.aliasName}}" data-userid="{{item.uploadingPerson.id}}" data-id="{{item.id}}" wx:if="{{userInfo.id!=item.uploadingPerson.id}}" catchtap="clickShowGift">
+                  <icon class="iconfont icon-dashang3"></icon>
+                  <text>打赏</text>
+                </view>
+                <view class="btn-command" data-index="{{index}}" data-id="{{item.id}}" catchtap="showComment">
+                  <icon class="iconfont icon-pinglun3"></icon>
+                  <text>评论</text>
+                </view>
+              </view>
+              <icon class="iconfont icon-pinglun2" data-id="{{item.id}}" data-showhide="{{showHideComment}}" catchtap="tabIdCick"></icon>
+            </view>
+
+            <!-- 点赞，回复的内容 -->
+            <view class="praiseAndComment">
+              <view class="jy_m_fabulous" wx:if="{{item.fabulous && item.fabulous.length>0}}">
+                <icon class="iconfont icon-xinaixin"></icon>
+                <block wx:for="{{item.fabulous}}" wx:key="praiseIndex" wx:for-index="praiseIndex" wx:for-item="praiseItem">
+                  <text>{{praiseIndex==0 ? praiseItem.user.aliasName : ','+praiseItem.user.aliasName}}</text>
+                </block>
+              </view>
+              <view class="jy_m_comment {{item.showMore?'cur':''}}" wx:if="{{item.comments && item.comments.length>0}}">
+                <block wx:for="{{item.comments}}" wx:key="commentItemIndex" wx:for-item="commentItem" wx:for-index="commentItemIndex">
+                  <view class="comment-arr" data-id="{{item.id}}" data-item="{{commentItem}}" data-index="{{commentItemIndex}}" catchtap="showComment">
+                    <text>{{commentItem.user.aliasName}}</text>:
+                    <text style="margin-left:5rpx;">{{commentItem.content}}</text>
+
+                    <!-- 回复模块 -->
+                    <block wx:if="{{item.commentObject && item.commentObject[commentItem.id]}}" wx:for="{{item.commentObject[commentItem.id]}}" wx:key="id" wx:for-item="commentObject"> 
+                      <view class="jy_c_replay" data-parentid="{{item.id}}" data-parentindex="{{commentItemIndex}}" data-item="{{commentObject}}" catchtap="showCommentEvent">
+                        <text>{{commentObject.user.aliasName}}</text>回复
+                        <text>{{commentObject.replayUser.aliasName}}</text>:
+                        <text>{{commentObject.content}}</text>  
+                      </view>
+                    </block>
+
+                  </view>
+                </block>
+              </view>
+
+              <view class="showmore" wx:if="{{item.comments&&item.commentLegth>5}}" data-index="{{index}}" data-showmore="{{item.showMore}}" catchtap="showMore">{{item.showMore?'收起':'展开('+item.commentLegth+')'}}</view>
+            </view>
+
+          </view>
+        </view>
+      </view>
+      <view class="bottom" hidden="{{hideBottom}}">已加载全部数据</view>
+    </view>
+  </scroll-view>
+  <view class="publishButton" bindtap="publishmoment" hidden="{{!showHideMoment}}">
+    <icon class="iconfont icon-jiahao"></icon>
+  </view>
+
+  <!-- 礼物列表 -->
+  <gifts id='gifts' userMoney="{{userMoney}}" objectId="{{objectId}}" candidateId="{{candidateId}}" aliasName="{{aliasName}}" bind:reward="reward"></gifts>
+
+  <!-- 动态详情 -->
+  <commentDetail id='commentDetail' detailId="{{id}}" isMy="{{isMy}}" dynamic="{{dynamicDes}}"></commentDetail>
+
+  <!-- 发布动态 -->
+  <addMoment id='addMoment' bind:publishEvent="publishEvent"></addMoment>
+</view>
+
+<form bindsubmit="sendComment" report-submit="true">
+  <view wx:if="{{showTextarea}}" class="commentAdd">
+    <textarea placeholder-class="input_null" fixed="true" show-confirm-bar="false" cursor-spacing="15" auto-height="true" placeholder="{{commentObj.replay?'回复'+commentObj.replay.user.aliasName:'请输入...'}}" name="comment"></textarea>
+    <button class="send-btn" form-type="submit">发送</button>
+  </view>
+</form>

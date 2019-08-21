@@ -1,0 +1,33 @@
+<view class="page login">
+  <image src='../../images/registered/logo.png' class='login_logo'></image>
+  <view class='logo_name'>乾坤岛</view>
+  <view class="weui-cells weui-cells_after-title">
+    <view class="weui-cell weui-cell_input">
+      <input class="weui-input" auto-focus placeholder="请输入您的手机号" placeholder-style='color:#c0c0c0;' bindinput='watchPhone' />
+    </view>
+  </view>
+  <view class="weui-cells weui-cells_after-title {{loginType=='pwd'?'show':'hide'}}">
+    <view class="weui-cell weui-cell_input">
+      <input class="weui-input" password="true" value="{{password}}" placeholder="密码" placeholder-style='color:#c0c0c0;' bindinput='watchPwd' hidden="{{showPassword}}" />
+      <input class="weui-input" type="text" value="{{password}}" placeholder="密码" placeholder-style='color:#c0c0c0;' bindinput='watchPwd' hidden="{{!showPassword}}" />
+      <image class="switching-icon" src="{{hidePwdImg}}" hidden="{{showPassword}}" catchtap="showHidePassword"></image>
+      <image class="switching-icon" src="{{showPwdImg}}" hidden="{{!showPassword}}" catchtap="showHidePassword"></image>
+    </view>
+  </view>
+  <view class="weui-cells weui-cells_after-title {{loginType=='code'?'show':'hide'}}">
+    <view class="weui-cell weui-cell_input">
+      <input class="weui-input" maxlength="6" type="number" placeholder="请输入验证码" placeholder-style='color:#c0c0c0;' style='width:80%;' bindinput='watchCode' />
+      <text class='send-code colorRed {{showSend?"show":"hide"}}' bindtap='getVerificationCode'>{{verificationCodeContent}}</text>
+      <text class='send-code {{showSend?"hide":"show"}}'>{{verificationCodeContent}}</text>
+    </view>
+  </view>
+  <view class="btn_login {{logined?'btn_logined':''}}" bindtap="login">{{loginText}}</view>
+  <view class='login-action'>
+    <text hidden="{{loginType=='pwd'}}" data-type="pwd" bindtap="loginTypeClick">密码登录</text>
+    <text hidden="{{loginType=='code'}}" data-type="code" bindtap="loginTypeClick">验证码登录</text>
+    <text data-url="/login/forgetPassword" catchtap="linkTo">忘记密码</text>
+  </view>
+  <view class='agreement'>登录代表同意
+    <text class='xy' bindtap="showAgreement">{{agreement}}</text>
+  </view>
+</view>

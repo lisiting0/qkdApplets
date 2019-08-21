@@ -1,0 +1,14 @@
+<!--帮助与反馈-->
+<view class="page gray">
+  <view class="top-bottom-gray"></view>
+  <view class="jy_block_t">
+    <view class="iconfont jy_p_tit2">常见问题</view>
+    <view class="jy_aInfo_line">
+      <block wx:for="{{help}}" wx:key="*this">
+        <view class="iconfont jy_aInfo_line_li" wx:if="{{item.list&&item.list.length>0}}" data-id="{{item.id}}" bindtap="linkTo">
+          {{item.title}}
+        </view>
+      </block>
+    </view>
+  </view>
+</view>

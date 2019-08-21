@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "blindDatePay": "/component/common/blindDatePay"
+  },
+  "enablePullDownRefresh": false
+}

@@ -1,0 +1,112 @@
+<!--我的评价-->
+<view class="page gray" bindtouchstart="handletouchtart">
+  <view class="top-bottom-gray"></view>
+  <view class="page_bd menu-top">
+    <view class="weui-tab">
+      <view class="weui-navbar">
+        <block wx:for="{{tabs}}" wx:key="*this">
+          <view id="{{index}}" class="weui-navbar__item {{activeIndex == index ? 'weui-bar__item_on' : ''}}" bindtap="tabClick">
+            <view class="weui-navbar__title">{{item}}</view>
+          </view>
+        </block>
+        <view class="weui-navbar__slider" style="left: {{sliderLeft}}px; transform: translateX({{sliderOffset}}px); -webkit-transform: translateX({{sliderOffset}}px);"></view>
+      </view>
+    </view>
+  </view>
+  <view class="header" hidden="{{hideHeader}}">
+    <view>下拉刷新中……</view>
+  </view>
+  <view class="weui-tab__panel" style="padding-top:0;">
+    <scroll-view scroll-y style="width: 100%; height:{{scroll_height+'px'}};" bindscrolltoupper="refresh" bindscrolltolower="loadMore">
+      <view class="weui-tab__content" hidden="{{activeIndex == 1 || activeIndex == 2}}">
+        <view class="comment_arr" wx:for="{{list}}" wx:key="{{index}}">
+          <view class="user border-bottom">
+            <image class="user_img" src="{{item.jiaoyouUser?item.jiaoyouUser.headimgAttachmentId:''}}" data-id="{{item.jiaoyouUser.id}}" data-silentState="{{item.jiaoyouUser.silentState}}" bindtap="toUserInfo"></image>
+            <view class="user-center">
+              <view>{{item.jiaoyouUser&&item.jiaoyouUser.aliasName}}</view>
+              <view>{{item.datingStarttime}}</view>
+            </view>
+            <icon class="iconfont icon-pinglun2"></icon>
+          </view>
+          <view class="active_link border-bottom" data-id="{{item.id}}" bindtap="toActiveDetail">
+            <view class="act-info">
+              <text class="jy-type xy" wx:if="{{item.activityMethod==1}}">选缘</text>
+              <text class="jy-type qy" wx:elif="{{item.activityMethod==2}}">抢缘</text>
+              <text class="jy-type jy" wx:elif="{{item.activityMethod==3}}">竞缘</text>
+              <text class="jy-type zy" wx:elif="{{item.activityMethod==4}}">中缘</text>
+              <text class="jy-type py" wx:else="{{item.activityMethod==5}}">配缘</text> {{item.datingDesc}}
+              <icon class="iconfont icon-arrow_r"></icon>
+            </view>
+          </view>
+          <view class="xpj_panel">
+            <view class="xpj" data-index="{{index}}" data-id="{{item.id}}" bindtap="showComment">
+              <icon class="iconfont icon-bianji" style='font-size:30rpx;'></icon>
+              <text>写评价</text>
+            </view>
+          </view>
+        </view>
+      </view>
+      <view class="weui-tab__content" hidden="{{activeIndex == 0 || activeIndex == 2}}">
+        <view class="comment_arr" wx:for="{{list}}" wx:key="{{index}}">
+          <view class="user border-bottom">
+            <image class="user_img" src="{{item.rUser?item.rUser.headimgAttachmentId:''}}" data-id="{{item.rUser.id}}" data-silentState="{{item.rUser.silentState}}" bindtap="toUserInfo"></image>
+            <view class="user-center">
+              <view>{{item.rUser&&item.rUser.aliasName}}</view>
+              <view>{{item.createDate }}</view>
+            </view>
+            <icon class="iconfont icon-pinglun2"></icon>
+          </view>
+          <view class="comment_text">
+            <text>评价：</text>
+            <text>{{item.content}}</text>
+          </view>
+          <view class="active_link" data-id="{{item.id}}" bindtap="toActiveDetail">
+            <view class="act-info" wx:if="{{item.object}}">
+              <text class="jy-type xy" wx:if="{{item.object.activityMethod==1}}">选缘</text>
+              <text class="jy-type qy" wx:elif="{{item.object.activityMethod==2}}">抢缘</text>
+              <text class="jy-type jy" wx:elif="{{item.object.activityMethod==3}}">竞缘</text>
+              <text class="jy-type zy" wx:elif="{{item.object.activityMethod==4}}">中缘</text>
+              <text class="jy-type py" wx:else="{{item.object.activityMethod==5}}">配缘</text> {{item.object.datingDesc}}
+              <icon class="iconfont icon-arrow_r"></icon>
+            </view>
+          </view>
+        </view>
+      </view>
+      <view class="weui-tab__content" hidden="{{activeIndex == 0 || activeIndex == 1}}">
+        <view class="comment_arr" wx:for="{{list}}" wx:key="{{index}}">
+          <view class="user border-bottom">
+            <image class="user_img" src="{{item.user?item.user.headimgAttachmentId:''}}" data-id="{{item.user.id}}" data-silentState="{{item.user.silentState}}" bindtap="toUserInfo"></image>
+            <view class="user-center">
+              <view>{{item.user&&item.user.aliasName}}</view>
+              <view>{{item.createDate }}</view>
+            </view>
+            <icon class="iconfont icon-pinglun2"></icon>
+          </view>
+          <view class="comment_text">
+            <text>评价：</text>
+            <text>{{item.content}}</text>
+          </view>
+          <block wx:if="{{item.object}}">
+            <view class="active_link" data-id="{{item.object.id}}" bindtap="toActiveDetail">
+              <view class="act-info">
+                <text class="jy-type xy" wx:if="{{item.object.activityMethod==1}}">选缘</text>
+                <text class="jy-type qy" wx:elif="{{item.object.activityMethod==2}}">抢缘</text>
+                <text class="jy-type jy" wx:elif="{{item.object.activityMethod==3}}">竞缘</text>
+                <text class="jy-type zy" wx:elif="{{item.object.activityMethod==4}}">中缘</text>
+                <text class="jy-type py" wx:else="{{item.object.activityMethod==5}}">配缘</text> {{item.object.datingDesc}}
+                <icon class="iconfont icon-arrow_r"></icon>
+              </view>
+            </view>
+          </block>
+        </view>
+      </view>
+      <view class="bottom" hidden="{{hideBottom}}">已加载全部数据</view>
+    </scroll-view>
+  </view>
+</view>
+<form bindsubmit="sendComment" report-submit="true">
+  <view wx:if="{{showTextarea}}" class="commentAdd">
+    <textarea placeholder-class="input_null" fixed="true" maxlength="-1" show-confirm-bar="false" cursor-spacing="15" auto-height="true" placeholder="请输入..." name="comment"></textarea>
+    <button class="send-btn" form-type="submit">发送</button>
+  </view>
+</form>

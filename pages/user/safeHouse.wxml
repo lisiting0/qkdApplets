@@ -1,0 +1,114 @@
+<!-- 金屋 -->
+<view class="page gray jy_jw">
+  <view class="top-bottom-gray"></view>
+
+  <view class="main-content">
+    <view class="money" style="background-image:url({{moneyBg}})">
+      <view class="one-panel">
+        <view class="left-panel">
+          <image src="../../images/earnCoin/rmb.png"></image>
+          <view>现金账户</view>
+        </view>
+        <view class="right-panel">
+          <view>余额</view>
+          <view>￥{{purse.income}}</view>
+        </view>
+      </view>
+      <view class="tubiao">
+        <icon class="iconfont icon-tixian"></icon>
+        <navigator hover-class="none" url="/pages/safeHouse/putforward">
+          <text>提现</text>
+        </navigator>
+        <icon class="iconfont icon-arrow_r"></icon>
+        <text class="text-line"></text>
+      </view>
+      <view class="two-panel">
+        <navigator hover-class="none" url="/pages/safeHouse/bill" class="jrsr">
+          <view>今日收入</view>
+          <view>￥{{purse.consumption.incomeAmountCountDay}}</view>
+        </navigator>
+        <navigator hover-class="none" url="/pages/safeHouse/bill" class="jrzc">
+          <view>今日支出</view>
+          <view>￥{{purse.consumption.consumeAmountCountDay}}</view>
+        </navigator>
+      </view>
+    </view>
+    <view class="qkb" style="background-image:url({{qkbBg}})">
+      <view class="one-panel">
+        <view class="left-panel">
+          <image src="../../images/earnCoin/qkb.png"></image>
+          <view>乾坤币账户</view>
+        </view>
+        <view class="right-panel">
+          <view>余额</view>
+          <view>{{purse.userMoney}}</view>
+        </view>
+      </view>
+      <view class="tubiao">
+        <icon class="iconfont icon-chongzhi"></icon>
+        <navigator hover-class="none" url="/pages/safeHouse/recharge">
+          <text>充值</text>
+        </navigator>
+        <icon class="iconfont icon-arrow_r"></icon>
+        <text class="text-line"></text>
+      </view>
+      <view class="two-panel">
+        <navigator hover-class="none" class='jrsr' url="/pages/safeHouse/bill?type=1">
+          <view>今日收入</view>
+          <view>{{((purse.consumption&&purse.consumption.incomeJiaobiCountDay)||0)}}</view>
+        </navigator>
+        <navigator hover-class="none" class='jrzc' url="/pages/safeHouse/bill?type=1">
+          <view>今日支出</view>
+          <view>{{((purse.consumption&&purse.consumption.consumeJiaobiCountDay||0))}}</view>
+        </navigator>
+      </view>
+    </view>
+  </view>
+  <view class="tuiguang">
+    <view class="tuiguang-link">
+      <icon class="jysc iconfont icon-shangcheng" style="display: block;color:#ff688b;"></icon>
+      <view>乾坤商城</view>
+    </view>
+    <navigator hover-class="none" url="/pages/safeHouse/sendGift" class="tuiguang-link">
+      <icon class="iconfont icon-liwu5" style="display: block;color:#3ccbb5;"></icon>送礼
+    </navigator>
+    <navigator hover-class="none" url="/pages/safeHouse/prizeDraw" class="tuiguang-link">
+      <icon class="iconfont icon-choujiang" style="display: block;color:#ff9f2d;"></icon>幸运乾坤轮
+    </navigator>
+    <navigator hover-class="none" url="/pages/safeHouse/bill" class="tuiguang-link">
+      <icon class="iconfont icon-zhangdan1" style="display: block;color:#269fde;"></icon>账单
+    </navigator>
+  </view>
+  <view class="earncoin">
+    <view class='zqkb'>
+      <view class='zqkb-img'>
+        <image src="../../images/earnCoin/tj.png"></image>
+      </view>
+      <view class='zqkb-text'>
+        <text>赚乾坤币</text>
+      </view>
+      <view class='zqkb-link' data-url="safeHouse/earnCoin" catchtap="linkTo">更多
+        <icon class="iconfont icon-arrow_r"> </icon>
+      </view>
+    </view>
+    <view class='zqkb-tips'>
+      <text>完成相应任务，可领取巨额乾坤币，Come on...</text>
+    </view>
+    <view class='rwzx-list'>
+      <view class="jy_earn_list">
+        <view wx:for="{{eventList}}" wx:key="id" class="jy_earn_list_li">
+          <image class="jy_earn_img" src="{{item.icon}}"></image>
+          <view class="center-text">
+            <view class='center-one'>
+              <text>{{item.name}}</text>
+              <text>+{{item.amount}}</text>
+            </view>
+            <view class='center-two'>{{item.remark}}</view>
+          </view>
+          <view class="action-btn finished" wx:if="{{item.classId==16}}">{{item.btnName}}</view>
+          <view data-url="{{item.linkUrl}}" catchtap="toLink" class="action-btn" wx:else>{{item.btnName}}</view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

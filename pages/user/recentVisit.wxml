@@ -1,0 +1,55 @@
+<!--最近来访-->
+<view class="page gray">
+  <view class="top-bottom-gray"></view>
+  <view class="page_bd menu-top">
+    <view class="weui-tab">
+      <view class="weui-navbar">
+        <block wx:for="{{tabs}}" wx:key="*this">
+          <view id="{{index}}" class="weui-navbar__item {{activeIndex == index ? 'weui-bar__item_on' : ''}}" bindtap="tabClick">
+            <view class="weui-navbar__title">{{item}}</view>
+          </view>
+        </block>
+        <view class="weui-navbar__slider" style="left: {{sliderLeft}}px; transform: translateX({{sliderOffset}}px); -webkit-transform: translateX({{sliderOffset}}px);"></view>
+      </view>
+    </view>
+    <view class="weui-search-bar">
+      <view class="weui-search-bar__form">
+        <view class="weui-search-bar__box">
+          <icon class="weui-icon-search_in-box" type="search" size="14"></icon>
+          <input type="text" class="weui-search-bar__input" placeholder="搜索" value="{{inputVal}}" focus="{{inputShowed}}" bindinput="inputTyping" />
+          <view class="weui-icon-clear" wx:if="{{inputVal.length > 0}}" bindtap="clearInput">
+            <icon type="clear" size="14"></icon>
+          </view>
+        </view>
+        <label class="weui-search-bar__label" hidden="{{inputShowed}}" bindtap="showInput">
+          <icon class="weui-icon-search" type="search" size="14"></icon>
+          <view class="weui-search-bar__text">搜索</view>
+        </label>
+      </view>
+      <view class="weui-search-bar__cancel-btn" hidden="{{!inputShowed}}" bindtap="hideInput">取消</view>
+    </view>
+  </view>
+  <view class="header" hidden="{{hideHeader}}">
+    <view>下拉刷新中……</view>
+  </view>
+  <scroll-view scroll-y style="width: 100%; height:{{scroll_height+'px'}};background-color:#ffffff;" bindscrolltoupper="refresh" bindscrolltolower="loadMore">
+    <view class="weui-tab__panel tab-panel-padding">
+      <view class="weui-tab__content">
+        <view class='text-image-panel' wx:for="{{list}}" wx:key="{{index}}" wx:for-index="bindex">
+          <view class='headImage'>
+            <image src='{{item.jiaoyouUser.headimgAttachmentId}}'></image>
+          </view>
+          <view class="right-view">
+            <view class='one-view'>{{item.jiaoyouUser.aliasName}}</view>
+            <view class='two-view'>{{item.jiaoyouUser.selfLabel}}</view>
+          </view>
+          <view class="action-view">
+            <view class="theme-btn" data-id="{{item.jiaoyouUser.id}}" data-index="{{bindex}}" wx:if="{{item.jiaoyouUser.isFollow==0}}" bindtap="followFriend">+关注</view>
+            <view class="theme-btn" data-id="{{item.jiaoyouUser.id}}" data-index="{{bindex}}" wx:else bindtap="unfollowFriend">取消关注</view>
+          </view>
+        </view>
+      </view> 
+      <view class="bottom" hidden="{{hideBottom}}">已加载全部数据</view>
+    </view>
+  </scroll-view> 
+</view>

@@ -1,0 +1,20 @@
+<view class="page">
+  <view class="top-bottom-gray"></view>
+  <view class="container"> 
+    <textarea class='input_view' maxlength='-1' auto-height="{{autoHeight}}" value='{{firstCon}}' placeholder="请输入活动提示" bindblur="outBlur" bindinput='inputCon' id='0' style='width:{{width-20}}px;' />
+    <view wx:for="{{dataList}}" wx:key="*this" style='background-color:white;margin-top:15rpx;'>
+      <view class='img_view' style='width:{{width-28}}px;max-height:{{width-28}}px;'>
+        <image style='width:{{width-28}}px;max-height:{{width-28}}px;' src='{{item.pic}}' mode='aspectFill' />
+        <view>
+          <icon type='cancel' bindtap='deletedImg' data-index='{{index}}' size='25' color='#ef8383' style='width:25px;height:25px;margin-left:-35px;margin-top:10px;'></icon>
+        </view>
+      </view>
+      <textarea class='input_view' maxlength='-1' auto-height="{{autoHeight}}" bindinput='inputCon' style='width:{{width-20}}px;' value='{{item.value}}' bindblur="outBlur" id='{{index+1}}' placeholder=" "/>
+    </view>
+    <view style='height:45px;width:100%;'></view>
+  </view>
+  <view class='toWrite' bindtap='addImg'>
+    <image src='../../../images/album.png' style='width:60rpx;height:60rpx;margin-left:21rpx;margin-top:21rpx;' />
+  </view>
+    <view class='bottom-btn' bindtap='editorConfirm' style="bottom: 40rpx;">确定</view>
+</view>

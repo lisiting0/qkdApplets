@@ -1,0 +1,33 @@
+<!-- 默认渠道 -->
+<view class='page gray'>
+  <view class="setting">
+    <view>
+      <label>男士人数</label>
+      <input type="number" placeholder="请填写报名人数" value="{{settingExtString6.boyLimit}}" data-input="boyLimit" bindinput='bindNumberInput' />
+    </view>
+    <p></p>
+    <view>
+      <label>男士费用</label>
+      <input type="number" placeholder="请填写报名费用" value="{{settingExtString6.boyFee}}" data-input="boyFee" bindinput='bindDoubleInput' />
+    </view>
+    <p></p>
+    <view>
+      <label>女士人数</label>
+      <input type="number" placeholder="请填写报名人数" value="{{settingExtString6.girlLimit}}" data-input="girlLimit" bindinput='bindNumberInput' />
+    </view>
+    <p></p>
+    <view>
+      <label>女士费用</label>
+      <input type="number" placeholder="请填写报名费用" value="{{settingExtString6.girlFee}}" data-input="girlFee" bindinput='bindDoubleInput' />
+    </view>
+    <view wx:if="{{settingExtString6.key!='a9fDfoS'}}">
+      <label>合伙人分成</label>
+      <input type="number" placeholder="请填写合伙人分成" value="{{settingExtString6.share}}" data-input="share" bindinput='bindDoubleInput' />
+    </view>
+    <view wx:if="{{settingExtString6.key!='a9fDfoS'}}" class="switch_view">
+      <label>是否需要渠道认证</label>
+      <switch class="tui-fr" color="#FF9000" checked="{{settingExtString6.needVerify}}" bindchange="onClick" />
+    </view>
+  </view>
+  <view class='bottom-btn' bindtap='makeSureExtString6'>确定</view>
+</view>

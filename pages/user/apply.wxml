@@ -1,0 +1,28 @@
+<view class="page gray">
+  <view class="top-bottom-gray"></view>
+  <view class="header" hidden="{{hideHeader}}">
+    <view>下拉刷新中……</view>
+  </view>
+  <scroll-view scroll-y style="width: 100%; height:{{scroll_height+'px'}};background-color:#ffffff;" bindscrolltoupper="refresh" bindscrolltolower="loadMore">
+    <view class="content">
+      <block wx:for="{{listArr}}" wx:key="id" wx:for-index="index">
+      <view class="apply-panel" data-id="{{item.user.id}}" data-state="{{item.user.silentState}}" catchtap="linkTo">
+        <!-- <router-link :to="{name:'userInfo',query:{id:item.user.id,silentState: item.user.silentState}}" tag="view" v-for="(item,index) in listArr" :key="item.id"> -->
+        <image src="{{item.user.headimgAttachmentId}}"></image>
+        <view class="userinfo">
+          <view>{{item.user.aliasName}}</view>
+          <view>{{item.content}}</view>
+        </view>
+        <view class="action-panel" wx:if="{{item.status==1}}"> 
+          <text data-id="{{item.user.id}}" data-index="{{index}}" catchtap="accept">接受</text> 
+          <text data-id="{{item.user.id}}" data-index="{{index}}" catchtap="reject">忽略</text>
+        </view>
+        <view class="action-panel gray_text" wx:elif="{{item.status==0}}">已忽略</view>
+        <view class="action-panel gray_text" wx:else>已同意</view>
+        <!-- </router-link> -->
+        </view>
+      </block>
+    </view>
+    <view class="bottom" hidden="{{hideBottom}}">已加载全部数据</view>
+  </scroll-view>
+</view>

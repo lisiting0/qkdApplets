@@ -1,0 +1,22 @@
+<!-- 黑名单 -->
+<view class="page gray">
+  <scroll-view scroll-y style="width: 100%; height:{{scroll_height+'px'}};" bindscrolltoupper="refresh" bindscrolltolower="loadMore">
+    <block wx:for="{{blacklist}}" wx:key="{{item}}">
+      <view class="order-item" bindtouchstart="drawStart" bindtouchmove="drawMove" bindtouchend="drawEnd" style="right:{{item.right}}rpx">
+        <view class='text-image-panel'>
+          <view class='headImage'>
+            <image src='{{item.jiaoyouUser.headimgAttachmentId}}'></image>
+          </view>
+          <view class="right-view">
+            <view class='one-view'>{{item.jiaoyouUser.aliasName}}</view>
+            <view class='two-view'>{{item.jiaoyouUser.selfLabel}}</view>
+          </view>
+        </view>
+        <view class="touch-btn">
+          <view class="qxgz" data-id="{{item.rid}}"  bindtap="outBlack">移出黑名单</view> 
+        </view>
+      </view>
+    </block>
+    <view class="bottom" hidden="{{hideBottom}}">已加载全部数据</view>
+  </scroll-view>
+</view>

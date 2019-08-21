@@ -1,0 +1,158 @@
+page{
+  overflow: hidden;
+}
+
+::-webkit-scrollbar{
+width: 0;
+height: 0;
+color: transparent;
+}
+
+.weui-navbar{
+  position: relative; 
+  border-bottom: none;
+  background-color: #fff;
+}
+
+.weui-navbar__item{
+  padding: 20rpx 0 0;
+  color: #9a9a9d;
+}
+
+.weui-navbar__item.weui-bar__item_on{
+  color: #000;
+}
+
+.weui-navbar__slider{
+  width: 2em;
+  background-color: #ff4300;
+}
+
+.blindDate_container {
+  padding: 0 20rpx;
+}
+
+.blindDate_container .blindDate_con {
+  padding-bottom: 20rpx;
+}
+
+.blindDate_con .blindDate_panel {
+  position: relative;
+  width: 100%;
+  height: 320rpx;
+  background-repeat: no-repeat;
+  background-position: center top;
+  background-size: cover;
+  color: #fff;
+}
+
+.blindDate_con .blindDate_panel .blindDate_tips {
+  width: 180rpx;
+  border-radius: 0.2rem;
+  background-color: rgba(0, 0, 0, 0.4);
+  position: absolute;
+  right: 10rpx;
+  bottom: 10rpx;
+  text-align: center;
+  font-size: 24rpx;
+  line-height: 32rpx;
+}
+
+.blindDate_con .blindDate_detail {
+  background-color: #fff;
+  padding: 10rpx;
+  color: #666;
+  line-height: 48rpx;
+  position: relative;
+}
+
+.blindDate_detail .blindDate_title {
+  font-size: 32rpx;
+  font-weight: 500;
+}
+
+.blindDate_desc {
+  font-size: 28rpx;
+  color: #b3b3b3;
+}
+
+.blindDate_desc .blindDate_count {
+  display: flex;
+}
+
+.blindDate_desc .blindDate_count .blindDate_gz,
+.blindDate_desc .blindDate_count .blindDate_bm {
+  display: inline-block;
+  width: 30%;
+}
+
+.blindDate_desc .blindDate_count .blindDate_bm icon {
+  margin-bottom: 10rpx;
+}
+
+.blindDate_desc .blindDate_date {
+  display: flex;
+}
+
+.blindDate_desc .blindDate_date image {
+  width: 32rpx;
+  height: 32rpx;
+  margin-right: 20rpx;
+}
+
+.blindDate_desc .blindDate_date text {
+  line-height: 32rpx;
+}
+
+.blindDate_act{
+  position: absolute;
+  bottom: 10%;
+  right: 5%;
+  width: 120rpx;
+  height: 120rpx;
+  line-height: 120rpx;
+  border-radius: 50%;
+  background-color: #f8a11b;
+  text-align: center;
+}
+
+.blindDate_act text{
+  font-size: 28rpx;
+  color: #fff;
+}
+
+icon {
+  margin-right: 20rpx;
+  display: inline-flex;
+}
+
+/* active  */
+.blindDate_detail.active .blindDate_title text:nth-of-type(1),
+.blindDate_detail.active icon, .blindDate_count text {
+  color: #ff2f17;
+}
+/* live */
+.blindDate_detail.live .blindDate_title text:nth-of-type(1),
+.blindDate_detail.live icon, .blindDate_count text {
+  color: #f8a11b;
+}
+/* end */
+.blindDate_detail.end .blindDate_title text:nth-of-type(1),
+.blindDate_detail.end icon, .blindDate_count text {
+  color: #b1b1b1;
+}
+
+/* active  */
+.blindDate_detail.active .blindDate_act{
+  background-color: #ff2f17;
+}
+
+/* live  */
+.blindDate_detail.live .blindDate_act{
+  background-color: #f8a11b;
+}
+
+/* end  */
+.blindDate_detail.end .blindDate_act{
+  background-color: #b1b1b1;
+}

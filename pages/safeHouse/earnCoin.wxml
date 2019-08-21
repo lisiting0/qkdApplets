@@ -1,0 +1,22 @@
+<!--金屋/赚乾坤币-->
+<view class="page gray">   
+  <view class="top-bottom-gray"></view>
+  <view class="task-con" wx:for="{{eventList}}" wx:key="*this" wx:for-item="item">
+    <view class="task-top">
+      <view class="task-title">{{item.label}}</view>
+      <view class="task-desc">{{item.description}}</view>
+    </view>
+    <view class="task-panel" wx:for="{{item.arr}}" wx:key="index" wx:for-item="items">
+      <view class='task-image'>
+        <image src='{{items.icon}}'></image>
+      </view>
+      <view class="task-right">
+        <view class='one-view'>{{items.name}}<text class="amount"> +{{items.amount}}</text></view>
+        <view class='two-view'>{{items.remark}}</view>
+      </view> 
+      <view class="action-view finished" wx:if="{{items.finished==1}}">已完成</view>
+      <view class="action-view" data-url="{{items.linkUrl}}" bindtap="toLink" wx:else>{{items.btnName}}</view>
+    </view>
+  </view>
+  <view class="top-bottom-gray"></view>
+</view>

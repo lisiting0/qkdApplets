@@ -1,0 +1,121 @@
+<!-- 相亲活动 -->
+<view class="page gray">
+  <view class="search">
+    <view class="search_content">
+      <icon class="iconfont icon-shaixuan1" size='20'></icon>
+      <input type="search" disabled value="{{searchValue}}" />
+      <text class='shaixuan' bindtap='filter'>筛选</text>
+    </view>
+  </view>
+  <scroll-view scroll-y style="width: 100%; height:{{scroll_height+'px'}};background-color:#ffffff;" bindscrolltoupper="refresh" bindscrolltolower="loadMore">
+    <view class="blindDate_container">
+      <view class="blindDate_con" wx:for="{{listArr}}" wx:key="{{item}}">
+        <navigator hover-class="none" url="/pages/blindDate/blindDateDetail?id={{item.id}}">
+          <view class="blindDate_panel" style="background-image:url('{{item.coverimgImages}}')">
+            <view wx:if="{{item.state==3&&item.isCandidate==0}}">
+              <text class="blindDate_tips" wx:if="{{item.state==3&&item.isStartEnroll==0&&item.isStopEnroll==0}}">报名开始时间\n                          {{item.datingDetailsExt.extDatetime}}</text>
+              <text class="blindDate_tips" wx:elif="{{item.state==3&&item.isStartEnroll==1&&item.isStopEnroll==0}}">报名截止时间\n{{item.datingDetailsExt.extDatetime}}</text>
+              <text class="blindDate_tips" wx:elif="{{item.state==3&&item.isCandidate==0&&item.isStopEnroll==1}}">报名已截止</text>
+            </view>
+            <view wx:elif="{{item.state==5}}">
+              <text class="blindDate_tips">活动已结束</text>
+            </view>
+          </view>
+        </navigator>
+        <view class="blindDate_detail {{item.type==6?'active':''}} {{(item.type==2||item.type==3)?'live':''}} {{item.type==7?'waiting':''}} {{(item.type==1 || item.type==4 || item.type==5) ?'end':''}}">
+          <view class="blindDate_title">
+            <text wx:if="{{item.datingDetailsExt}}">[{{lineType[item.datingDetailsExt.extInt]}} · {{specialType[item.datingDetailsExt.extInt5]}}专场]</text>
+            <text>{{item.datingTitle}}</text>
+          </view>
+          <view class="blindDate_desc">
+            <view class="blindDate_address">
+              <icon class="iconfont icon-weizhi"></icon>
+              <text>{{item.datingLocation}}</text>
+            </view>
+            <view class="blindDate_count">
+              <view class="blindDate_gz">
+                <icon class="iconfont icon-guanzhu"></icon>
+                <text>{{item.followCount}}</text>人关注
+              </view>
+              <view class="blindDate_bm">
+                <icon class="iconfont icon-heart"></icon>
+                <text>{{item.enrollCount}}</text>人报名
+              </view>
+            </view>
+            <view class="blindDate_date">
+              <image src="../../images/osj_icon.png" wx:if="{{item.type==2||item.type==3}}"></image>
+              <image src="../../images/rsj_icon.png" wx:if="{{item.type==6}}"></image>
+              <image src="../../images/gsj_icon.png" wx:if="{{item.type==1||item.type==4||item.type==5}}"></image>
+              <text>{{item.activityStarttime}}</text>
+            </view>
+          </view>
+          <view class='blindDate_act' wx:if="{{item.type==1}}" data-id="{{item.id}}" catchtap="linkTo">
+            <text>编辑</text>
+          </view>
+          <view class='blindDate_act' wx:elif="{{item.type==2||item.type==3}}">
+            <text>进入现场</text>
+          </view>
+          <navigator hover-class="none" url="/pages/blindDate/blindDateDetail?id={{item.id}}" class='blindDate_act' wx:elif="{{item.type==6}}">
+            <text wx:if="{{item.enrollFee>0}}">立即报名\n{{item.enrollFee}}元</text>
+            <text wx:else>立即报名</text>
+          </navigator>
+          <view class='blindDate_act' wx:elif="{{item.type==4}}">
+            <text>活动结束</text>
+          </view>
+          <view class='blindDate_act' wx:elif="{{item.type==7}}">
+            <text>即将开始</text>
+          </view>
+          <view class='blindDate_act' wx:elif="{{item.type==5}}">
+            <text>报名结束</text>
+          </view>
+        </view>
+      </view> 
+    </view>
+    <view class="bottom" hidden="{{hideBottom}}">已加载全部数据</view>
+  </scroll-view>
+
+  <!-- 发布按钮 --> 
+  <view class="publishButton" bindtap="publish" hidden="{{userInfo.identity!=1 && !showHidePublishBtn}}">
+    <icon class="iconfont icon-jiahao" style="margin-right:0;"></icon>
+  </view>
+</view>
+
+
+<view class='zhezhao' hidden="{{flag}}" bindtap="closeFilter">
+  <!--这是一个遮罩层，在框弹出后遮住框外区域-->
+</view>
+<!--这是下拉框中的内容，一个文本框和一个按钮，按钮触发拉起事件，表示拉起下拉框-->
+<view class="filter {{test=='test1'?'test1':'test2'}}" style='display:{{yesorno}};'>
+  <view class="filter-panel">
+    <view class="filter-title">地区</view>
+    <view class="filter-content">
+      <view data-num="0" class='{{location==0?"active":""}}' bindtap="locationClick">不限</view>
+      <picker class='picker-city' mode="region" bindchange="bindRegionChange" value="{{region}}">
+        <view data-num="1" class='{{location==1?"active":""}}' bindtap="locationClick">{{locationText}}</view>
+      </picker>
+    </view>
+  </view>
+  <view class="filter-panel">
+    <view class="filter-title">活动时间</view>
+    <view class="filter-content">
+      <view data-time="0" class='{{datingTime==0?"active":""}}' bindtap="datingTimeClick">不限</view>
+      <view data-time="1" class='datingTime-panel {{datingTime==1?"active":""}}' bindtap="datingTimeClick">
+        <picker class='picker-datingTime' mode="date" value="{{startDate}}" bindchange="bindStartDateChange">
+          <view>{{startDate}}</view>
+        </picker>
+        <text>~</text>
+        <picker class='picker-datingTime' mode="date" value="{{endDate}}" bindchange="bindEndDateChange">
+          <view>{{endDate}}</view>
+        </picker>
+      </view>
+    </view>
+  </view>
+  <view class="filter-panel">
+    <view class="filter-title">类型</view>
+    <view class="filter-content">
+      <view wx:for="{{specialTypeList}}" wx:key="*this" data-index="{{index}}" class='{{specialTypeVal==index?"active":""}}' bindtap="specialTypeClick">
+        {{item.specialTypeText}}</view>
+    </view>
+  </view>
+  <button class='btn' bindtap='confirm'>确定</button>
+</view>

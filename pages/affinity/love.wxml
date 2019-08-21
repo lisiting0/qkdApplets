@@ -1,0 +1,125 @@
+<!--约会-->
+<view class="page gray">
+  <view class="top-bottom-gray"></view>
+  <view class='menu-top'>
+    <view class="six-menu">
+      <view class='{{love==0?"active":""}}' bindtap="changeImage" data-love="0">
+        <image class="qb_icon" src="{{love==0?'../../images/nlove_ico1s.png':'../../images/nlove_ico1.png'}}"></image>
+        <text class="qb_text">全部</text>
+      </view>
+      <view class='{{love==1?"active":""}}' bindtap="changeImage" data-love="1">
+        <image class="xy_icon" src="{{love==1?'../../images/nlove_ico2s.png':'../../images/nlove_ico2.png'}}"></image>
+        <text class="xy_text">选缘</text>
+      </view>
+      <view class='{{love==2?"active":""}}' bindtap="changeImage" data-love="2">
+        <image class="qy_icon" src="{{love==2?'../../images/nlove_ico3s.png':'../../images/nlove_ico3.png'}}"></image>
+        <text class="qy_text">抢缘</text>
+      </view>
+      <view class='{{love==3?"active":""}}' bindtap="changeImage" data-love="3">
+        <image class="jy_icon" src="{{love==3?'../../images/nlove_ico4s.png':'../../images/nlove_ico4.png'}}"></image>
+        <text class="jy_text">竞缘</text>
+      </view>
+      <view class='{{love==4?"active":""}}' bindtap="changeImage" data-love="4">
+        <image class="zy_icon" src="{{love==4?'../../images/nlove_ico5s.png':'../../images/nlove_ico5.png'}}"></image>
+        <text class="zy_text">中缘</text>
+      </view>
+      <view class='{{love==5?"active":""}}' bindtap="changeImage" data-love="5">
+        <image class="py_icon" src="{{love==5?'../../images/nlove_ico6s.png':'../../images/nlove_ico6.png'}}"></image>
+        <text class="py_text">配缘</text>
+      </view>
+    </view>
+    <view class="six-menu six-type" style='border-top:1px solid #f2f2f2;'>
+      <view class='{{type==0?"live":""}}' bindtap="changeType" data-type="0">
+        <text>全部</text>
+      </view>
+      <view class='{{type==1?"live":""}}' bindtap="changeType" data-type="1">
+        <text>吃饭</text>
+      </view>
+      <view class='{{type==2?"live":""}}' bindtap="changeType" data-type="2">
+        <text>唱歌</text>
+      </view>
+      <view class='{{type==3?"live":""}}' bindtap="changeType" data-type="3">
+        <text>竞缘</text>
+      </view>
+      <view class='{{type==4?"live":""}}' bindtap="changeType" data-type="4">
+        <text>中缘</text>
+      </view>
+      <view class='{{type==5?"live":""}}' bindtap="changeType" data-type="5">
+        <text>配缘</text>
+      </view>
+    </view>
+  </view>
+  <view class="header" hidden="{{hideHeader}}">
+    <view>下拉刷新中……</view>
+  </view>
+  <scroll-view scroll-y style="width: 100%; height:{{scroll_height+'px'}};" bindscrolltoupper="refresh" bindscrolltolower="loadMore">
+    <navigator class='love-info' url="/pages/affinity/act?id={{item.id}}" wx:for="{{nearArr}}" wx:key="id">
+      <view class='love-top'>
+        <view class='headImage'>
+          <image src='{{item.jiaoyouUser.headimgAttachmentId}}'></image>
+        </view>
+        <view class='one-panel'>{{item.jiaoyouUser.aliasName}}</view>
+        <view class='two-panel'>
+          <view class="age {{item.jiaoyouUser.sex==1?'girl':'boy'}}">
+            <icon class='iconfont icon-xingbie-nv' wx:if="{{item.jiaoyouUser.sex==1}}"></icon>
+            <icon class='iconfont icon-xingbie' wx:elif="{{item.jiaoyouUser.sex==2}}"></icon>
+            <text>{{item.jiaoyouUser.age}}</text>
+          </view>
+          <text class='md'>{{item.payType==0?'AA':item.payType==1?'我买单':item.payType==2?'你买单':''}}</text>
+        </view>
+      </view>
+      <view class='love-bottom'>
+        <view class='left-content' wx:if="{{item.showPic!=''}}" style="background-image:url('{{item.showPic}}')"></view>
+        <view class='right-content'>
+          <view class='right-first'>
+            <text class="jy_new_love_tit_{{item.activityMethod}}">{{datingType[item.activityMethod]}}</text>
+            <text>一起{{item.datingThemes==1?'去旅行':item.datingThemes==2?'吃饭':item.datingThemes==3?'看电影':item.datingThemes==4?'唱歌':item.datingThemes==5?'运动':''}}{{item.datingThemes==1?item.datingLocation&&' · '+item.datingLocation:item.datingThemes==2?item.datingLocation&&' · '+item.datingLocation:item.datingThemes==3?item.datingTitle&&' · '+item.datingTitle:item.datingThemes==4?item.datingLocation&&' · '+item.datingLocation:item.datingThemes==5?item.datingTitle&&' · '+item.datingTitle:item.datingTitle&&item.datingTitle}}</text>
+          </view>
+          <view class='jy_new_love_list_pos'>
+            <icon class='iconfont icon-location'></icon>{{item.datingLocation}}</view>
+          <view class='jy_new_love_list_date'>
+            <icon class='iconfont icon-icon--time'></icon>{{item.activityStarttime?item.activityStarttime:item.datingStarttime}}</view>
+          <view class='jy_new_love_list_tip'>
+            <icon class='iconfont icon-biaoqian'></icon>{{item.datingDesc}}</view>
+        </view>
+      </view>
+    </navigator>
+    <view class="bottom" hidden="{{hideBottom}}">{{loadMoreData}}</view>
+  </scroll-view>
+
+  <view class="publishButton" style='bottom:80rpx;' hidden="{{!flag}}" bindtap="openChooseThemes">
+    <icon class="iconfont icon-jiahao" style="margin-right:0;"></icon>
+  </view>
+  <view class="publishButton" style='bottom:80rpx;' hidden="{{flag}}" bindtap="closeChooseThemes">
+    <icon class="iconfont icon-cha1" style="margin-right:0;"></icon>
+  </view>
+</view>
+
+<view class='zhezhao' hidden="{{flag}}" bindtap="closeChooseThemes">
+  <!--这是一个遮罩层，在框弹出后遮住框外区域-->
+</view>
+<!--这是下拉框中的内容，一个文本框和一个按钮，按钮触发拉起事件，表示拉起下拉框-->
+<view class="publish-modal" style='display:{{yesorno}};'>
+  <view class="center-dialog dialog-chooseThemes">
+    <view class="chooseThemes">
+      <view class="publish-title">发起约会</view>
+      <view class="publish-sel">
+        <view class="publish-panel" data-index="2" bindtap='chooseThemes'>
+          <view class="publish-img">
+            <image src='../../images/love/putong.png'></image>
+          </view>
+          <view class="theme-title">约会</view>
+          <view class="theme-desc">说明：{{appointment}}</view>
+        </view>
+        <view class="publish-panel" data-index="1" bindtap='chooseThemes'>
+          <view class="publish-img">
+            <image src='../../images/love/yuanfen.png'></image>
+          </view>
+          <view class="theme-title">二次元约会</view>
+          <view class="theme-desc">说明：{{twice_appoint}}</view>
+        </view>
+      </view>
+    </view>
+    <view class="arrow"></view>
+  </view>
+</view>

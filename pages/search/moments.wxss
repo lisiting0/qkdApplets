@@ -1,0 +1,217 @@
+page{
+  overflow: hidden;
+}
+
+::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  color: transparent;
+}
+
+.weui-navbar {
+  position: relative;
+  border-bottom: none;
+  background-color: #fff;
+}
+
+.weui-navbar__item {
+  padding: 20rpx 0 0;
+  color: #9a9a9d;
+}
+
+.weui-navbar__item.weui-bar__item_on {
+  color: #000;
+}
+
+.weui-navbar__slider {
+  width: 2em;
+  background-color: #ff4300;
+}
+
+.page_bd {
+  margin-bottom: 20rpx;
+}
+
+.tab-panel-padding {
+  padding: 20rpx 0 0;
+}
+
+.momentItem {
+  display: flex;
+  justify-content: space-between;
+  padding: 20rpx;
+  position: relative;
+}
+
+.momentItem + .momentItem {
+  border-top: 1px solid #f2f2f2;
+}
+
+.momentItem::before {
+  content: '';
+  width: 20rpx;
+  height: 100%;
+  position: absolute;
+  right: 0;
+  top: 0;
+  background-color: #fff;
+  z-index: 500;
+}
+
+.momentItem .user-image {
+  width: 100rpx;
+  height: 100rpx;
+}
+
+.momentItem .right-con {
+  width: 82%;
+}
+
+.momentItem .text-con .aliasName {
+  font-size: 36rpx;
+  color: #667592;
+  font-weight: 500;
+}
+
+.momentItem .right-con .comment-con {
+  font-size: 30rpx;
+}
+
+.momentItem .one-cls {
+  margin: 30rpx 0 10rpx;
+}
+
+.one-cls image {
+  max-height: 250rpx;
+  max-width: 250rpx;
+  background-color: #999;
+}
+
+.momentItem .img-cls {
+  margin: 30rpx 0 10rpx;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+}
+
+.momentItem .img-cls image {
+  width: 186rpx;
+  height: 206rpx;
+  margin: 0 5rpx 10rpx;
+}
+
+.momentItem .publish-cls {
+  position: relative;
+  padding: 10rpx 0;
+}
+
+.momentItem .publish-cls .icon-pinglun2 {
+  position: absolute;
+  right: 0;
+  top: -2rpx;
+  color: #8b98b2;
+  background-color: #fff;
+  height: 78rpx;
+}
+
+.momentItem .publish-cls .list-command-btn {
+  position: absolute;
+  right: 25px;
+  top: 10rpx;
+  background-color: #4c5254;
+  color: #fff;
+  font-size: 30rpx;
+  border-radius: 3px;
+}
+
+.icon-xinaixin, .icon-pinglun3, .icon-dashang3 {
+  display: inline-flex;
+  margin-right: 10rpx;
+  font-size: 30rpx;
+}
+
+.btn-command {
+  display: inline-block;
+  margin: 5rpx 20rpx;
+}
+
+.momentItem .praiseAndComment {
+  margin-top: 10rpx;
+  background-color: #f2f2f2;
+}
+
+.momentItem .praiseAndComment .jy_m_fabulous {
+  font-size: 30rpx;
+  padding: 10rpx;
+  color: #667592;
+}
+
+.momentItem .praiseAndComment .jy_m_fabulous .icon-xinaixin {
+  display: inline-flex;
+}
+
+.momentItem .praiseAndComment .jy_m_fabulous text {
+  vertical-align: middle;
+}
+
+.momentItem .praiseAndComment .jy_m_comment {
+  font-size: 30rpx;
+  max-height: 235rpx;
+  padding: 15rpx 10rpx;
+  overflow: hidden;
+}
+
+.momentItem .praiseAndComment .jy_m_comment.cur {
+  max-height: inherit;
+}
+
+.momentItem .praiseAndComment .comment-arr text:first-child {
+  color: #667592;
+  margin-right: 5rpx;
+}
+
+.showmore {
+  background-color: #f2f2f2;
+  padding: 10rpx;
+  text-align: center;
+  border-top: 1px dashed #ccc;
+}
+
+@keyframes slideInRight {
+  from {
+    transform: translate3d(100%, 0, 0);
+  }
+
+  to {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes slideOutRight {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+
+  to {
+    transform: translate3d(100%, 0, 0);
+  }
+}
+
+.slideInRight {
+  animation-name: slideInRight;
+}
+
+.slideOutRight {
+  animation-name: slideOutRight;
+}
+
+.slideInRight, .slideOutRight {
+  animation-duration: 0.3s;
+}
+
+.jy_c_replay text:first-child,.jy_c_replay text:nth-child(2) {
+  color: #667592;
+  margin-right: 5rpx;
+}

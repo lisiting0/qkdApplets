@@ -1,0 +1,72 @@
+<!--金屋/保证金-->
+<view class="page gray">
+  <view class="top-bottom-gray"></view>
+  <view class="jy_bond_top">
+    <image src="../../images/top2.jpg" class="top-bg"></image>
+    <view class="jy_bond_top_ul">
+      <view class="jy_bond_top_li" wx:for="{{bondList}}" wx:key="*this">
+        <view>{{item.amount}}</view>
+        <view>{{item.levelName}}</view>
+      </view> 
+    </view>
+  </view>
+  <view class="weui-tab">
+    <view class="weui-navbar">
+      <block wx:for="{{tabs}}" wx:key="*this">
+        <view id="{{index}}" class="weui-navbar__item {{activeIndex == index ? 'weui-bar__item_on' : ''}}" bindtap="tabClick">
+          <view class="weui-navbar__title">{{item}}</view>
+        </view>
+      </block>
+      <view class="weui-navbar__slider" style="left: {{sliderLeft}}px; transform: translateX({{sliderOffset}}px); -webkit-transform: translateX({{sliderOffset}}px);"></view>
+    </view>
+  </view>
+  <view class="weui-tab__panel tab-panel-padding" style="background-color:#ffffff;">
+    <view class="weui-tab__content" hidden="{{activeIndex == 1}}">
+      <view class="jy_bond_sm">
+        <view class="jy_bond_sm_li" wx:for="{{bondList}}" wx:key="*this"><text>{{item.levelName}}\n</text><text>{{item.levelDescript}}</text></view> 
+      </view>
+    </view>
+    <view class="weui-tab__content" hidden="{{activeIndex == 0}}">
+      <block wx:if="{{bondReList}}">
+        <view class="jy_bill_list" wx:for="{{bondReList}}" wx:key="*this">
+          <view>
+            <text>{{item.money}}</text>
+            <text>{{item.remarks}}</text>
+          </view>
+          <view>
+            <text>支付成功</text>
+            <text>{{item.createDate}}</text>
+          </view>
+        </view>
+      </block>
+      <view class="jy_bond_sm" wx:else>暂无记录</view>
+    </view>
+  </view>
+  <view class="jy_auth_btn" bindtap='jf'>缴纳/续费/升级保证金</view>
+</view>
+
+<view class='zhezhao' hidden="{{flag}}" bindtap="closeFilter">
+  <!--这是一个遮罩层，在框弹出后遮住框外区域-->
+</view>
+<!--这是下拉框中的内容，一个文本框和一个按钮，按钮触发拉起事件，表示拉起下拉框-->
+<view class="filter {{test=='test1'?'test1':'test2'}}" style='display:{{yesorno}};'>
+  <view class="jy_bond_block">
+    <view class="jy_qb_tit">保证金级别</view>
+    <view class="jy_qb_pay_list">
+       <block wx:for="{{bondList}}" wx:key='index' wx:for-index="index">
+				<view wx:if="{{item.level>userInfo.cashDepositLevel||!userInfo.cashDepositLevel}}" data-index="{{index}}" class="jy_qb_pay_list_li iconfont {{index==typeIndex?'cur':''}}" bindtap="changeDeposit">{{item.levelName}}
+        </view>
+        </block>
+    </view>
+  </view>  
+  <view class="jy_bond_block">
+    <view class="jy_qb_tit">支付方式</view>
+    <view class="jy_qb_pay_list">
+       <block wx:for="{{payType}}" wx:key="index" wx:for-index="pIndex" wx:for-item="items" >
+        <view class="jy_qb_pay_list_li {{pIndex==payIndex?'cur':''}} iconfont {{pIndex=='alipay'?'icon-icon-alipay':''}} {{pIndex=='wxpay'?'icon-weixindenglu':''}}" wx:if="{{payIndex!='alipay' || (payIndex=='alipay'&&!isWeixin)}}" data-payindex="{{pIndex}}" bindtap="bindPayIndex">{{items}}
+        </view>
+      </block>
+    </view>
+  </view>  
+  <view class='jy_auth_btn' bindtap='submit'>提交</view>
+</view>

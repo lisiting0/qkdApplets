@@ -1,0 +1,8 @@
+{
+  "usingComponents": { 
+    "gifts": "/component/common/gifts",
+    "addMoment": "/component/common/addMoment",
+    "commentDetail": "/component/common/commentDetail"
+  },
+  "enablePullDownRefresh": false
+}

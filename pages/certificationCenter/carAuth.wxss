@@ -1,0 +1,150 @@
+.jy_info_block {
+  margin: 0 20rpx;
+}
+
+.rz_block .rz_container {
+  width: 20%;
+}
+
+.shade {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.jy_auth .jy_auth_up3 {
+  width: 50%;
+  height: 230rpx;
+  margin-bottom: 20rpx;
+  border-radius: 20rpx;
+  display: inline-block;
+}
+
+.jy_auth_xqname {
+  width: 100%;
+  height: 70rpx;
+  line-height: 66rpx;
+  padding: 0 20rpx;
+  font-size: 32rpx;
+  outline: 0;
+  border: 1px solid #e5e5e5;
+  border-radius: 10rpx;
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  margin-bottom: 20rpx;
+  color: #a3a3a4;
+  position: relative;
+}
+
+.jy_auth_xqname::after {
+  content: " ";
+  display: inline-block;
+  height: 18rpx;
+  width: 18rpx;
+  border-width: 5rpx 5rpx 0 0;
+  border-color: #d2d2d2;
+  border-style: solid;
+  -webkit-transform: matrix(0.71, 0.71, -0.71, 0.71, 0, 0);
+  transform: matrix(0.71, 0.71, -0.71, 0.71, 0, 0);
+  position: absolute;
+  top: 50%;
+  right: 40rpx;
+  margin-top: -4px;
+}
+
+/* 选择层 */
+
+.choose {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1454;
+  background-color: #fff;
+}
+
+/* 左边内容 */
+
+::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  color: transparent;
+}
+
+.cadBrand_con .left_con {
+  float: left;
+  border-right: 1px solid #f2f2f2;
+}
+
+.left_con .brand-list {
+  font-size: 32rpx;
+  line-height: 32rpx;
+  font-weight: bold;
+  color: #666;
+  padding: 30rpx 0;
+  text-align: center;
+}
+
+.left_con .brand-list.active {
+  color: #ff8708;
+  border-left: 10rpx solid #ff8708;
+}
+
+.right_con {
+  width: 70%;
+  float: left;
+  padding: 0.3rem;
+}
+
+.right_con .brand_title {
+  position: relative;
+  height: 40rpx;
+  padding: 20rpx 0 20rpx 40rpx;
+  font-size: 32rpx;
+  color: #ff8708;
+}
+
+.brand_title::before {
+  content: "";
+  width: 15rpx;
+  height: 15rpx;
+  border-radius: 50%;
+  background-color: #ff8708;
+  margin-right: 30rpx;
+  position: absolute;
+  top: 50%;
+  left: 0;
+}
+
+.brand_title::after {
+  content: "";
+  width: 300rpx;
+  height: 1px;
+  background-color: #f2f2f2;
+  margin-right: 30rpx;
+  position: absolute;
+  top: 50%;
+  right: -30rpx;
+}
+
+.brand_system {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.brand_system view {
+  height: 60rpx;
+  line-height: 60rpx;
+  font-size: 32rpx;
+  color: #989797;
+  border-radius: 40rpx;
+  border: 1px solid #f5f5f5;
+  padding: 0 10px;
+  margin: 15rpx 15rpx 0 0;
+}
+
+.brand_system view.active {
+  color: #ff8708;
+  border: 1px solid #ff8708;
+}

@@ -1,0 +1,13 @@
+<!-- 安卓弹框 -->
+<view class="wx-confirm-mask" hidden="{{flag}}">
+  <view class="wx-confirm-box">
+    <view class="wx-confirm-title">{{title}}</view>
+    <view class="wx-confirm-con"> 
+      <view>{{content}}</view>
+    </view>
+    <view class="wx-confirm-btn"> 
+      <text class="btn-no" bindtap='_cancel'>{{btn_no}}</text>
+      <text class="btn-yes" bindtap='_confirm'>{{btn_ok}}</text>
+    </view>
+  </view>
+</view>

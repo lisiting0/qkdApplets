@@ -1,0 +1,418 @@
+::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  color: transparent;
+}
+
+/* 功能导航 */
+
+.publish-menu {
+  width: 100%;
+  height: 120rpx;
+  background-color: #f2f2f2;
+}
+
+.publish-menu .timeline-text {
+  position: relative;
+  width: 50%;
+  float: left;
+  text-align: center;
+  border-bottom: 3px solid #e5e5e5;
+  margin-bottom: 0;
+  background-color: #fff;
+}
+
+.publish-menu .timeline-text.active {
+  border-bottom: 3px solid #ff4200;
+}
+
+.publish-menu .timeline-text::before {
+  content: "";
+  width: 24rpx;
+  height: 24rpx;
+  border-radius: 50%;
+  background-color: #e5e5e5;
+  margin: 0 auto;
+  position: absolute;
+  bottom: -15rpx;
+  left: 0;
+  right: 0;
+}
+
+.publish-menu .timeline-text.active:before {
+  content: "";
+  width: 18rpx;
+  height: 18rpx;
+  border-radius: 50%;
+  margin: 0 auto;
+  position: absolute;
+  bottom: -15rpx;
+  left: 0;
+  right: 0;
+  background-color: #fff;
+  border: 6rpx solid #ff4200;
+}
+
+.publish-menu .timeline-text .text {
+  font-size: 32rpx;
+  color: #a0a0a0;
+  display: inline-block;
+  text-rendering: auto;
+  padding: 20rpx 0;
+}
+
+.publish-menu .timeline-text.active .text {
+  color: #ff4200;
+}
+
+/* 内容块 */
+
+.panel {
+  padding: 20rpx 30rpx;
+  background-color: #fff;
+}
+
+.panel .title {
+  position: relative;
+  font-size: 32rpx;
+  color: #333;
+  padding: 10rpx 0;
+}
+
+.panel .title::before {
+  content: '';
+  margin-right: 20rpx;
+  border-left: 10rpx solid #f00;
+}
+
+/* 约会类型 */
+
+.panel .check-box {
+  padding: 20rpx 0;
+}
+
+.panel .check-box>view {
+  display: inline-block;
+  height: 60rpx;
+  font-size: 28rpx;
+  line-height: 60rpx;
+  color: #b6b6b6;
+  border-radius: 20rpx;
+  border: 1px solid #f5f5f5;
+  text-align: center;
+}
+
+.panel .check-box .check-type {
+  width: 29%;
+  margin: 15rpx 12rpx;
+}
+
+.panel .check-box view.active {
+  border: 1px solid #f00;
+  color: #f00;
+}
+
+.panel .check-box .check-type icon {
+  margin: 0 20rpx;
+  display: inline-flex;
+}
+
+.gray {
+  border-bottom: 20rpx solid #f2f2f2;
+}
+
+.panel.select_panel {
+  color: #3b3b3b;
+}
+
+.panel .select_con {
+  position: relative;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #f2f2f2;
+  padding: 20rpx 0;
+}
+
+.select_panel .select_con .select_con_title {
+  width: 33%;
+  font-size: 36rpx;
+  color: #333;
+}
+
+.select_panel .select_con .select_con_container {
+  width: 65%;
+  margin-right: 20rpx;
+  font-size: 32rpx;
+  color: #bcbbc0;
+  display: inline-flex;
+  justify-content: flex-end;
+}
+
+.select_panel .select_number .select_con_container .select-method {
+  width: 120rpx;
+  height: 60rpx;
+  line-height: 60rpx;
+  margin-right: 10rpx;
+  text-align: center;
+  border-radius: 20rpx;
+  font-size: 32rpx;
+  border: 1px solid #bcbbc0;
+}
+
+.select_panel .select_number .select_con_container .select-method.select {
+  border: 1px solid #f00;
+  color: #f00;
+}
+
+.select_panel .select_con .select_con_container input {
+  width: 200rpx;
+  font-size: 32rpx;
+  color: #bcbbc0;
+  text-align: center;
+  border-radius: 20rpx;
+  border: 1px solid #bcbbc0;
+  padding: 5rpx 20rpx;
+}
+
+.row-check-box .box {
+  width: 28%;
+  height: 60rpx;
+  line-height: 60rpx;
+  font-size: 32rpx;
+  border-radius: 20rpx;
+  text-align: center;
+  border: 1px solid rgba(0, 0, 0, 0);
+  margin-right: 20rpx;
+  justify-content: center;
+  align-items: center;
+}
+
+.row-check-box .box.active {
+  color: #ff4200;
+  border: 1px solid #ff4200;
+}
+
+.radio-group {
+  display: inline-block;
+}
+
+radio .wx-radio-input {
+  /* 自定义样式.... */
+  height: 38rpx;
+  width: 38rpx;
+  margin-top: -4rpx;
+  border-radius: 50%;
+  border: 2rpx solid #999;
+  background: transparent;
+}
+
+radio .wx-radio-input.wx-radio-input-checked {
+  border: none;
+  background: red;
+}
+
+/* 选中后的 对勾样式 （白色对勾 可根据UI需求自己修改） */
+
+radio .wx-radio-input.wx-radio-input-checked::before {
+  border-radius: 50%; /* 圆角 */
+  width: 38rpx; /* 选中后对勾大小，不要超过背景的尺寸 */
+  height: 38rpx; /* 选中后对勾大小，不要超过背景的尺寸 */
+  line-height: 38rpx;
+  text-align: center;
+  font-size: 30rpx; /* 对勾大小 30rpx */
+  color: #fff; /* 对勾颜色 白色 */
+  background: transparent;
+  transform: translate(-50%, -50%) scale(1);
+  -webkit-transform: translate(-50%, -50%) scale(1);
+  background-color: #ff4200;
+  border: 1rpx solid #ff4200;
+}
+
+.user_img_desc {
+  clear: both;
+  font-size: 30rpx;
+  color: #b1b1b1;
+  padding: 10rpx 0;
+  border-bottom: 1px solid #f2f2f2;
+}
+
+.publish_bd_btn {
+  width: 100%;
+  padding: 1em 0;
+  text-align: center;
+  background-color: rgba(0, 0, 0, 0.1);
+  position: fixed;
+  bottom: 0;
+  left: 0;
+}
+
+.publish_bd_btn view {
+  display: inline-block;
+  width: 280rpx;
+  height: 80rpx;
+  line-height: 80rpx;
+  font-size: 32rpx;
+  color: #fff;
+  background-color: #ababab;
+  border-radius: 40rpx;
+  margin-left: 10rpx;
+}
+
+.publish_bd_btn view.next {
+  background-color: #ff4200;
+}
+
+.img-view {
+  display: flex;
+  align-items: flex-start;
+}
+
+.dialog-datingTime .chooseDatingTime {
+  background-color: #fff;
+  width: 90%;
+  margin: auto;
+  overflow: hidden;
+  border-radius: 10px;
+  padding: 0 0 30rpx;
+}
+
+.dialog-datingTime .chooseDatingTime .time-title {
+  position: relative;
+  padding: 40rpx 0;
+  font-size: 36rpx;
+}
+
+.dialog-datingTime .chooseDatingTime .time-sel {
+  width: 70%;
+  margin: 0 auto 30rpx;
+  color: #8e8e8e;
+  font-size: 32rpx;
+  display: flex;
+  justify-content: space-between;
+}
+
+.dialog-datingTime .chooseDatingTime .time-panel {
+  width: 80px;
+  height: 30px;
+  line-height: 30px;
+  border: 1px solid #b7b7b7;
+  border-radius: 5px;
+}
+
+.fee-popup {
+  color: #b5b4b4;
+  padding: 20rpx;
+}
+
+.fee-popup-title {
+  text-align: center;
+  padding: 0 0 20rpx;
+  border-bottom: 1rpx solid #f2f2f2;
+}
+
+.fee-container {
+  padding: 20rpx 0;
+}
+
+.fee-container .title {
+  font-size: 32rpx;
+  color: #000;
+  height: 60rpx;
+}
+
+.fee-choose {
+  font-size: 30rpx;
+  margin: 30rpx 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.fee-container .fee-choose view {
+  width: 160rpx;
+  height: 60rpx;
+  line-height: 60rpx;
+  background-color: #eee;
+  border-radius: 5px;
+  text-align: center;
+  border: 1px solid #d4d4d4;
+}
+
+.fee-choose-child {
+  font-size: 30rpx;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #f2f2f2;
+  padding: 0 0 20rpx;
+}
+
+.fee-choose-child input {
+  width: 240rpx;
+  height: 60rpx;
+  line-height: 60rpx;
+  border-radius: 5px;
+  text-align: center;
+  color: #b5b4b4;
+  border: 1px solid #d4d4d4;
+}
+
+.fee-choose-child text:first-child {
+  text-align: center;
+  width: 130rpx;
+}
+
+.fee-choose-child text.yuan {
+  text-align: center;
+  width: 100rpx;
+}
+
+.fee-tips {
+  display: flex;
+  color: #ccc;
+  line-height: 1.6;
+  font-size: 30rpx;
+  margin: auto;
+}
+
+.fee-tips text:nth-child(1) {
+  flex-shrink: 0;
+}
+
+.footer {
+  height: 80rpx;
+  display: flex;
+}
+
+.footer view {
+  text-align: center;
+  line-height: 80rpx;
+  flex-grow: 1;
+  background-color: #eee;
+}
+
+.footer view:last-child {
+  background-color: #ff4200;
+  color: #fff;
+  font-weight: 500;
+  font-size: 36rpx;
+}
+
+.check-box .three-box {
+  width: 29%;
+  margin: 15rpx 12rpx;
+}
+
+.check-box .five-box {
+  width: 15%;
+  margin: 15rpx 12rpx;
+}
+
+input [disabled] {
+  color: #fff;
+  background-color: #EEE;
+}
+
+.display-inlineflex{
+  display: inline-flex;
+  vertical-align: top;
+}

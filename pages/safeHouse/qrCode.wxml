@@ -1,0 +1,22 @@
+<!--金屋/二维码-->
+<view class="page qrcode"> 
+  <image src="../../images/qrcode_bg.jpg" class="qrcode_bg"></image>
+  <view class='qrcode_panel'>
+    <image src="../../images/code_border.png" class="corde-border"></image>
+    <view class="qrcode-title">告诉小伙伴，你在乾坤岛等Ta</view>
+    <!-- 存放二维码的图片-->
+    <view class='container'>
+      <image mode="scaleToFill" src="{{imagePath}}"></image>
+    </view>
+    <!-- 画布，用来画二维码，只用来站位，不用来显示-->
+    <view class="canvas-box">
+      <canvas hidden="{{canvasHidden}}" style="width: 420rpx;height: 420rpx;background:#f1f1f1;" canvas-id="mycanvas" />
+    </view>
+    <view class="qrcode-sys">扫一扫</view>
+    <view class="qrcode-dl">登录乾坤岛</view>
+  </view>
+  <view class="button">
+    <image src="../../images/code_button.png"></image>
+    <text>已邀请了{{userInfo.agentNumber}}个好友,赚了{{userInfo.agentNumber*30}}个乾坤币</text>
+  </view>
+</view>

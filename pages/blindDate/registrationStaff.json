@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "gifts": "/component/common/gifts"
+  },
+  "enablePullDownRefresh": false
+}

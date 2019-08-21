@@ -1,0 +1,155 @@
+<view class="page">
+  <view class="swiper-container">
+    <swiper class="swiper" indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}">
+      <block wx:for="{{adList}}" wx:key="*this">
+        <swiper-item>
+          <image src="{{item.adImg}}" class="slide-image" mode="aspectFill" />
+        </swiper-item>
+      </block>
+    </swiper>
+  </view>
+  <view class="container">
+    <view class="menu">
+      <navigator hover-class="none" url="../blindDate/registrationActivity">
+        <view class="menu_href">
+          <icon class="iconfont icon-yuanxin xq"></icon>
+          <text>相亲</text>
+        </view>
+      </navigator>
+      <navigator hover-class="none" url='/pages/affinity/love' open-type='switchTab'>
+        <view class="menu_href">
+          <icon class="iconfont icon-huodong- hd"></icon>
+          <text>活动</text>
+        </view>
+      </navigator>
+      <navigator hover-class="none" url='/pages/safeHouse/prizeDraw'>
+        <view class="menu_href">
+          <icon class="iconfont icon-choujiang cj"></icon>
+          <text>抽奖</text>
+        </view>
+      </navigator>
+      <navigator hover-class="none" url='/pages/logs/logs'>
+        <view class="menu_href">
+          <icon class="iconfont icon-jifenshangcheng sc"></icon>
+          <text>商城</text>
+        </view>
+      </navigator>
+    </view>
+    <view class="function_section">
+      <view class="function_title">
+        <text class="title fjyy">附近约会</text>
+        <view class="more">
+          <navigator hover-class="none" url="../affinity/love" open-type="switchTab" >
+            查看更多
+            <icon></icon>
+          </navigator>
+        </view>
+      </view>
+      <view class="clearfix function_container">
+        <navigator hover-class="none" url="" class="fjjy_con" wx:for="{{nearArr}}" wx:key="id" wx:for-item="nearItem">
+          <view class="fjyy_panel" style="background-image:url('{{nearItem.coverimgImages?nearItem.coverimgImages:nearItem.jiaoyouUser.headimgAttachmentId}}')">
+            <view class="left_con xy" wx:if="{{nearItem.activityMethod==1}}">选缘-{{nearItem.datingTitle}}</view>
+            <view class="left_con qy" wx:elif="{{nearItem.activityMethod==2}}">抢缘-{{nearItem.datingTitle}}</view>
+            <view class="left_con jy" wx:elif="{{nearItem.activityMethod==3}}">竞缘-{{nearItem.datingTitle}}</view>
+            <view class="left_con zy" wx:elif="{{nearItem.activityMethod==4}}">中缘-{{nearItem.datingTitle}}</view>
+            <view class="left_con py" wx:else="{{nearItem.activityMethod==5}}">配缘-{{nearItem.datingTitle}}</view>
+            <view class="bottom_con clearfix">
+              <view class="bottom_lf fl">
+                <icon class="iconfont icon-shijianlishijilujishizhongbiaomianxing fl"></icon>
+                <view class="starttime">{{nearItem.datingStarttime}}</view>
+              </view>
+              <view class="bottom_rf fl">
+                <icon class="iconfont icon-weizhi "></icon>
+                <view>{{nearItem.areaName}}</view>
+              </view>
+            </view>
+          </view>
+          <view class="fjyy_name">{{nearItem.datingDesc}}</view>
+          <view class="fjyy_icon fl">
+            <image src="../../images/message/3.png" wx:if="{{nearItem.state==3}}"></image>
+            <image src="../../images/message/6.png" wx:elif="{{nearItem.state==6}}"></image>
+          </view>
+          <view class="fjyy_time">{{nearItem.activityStarttime}}</view>
+        </navigator>
+      </view>
+    </view>
+    <view class="function_section">
+      <view class="function_title">
+        <text class="title fjyy">附近的人</text>
+        <view class="more">
+          <navigator hover-class="none" url="nearbyPeople">
+            查看更多
+            <icon></icon>
+          </navigator>
+        </view>
+      </view>
+      <view class="fjdr_container">
+        <navigator hover-class="none" url="" class="fjdr_con" wx:for="{{nearPeopleArr}}" wx:key="index" wx:for-item="peopleItem">
+          <view class="fjdr_panel" style="background-image:url({{peopleItem.headimgAttachmentId}})">
+            <view class="icon_container" style='background-color:rgb(255, 56, 131)' wx:if="{{peopleItem.sex==2}}">
+              <icon class="iconfont icon-xingbie-nv"></icon>
+            </view>
+            <view class="icon_container" style='background-color:rgb(0, 180, 255)' wx:else>
+              <icon class="iconfont icon-xingbie-nv"></icon>
+            </view>
+          </view>
+          <view class="fjdr_name">{{peopleItem.aliasName}}</view>
+        </navigator>
+      </view>
+    </view>
+    <view class="function_section">
+      <view class="function_title">
+        <text class="title fjyy">相亲活动</text>
+        <view class="more">
+          <navigator hover-class="none" url="registrationActivity">
+            查看更多
+            <icon></icon>
+          </navigator>
+        </view>
+      </view>
+      <view class="clearfix function_container">
+        <navigator hover-class="none" url='../logs/logs' class="fjjy_con" wx:for="{{registrationActivity}}" wx:key="id" wx:for-item="activityItem">
+          <view class="fjyy_panel" style="background-image:url({{activityItem.coverimgImages?activityItem.coverimgImages:activityItem.jiaoyouUser.headimgAttachmentId}})">
+            <view class="left_con">{{activityItem.datingDetailsExt.extInt5Name}}</view>
+            <view class="bottom_con clearfix">
+              <view class="bottom_lf fl" wx:if="{{activityItem.datingDetailsExt.extInt==1}}">
+                <view class='bottom_lf_text'>{{activityItem.datingDetailsExt.extIntName}}</view>
+              </view>
+              <view class="bottom_lf fl" wx:elif="{{activityItem.datingDetailsExt.extInt!=1}}">
+                <icon class="iconfont icon-weizhi"></icon>
+                <view>{{activityItem.areaName}}</view>
+              </view>
+              <view class="bottom_rf fl">
+                <icon class="iconfont icon-renyuan fl"></icon>
+                <view class="count">{{activityItem.datingDetailsExt.extInt4}}</view>
+              </view>
+            </view>
+          </view>
+          <view class="fjyy_name">{{activityItem.datingTitle}}</view>
+          <view class="fjyy_icon fl">
+            <image src="../../images/heart.png"></image>
+          </view>
+          <view class="fjyy_time">{{activityItem.activityStarttime}}</view>
+        </navigator>
+        <!-- <navigator hover-class="none" url='../logs/logs' class="fjjy_con">
+        <view class="fjyy_panel" style="background-image:url({{imagePath}})">
+          <view class="left_con">高精尖人才</view>
+          <view class="bottom_con clearfix">
+            <view class="bottom_lf fl">
+              <icon class="iconfont icon-weizhi "></icon>
+              <view>白云</view>
+            </view>
+            <view class="bottom_rf fl">
+              <icon class="iconfont icon-renyuan fl"></icon>
+              <view class="count">200</view>
+            </view>
+          </view>
+        </view>
+        <view class="fjyy_name">看第一场电影，遇一场情</view>
+        <view class="fjyy_icon fl"><image src="../../images/heart.png"></image></view>
+        <view class="fjyy_time">2018.12.28</view>
+      </navigator> -->
+      </view>
+    </view>
+  </view>
+</view>

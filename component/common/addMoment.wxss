@@ -1,0 +1,105 @@
+@import "/style/iconfont.wxss";
+@import "/style/weui.wxss";
+@import "/style/common.wxss";
+
+.text-cls {
+  clear: both;
+  margin-top: 100rpx;
+  font-size: 36rpx;
+  color: #000;
+  font-weight: 500;
+}
+
+.text-cls view {
+  border-bottom: 1px solid #f2f2f2;
+  height: 120rpx;
+  line-height: 120rpx;
+  position: relative;
+  display: flex;
+}
+
+.text-cls icon {
+  display: inline-flex;
+}
+
+.text-cls .who-see-text {
+  margin-left: 60rpx;
+}
+
+.text-cls .who-see-val {
+  position: absolute;
+  right: 60rpx;
+  color: #9a9a9a;
+}
+
+.text-cls .icon-arrow_r {
+  position: absolute;
+  right: 20rpx;
+  color: #9a9a9a;
+}
+
+.fix-btn {
+  color: #fff;
+  font-size: 32rpx;
+  background-color: #1cc781;
+  text-align: center;
+  border-radius: 60rpx;
+  padding: 16rpx 0;
+  position: fixed;
+  width: 90%;
+  bottom: 60rpx;
+}
+
+.role-dialog{
+  position: fixed;
+  z-index: 1999;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.role-dialog .jy_bond_block {
+  position: absolute;
+  z-index: 10999;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 145%;
+  background-color: #fff;
+  -webkit-transform: translateY(100%);
+  transform: translateY(100%);
+} 
+
+.jy_bond_block .jy_qb_tit {
+  color: #a1a1a1;
+  font-size: 30rpx;
+  background-color: #fff;
+  padding: 12rpx 20rpx;
+  margin-top: 13rpx;
+}
+
+.jy_bond_block .jy_qb_pay_list {
+  background-color: #fff;
+  padding: 12rpx 20rpx;
+  color: #202020;
+}
+
+.jy_qb_pay_list .jy_qb_pay_list_li {
+  position: relative;
+  border-top: 1px solid #dcdcdc;
+  padding: 20rpx 0;
+  font-size: 30rpx;
+  line-height: 60rpx;
+}
+
+.jy_qb_pay_list .jy_qb_pay_list_li.cur:after {
+  content: "\e7a6";
+  color: #fea201;
+  position: absolute;
+  margin-top: -0.2rem;
+  right: 0;
+  top: 50%;
+  line-height: 1;
+}

@@ -1,0 +1,23 @@
+<view class="page gray">
+  <view class="top-bottom-gray"></view>
+  <view class="address_panel">
+    <view class="address_con">
+      <view>活动城市</view>
+      <view>
+        <picker class="picker" mode="multiSelector" bindchange="bindRegionChange" bindcolumnchange="bindMultiPickerColumnChange" value="{{addressIndex}}" range="{{addressList}}">
+          <view class="flRight" style="width:100%;">{{addressList[0][addressIndex[0]]}} {{addressList[1][addressIndex[1]]}} </view>
+        </picker>
+      </view>
+      <view>
+        <icon class="iconfont icon-arrow_r"></icon>
+      </view>
+    </view>
+    <view class="address_con">
+      <view style="width: 100%;">
+        <input type="text" placeholder="请填写具体地点" style="font-size: 30rpx;color: #bababa;" bindinput="bindAddressInput" value="{{addressDetailText}}"></input>
+      </view>
+    </view>
+    <view class="address_ex">例如：xx假日酒店2楼溪下厅</view> 
+  </view>
+    <view class='bottom-btn' bindtap='bindAddressConfirm'>确定</view>
+</view>

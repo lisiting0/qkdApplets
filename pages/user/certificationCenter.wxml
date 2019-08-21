@@ -1,0 +1,53 @@
+<!--认证中心-->
+<view class="page gray certificationCenter_con">
+  <view class="top-bottom-gray"></view>
+  <view class="certificationCenter_panel">
+    <view class="link_panel" data-status="{{userInfo.idStatus}}" data-url="certificationCenter/identityAuth" bindtap="linkTo">
+      <view class="left_panel {{userInfo.idStatus==1?'ok':''}}">
+        <image src="../../images/idcard.png "></image>
+      </view>
+      <view class="right_panel {{userInfo.idStatus==1?'ok':''}}">
+        <text>身份认证</text>
+        <text class="{{userInfo.idStatus==0 || userInfo.idStatus==3? 'iconfont': ''}}">{{userInfo.idStatus==2? '认证中': userInfo.idStatus==1? '已认证': '立即认证'}}</text>
+      </view>
+    </view>
+    <view class="link_panel" data-status="{{userInfo.videoStatus}}" data-url="certificationCenter/videoAuth" bindtap="linkTo">
+      <view class="left_panel {{userInfo.videoStatus==1?'ok':''}}">
+        <image src="../../images/video_icon.png "></image>
+      </view>
+      <view class="right_panel {{userInfo.videoStatus==1?'ok':''}}">
+        <text>视频认证</text>
+        <text class="{{userInfo.videoStatus==0 || userInfo.videoStatus==3? 'iconfont': ''}}">{{userInfo.videoStatus==2? '认证中': userInfo.videoStatus==1? '已认证': '立即认证'}}</text>
+      </view>
+    </view>
+  </view>
+  <view class="certificationCenter_panel ">
+    <view class="link_panel" data-status="{{userInfo.carStatus}}" data-url="certificationCenter/carAuth" bindtap="linkTo">
+      <view class="left_panel {{userInfo.carStatus==1? 'ok': ''}}">
+        <image src="../../images/car.png " style="width:90%;height:70%; "></image>
+      </view>
+      <view class="right_panel {{userInfo.carStatus==1? 'ok': ''}}">
+        <text>车产认证</text>
+        <text class="{{userInfo.carStatus==0 || userInfo.carStatus==3? 'iconfont': ''}}">{{userInfo.carStatus==2? '认证中': userInfo.carStatus==1? '已认证': '立即认证'}}</text>
+      </view>
+    </view>
+    <view class="link_panel" data-status="{{userInfo.houseStatus}}" data-url="certificationCenter/houseAuth" bindtap="linkTo">
+      <view class="left_panel {{userInfo.houseStatus==1? 'ok': ''}}">
+        <image src="../../images/house.png " style="width:66%;height:70%; "></image>
+      </view>
+      <view class="right_panel {{userInfo.houseStatus==1? 'ok': ''}}">
+        <text>房产认证</text>
+        <text class="{{userInfo.houseStatus==0 || userInfo.houseStatus==3? 'iconfont': ''}}">{{userInfo.houseStatus==2? '认证中': userInfo.houseStatus==1? '已认证': '立即认证'}}</text>
+      </view>
+    </view>
+    <view class="link_panel" data-status="{{userInfo.healthyStatus}}" data-url="certificationCenter/healthyAuth" bindtap="linkTo">
+      <view class="left_panel {{userInfo.healthyStatus==1? 'ok': ''}}">
+        <image src="../../images/health.png " style="width:66%;height:70%; "></image>
+      </view>
+      <view class="right_panel {{userInfo.healthyStatus==1? 'ok': ''}}">
+        <text>健康认证</text>
+        <text class="{{userInfo.healthyStatus==0 || userInfo.healthyStatus==3? 'iconfont': ''}}">{{userInfo.healthyStatus==2? '认证中': userInfo.healthyStatus==1? '已认证': '立即认证'}}</text>
+      </view>
+    </view>
+  </view>
+</view>

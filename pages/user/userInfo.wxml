@@ -1,0 +1,392 @@
+<view class="page gray">
+  <view class="top-bottom-gray"></view>
+  <navigator hover-class="none" url="/pages/user/modify?id={{userId}}" class="fix-action">
+    <icon wx:if="{{userId==userInfo.id}}" class="iconfont icon-bianji"></icon>
+  </navigator>
+  <view class="swiper-container">
+    <swiper class="swiper" indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" current="{{currIndex}}" bindchange="bindchange" wx:if="{{coverimgAttachement && coverimgAttachement.length>0}}">
+      <block wx:for="{{coverimgAttachement}}" wx:key="*this">
+        <swiper-item>
+          <image src="{{item}}" class="slide-image" mode="aspectFill" />
+        </swiper-item>
+      </block>
+    </swiper>
+    <swiper class="swiper" indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" wx:else="{{userInfo.headimgAttachmentId}}">
+      <block>
+        <swiper-item>
+          <image src="{{userInfo.headimgAttachmentId}}" class="slide-image" mode="aspectFill" />
+        </swiper-item>
+      </block>
+    </swiper>
+    <view class="swiper_count" wx:if="{{coverimgAttachement.length>0}}">{{(currIndex+1)}} / {{coverimgAttachement.length}}</view>
+    <view class="swiper_count" wx:elif="{{coverimgAttachement.length<0 && userInfo.headimgAttachmentId}}">1 / 1</view>
+    <view class="swiper_count" wx:else>0 / 0</view>
+    <view class="rz spyrz" wx:if="{{userInfo.videoStatus==1}}">
+      <image class="spyrz_icon" src="../../images/spyyz_icon.png"></image>
+      <text>视频已认证</text>
+    </view>
+    <view class="rz yjbzj" wx:if="{{userInfo.cashDepositLevel}}">
+      <image class="yjbzj_icon" src="../../images/bzj_icon.png"></image>
+      <text>已交保证金</text>
+    </view>
+    <view class="jy_number">乾坤号:{{userInfo.jyNumber}}</view>
+  </view>
+
+  <view class="jy_info_desc">
+    <view class="jy_info_desc_t">
+      <view class="jy_info">
+        <text class='aliasName'>{{userInfo.aliasName}}</text>
+        <view class='gz_count'>
+          <icon class="iconfont icon-guanzhu"></icon>
+          <text>{{userInfo.followCount}}</text>
+        </view>
+      </view>
+      <view class='jy_info_ico'>
+        <view class='jy_info_trangle' wx:if="{{userInfo.sex==2}}" style='background-color:rgb(255, 56, 131)'>
+          <icon class="iconfont icon-xingbie-nv"></icon>{{userInfo.age}}
+        </view>
+        <view class='jy_info_trangle' wx:elif="{{userInfo.sex==1}}" style='background-color:rgb(0, 180, 255)'>
+          <icon class="iconfont icon-xingbie"></icon>{{userInfo.age}}
+        </view>
+        <view class='jy_info_trangle jy_xz' wx:if="{{userInfo.userExt.constellation}}">{{userInfo.userExt.constellation}}</view>
+      </view>
+      <view class='jy_info_qm'>{{userInfo.selfLabel?userInfo.selfLabel:'愿得一人心,白首不相离'}}</view>
+    </view>
+  </view>
+
+  <view class="jy_info_block">
+    <navigator class="jy_info_title" hover-class='none'>
+      <text>动态</text>
+      <icon class="iconfont icon-arrow_r"></icon>
+    </navigator>
+    <view wx:if="{{userInfo.images}}" class="bg_white">
+      <block wx:for="{{userInfo.images}}" wx:key="dy" wx:for-item="dyItem">
+        <image class='dt_image' wx:if="{{dyItem.feedAttachment}}" src="{{dyItem.feedAttachment}}" />
+      </block>
+    </view>
+  </view>
+
+  <view class="jy_info_block">
+    <view class="jy_info_title">
+      <text>认证</text>
+    </view>
+    <view class="bg_white rz_block" wx:if="{{storageId!=userId}}">
+      <view class="rz_container {{userInfo.idStatus==1?'ok':''}}">
+        <view class="idCard">
+          <image src="../../images/idcard.png"></image>
+        </view>
+        <view>实名</view>
+      </view>
+      <view class='rz_container'>
+        <view class="car">
+          <image src="../../images/car.png"></image>
+        </view>
+        <view>车产</view>
+      </view>
+      <view class='rz_container'>
+        <view class="house">
+          <image src="../../images/house.png"></image>
+        </view>
+        <view>房产</view>
+      </view>
+      <view class='rz_container'>
+        <view class="health">
+          <image src="../../images/health.png"></image>
+        </view>
+        <view>健康</view>
+      </view>
+      <view class='rz_container'>
+        <view class="video">
+          <image src="../../images/video_icon.png"></image>
+        </view>
+        <view>视频</view>
+      </view>
+      <view class='rz_container active'>
+        <view class="phone">
+          <image src="../../images/phone_icon.png"></image>
+        </view>
+        <view>手机</view>
+      </view>
+    </view>
+    <view class="bg_white rz_block" wx:else>
+      <view class="rz_container {{userInfo.idStatus==1?'ok':''}}" wx:if="{{userInfo.idStatus==1 || userInfo.idStatus==2}}">
+        <view class="idCard">
+          <image src="../../images/idcard.png"></image>
+        </view>
+        <view>实名</view>
+      </view>
+      <navigator hover-class="none" class="rz_container" wx:else>
+        <view class="idCard">
+          <image src="../../images/idcard.png"></image>
+        </view>
+        <view>实名</view>
+      </navigator>
+
+      <view class="rz_container {{userInfo.carStatus==1?'ok':''}}" wx:if="{{userInfo.carStatus==1 || userInfo.carStatus==2}}">
+        <view class="car">
+          <image src="../../images/car.png"></image>
+        </view>
+        <view>车产</view>
+      </view>
+      <navigator hover-class="none" class="rz_container" wx:else>
+        <view class="car">
+          <image src="../../images/car.png"></image>
+        </view>
+        <view>车产</view>
+      </navigator>
+
+      <view class="rz_container {{userInfo.houseStatus==1?'ok':''}}" wx:if="{{userInfo.houseStatus==1 || userInfo.houseStatus==2}}">
+        <view class="house">
+          <image src="../../images/house.png"></image>
+        </view>
+        <view>房产</view>
+      </view>
+      <navigator hover-class="none" class="rz_container" wx:else>
+        <view class="house">
+          <image src="../../images/house.png"></image>
+        </view>
+        <view>房产</view>
+      </navigator>
+
+      <view class="rz_container {{userInfo.healthyStatus==1?'ok':''}}" wx:if="{{userInfo.healthyStatus==1 || userInfo.healthyStatus==2}}">
+        <view class="health">
+          <image src="../../images/health.png"></image>
+        </view>
+        <view>健康</view>
+      </view>
+      <navigator hover-class="none" class="rz_container" wx:else>
+        <view class="health">
+          <image src="../../images/health.png"></image>
+        </view>
+        <view>健康</view>
+      </navigator>
+
+      <view class="rz_container {{userInfo.videoStatus==1?'ok':''}}" wx:if="{{userInfo.videoStatus==1 || userInfo.videoStatus==2}}">
+        <view class="video">
+          <image src="../../images/video_icon.png"></image>
+        </view>
+        <view>视频</view>
+      </view>
+      <navigator hover-class="none" class="rz_container" wx:else>
+        <view class="video">
+          <image src="../../images/video_icon.png"></image>
+        </view>
+        <view>视频</view>
+      </navigator>
+
+      <view class='rz_container ok'>
+        <view class="phone">
+          <image src="../../images/phone_icon.png"></image>
+        </view>
+        <view>手机</view>
+      </view>
+    </view>
+  </view>
+
+  <view class="jy_info_block">
+    <view class="jy_info_title" hover-class='none'>
+      <text>资料</text>
+    </view>
+    <view class="bg_white jy_info_detail">
+      <view class="detail_title">
+        <icon class="iconfont icon-yonghu2"></icon>
+        <view>关于我</view>
+      </view>
+      <view class="detail_info">
+        <view class="rows">
+          <text>年龄</text>
+          <text>{{userInfo.age}}</text>
+        </view>
+        <view class="rows">
+          <text>身高</text>
+          <text wx:if="{{userInfo.userExt.height}}">{{userInfo.userExt.height}}cm</text>
+          <text wx:else>{{storageId==userId?'暂无':'保密'}}</text>
+        </view>
+        <view class="rows">
+          <text>学历</text>
+          <text wx:if="{{userInfo.userExt.education!=null || userInfo.userExt.education!=''}}">{{educationTextArr[userInfo.userExt.education]}}</text>
+          <text wx:else>{{storageId==userId?'暂无':'保密'}}</text>
+        </view>
+        <view class="rows">
+          <text>居住地</text>
+          <text wx:if="{{userInfo.userExt.liveCityName && userInfo.userExt.liveAreaName}}">{{userInfo.userExt.liveCityName}} {{userInfo.userExt.liveAreaName}}</text>
+          <text wx:else>{{storageId==userId?'暂无':'保密'}}</text>
+        </view>
+        <view class="rows">
+          <text>毕业院校</text>
+          <text wx:if="{{userInfo.userExt.school}}">{{userInfo.userExt.school}}</text>
+          <text wx:else>{{storageId==userId?'暂无':'保密'}}</text>
+        </view>
+        <view class="rows">
+          <text>职业</text>
+          <text wx:if="{{userInfo.userExt.profession}}">{{userInfo.userExt.profession}}</text>
+          <text wx:else>{{storageId==userId?'暂无':'保密'}}</text>
+        </view>
+      </view>
+    </view>
+    <view class="bg_white jy_info_detail">
+      <view class="detail_title">
+        <icon class="iconfont icon-heyue"></icon>
+        <view>择偶意向</view>
+      </view>
+      <view class="detail_info">
+        <view class="rows" wx:if="{{userInfo.userExt.chooseMateAgeStart && userInfo.userExt.chooseMateAgeEnd}}">
+          <text>年龄</text>
+          <text wx:if="{{userInfo.userExt.chooseMateAgeStart==-1 && userInfo.userExt.chooseMateAgeEnd==-1}}">无限</text>
+          <text wx:elif="{{userInfo.userExt.chooseMateAgeStart==-1 && userInfo.userExt.chooseMateAgeEnd>=19}}">{{userInfo.userExt.chooseMateAgeEnd + "岁以下"}}</text>
+          <text wx:elif="{{userInfo.userExt.chooseMateAgeStart>=19 && userInfo.userExt.chooseMateAgeEnd==-1}}">{{userInfo.userExt.chooseMateAgeStart + "岁以上"}}</text>
+          <text wx:elif="{{userInfo.userExt.chooseMateAgeStart>=19 && userInfo.userExt.chooseMateAgeEnd>=19}}">{{userInfo.userExt.chooseMateAgeStart+ "-" + userInfo.userExt.chooseMateAgeEnd}}</text>
+        </view>
+        <view wx:else>
+          <text>年龄</text>
+          <text>{{storageId==userId?'暂无':'保密'}}</text>
+        </view>
+        <view class="rows" wx:if="{{userInfo.userExt.chooseMateHeightLowerLimit && userInfo.userExt.chooseMateHeightUpperLimit}}">
+          <text>身高</text>
+          <text wx:if="{{userInfo.userExt.chooseMateHeightLowerLimit==-1 && userInfo.userExt.chooseMateHeightUpperLimit==-1}}">无限</text>
+          <text wx:elif="{{userInfo.userExt.chooseMateHeightLowerLimit>=150 && userInfo.userExt.chooseMateHeightUpperLimit==-1}}">{{userInfo.userExt.chooseMateHeightLowerLimit + "cm以上"}}</text>
+          <text wx:elif="{{userInfo.userExt.chooseMateHeightLowerLimit>=150 && userInfo.userExt.chooseMateHeightUpperLimit>=150}}">{{userInfo.userExt.chooseMateHeightLowerLimit + "-" + userInfo.userExt.chooseMateHeightUpperLimit+"cm"}}</text>
+        </view>
+        <view class="rows" wx:else>
+          <text>身高</text>
+          <text>{{storageId==userId?'暂无':'保密'}}</text>
+        </view>
+        <view class="rows">
+          <text>学历</text>
+          <text wx:if="{{userInfo.userExt.chooseMateEducation}}">{{educationReTextArr[userInfo.userExt.chooseMateEducation]}}</text>
+          <text wx:else>{{storageId==userId?'暂无':'保密'}}</text>
+        </view>
+        <view class="rows">
+          <text>婚姻状况</text>
+          <text wx:if="{{userInfo.userExt.chooseMateMarried}}">{{maritalStatusTextArr[userInfo.userExt.chooseMateMarried]}}</text>
+          <text wx:else>{{storageId==userId?'暂无':'保密'}}</text>
+        </view>
+        <view class="rows">
+          <text>子女情况</text>
+          <text wx:if="{{userInfo.userExt.chooseMateChildren}}">{{childTextArr[userInfo.userExt.chooseMateChildren]}}</text>
+          <text wx:else>{{storageId==userId?'暂无':'保密'}}</text>
+        </view>
+        <view class="rows" wx:if="{{userInfo.userExt.chooseMateIncomeLowerLimit && userInfo.userExt.chooseMateIncomeUpperLimit}}">
+          <text>收入状况</text>
+          <text wx:if="{{userInfo.userExt.chooseMateIncomeLowerLimit==-1 && userInfo.userExt.chooseMateIncomeUpperLimit==-1}}">不限</text>
+          <text wx:elif="{{userInfo.userExt.chooseMateIncomeLowerLimit>=2000 && userInfo.userExt.chooseMateIncomeUpperLimit==-1}}">{{userInfo.userExt.chooseMateIncomeLowerLimit + '元以上'}}</text>
+          <text wx:elif="{{userInfo.userExt.chooseMateIncomeLowerLimit==-1 && userInfo.userExt.chooseMateIncomeUpperLimit>=2000}}">{{userInfo.userExt.chooseMateIncomeUpperLimit + '元以下'}}</text>
+          <text wx:elif="{{userInfo.userExt.chooseMateIncomeLowerLimit>=2000 && userInfo.userExt.chooseMateIncomeUpperLimit>=2000}}">{{userInfo.userExt.chooseMateIncomeLowerLimit + '-' + userInfo.userExt.chooseMateIncomeUpperLimit}}</text>
+        </view>
+        <view class="rows" wx:else>
+          <text>收入状况</text>
+          <text>{{storageId==userId?'暂无':'保密'}}</text>
+        </view>
+        <view class="rows">
+          <text>是否吸烟</text>
+          <text wx:if="{{userInfo.userExt.chooseMateSmoke}}">{{smokingTextArr[userInfo.userExt.chooseMateSmoke]}}</text>
+          <text wx:else>{{storageId==userId?'暂无':'保密'}}</text>
+        </view>
+        <view class="rows">
+          <text>是否喝酒</text>
+          <text wx:if="{{userInfo.userExt.chooseMateDrink}}">{{drinkTextArr[userInfo.userExt.chooseMateDrink]}}</text>
+          <text wx:else>{{storageId==userId?'暂无':'保密'}}</text>
+        </view>
+        <view class="rows">
+          <text>住房情况</text>
+          <text wx:if="{{userInfo.userExt.chooseMateHousing}}">{{houseTextArr[userInfo.userExt.chooseMateHousing]}}</text>
+          <text wx:else>{{storageId==userId?'暂无':'保密'}}</text>
+        </view>
+        <view class="rows">
+          <text>购车情况</text>
+          <text wx:if="{{userInfo.userExt.chooseMateCar}}">{{carTextArr[userInfo.userExt.chooseMateCar]}}</text>
+          <text wx:else>{{storageId==userId?'暂无':'保密'}}</text>
+        </view>
+        <view class="rows" wx:if="{{(userInfo.userExt.chooseMateLiveCityId&&userInfo.userExt.chooseMateLiveCityId!=0) && (userInfo.userExt.chooseMateLiveAreaId&&userInfo.userExt.chooseMateLiveAreaId!=0)}}">
+          <text>居住地</text>
+          <text wx:if="{{userInfo.userExt.chooseMateLiveCityId== -1 &&  userInfo.userExt.chooseMateLiveAreaId==-1}}">不限</text>
+          <text wx:elif="{{userInfo.userExt.chooseMateLiveCityId>= 0 && userInfo.userExt.chooseMateLiveAreaId==-1}}">{{userInfo.userExt.chooseMateLiveCityName + '范围内'}}</text>
+          <text wx:elif="{{userInfo.userExt.chooseMateLiveCityId>= 0 && userInfo.userExt.chooseMateLiveAreaId>0}}">{{userInfo.userExt.chooseMateLiveCityName + " " + userInfo.userExt.chooseMateLiveAreaName}}</text>
+        </view>
+        <view class="rows" wx:else>
+          <text>居住地</text>
+          <text>{{storageId==userId?'暂无':'保密'}}</text>
+        </view>
+      </view>
+    </view>
+    <view class="bg_white jy_info_detail">
+      <view class="detail_title">
+        <icon class="iconfont icon-mima"></icon>
+        <view>私密资料</view>
+      </view>
+      <view class="detail_info" wx:if="{{storageId==userId || userInfo.isSeePrivateInfo==1}}">
+        <view class="rows">
+          <text>真实姓名</text>
+          <text wx:if="{{userInfo.userName}}">{{userInfo.userName}}</text>
+          <text wx:else>{{storageId==userId?'暂无':'保密'}}</text>
+        </view>
+        <view class="rows">
+          <text>家乡</text>
+          <text wx:if="{{userInfo.userExt.cityName&&userInfo.userExt.areaName}}">{{userInfo.userExt.cityName + " " + userInfo.userExt.areaName}}</text>
+          <text wx:else>{{storageId==userId?'暂无':'保密'}}</text>
+        </view>
+        <view class="rows">
+          <text>婚姻状况</text>
+          <text wx:if="{{userInfo.userExt.married}}">{{maritalStatusTextArr[userInfo.userExt.married]}}</text>
+          <text wx:else>{{storageId==userId?'暂无':'保密'}}</text>
+        </view>
+        <view class="rows">
+          <text>子女情况</text>
+          <text wx:if="{{userInfo.userExt.children}}">{{childTextArr[userInfo.userExt.children]}}</text>
+          <text wx:else>{{storageId==userId?'暂无':'保密'}}</text>
+        </view>
+        <view class="rows" wx:if="{{userInfo.userExt.incomeLowerLimit && userInfo.userExt.incomeUpperLimit}}">
+          <text>月收入</text>
+          <text wx:if="{{userInfo.userExt.incomeLowerLimit>=2000 && userInfo.userExt.incomeUpperLimit==-1}}">{{userInfo.userExt.incomeLowerLimit + '元以上'}}</text>
+          <text wx:elif="{{userInfo.userExt.incomeLowerLimit==-1 && userInfo.userExt.incomeUpperLimit>=2000}}">{{userInfo.userExt.incomeUpperLimit + '元以下'}}</text>
+          <text wx:elif="{{userInfo.userExt.incomeLowerLimit>=2000 && userInfo.userExt.incomeUpperLimit>=2000}}">{{userInfo.userExt.incomeLowerLimit + '-' + userInfo.userExt.incomeUpperLimit}}</text>
+        </view>
+        <view class="rows" wx:else>
+          <text>月收入</text>
+          <text>{{storageId==userId?'暂无':'保密'}}</text>
+        </view>
+        <view class="rows">
+          <text>是否吸烟</text>
+          <text wx:if="{{userInfo.userExt.smoke}}">{{smokingTextArr[userInfo.userExt.smoke]}}</text>
+          <text wx:else>{{storageId==userId?'暂无':'保密'}}</text>
+        </view>
+        <view class="rows">
+          <text>是否喝酒</text>
+          <text wx:if="{{userInfo.userExt.drink}}">{{drinkTextArr[userInfo.userExt.drink]}}</text>
+          <text wx:else>{{storageId==userId?'暂无':'保密'}}</text>
+        </view>
+        <view class="rows">
+          <text>住房情况</text>
+          <text wx:if="{{userInfo.userExt.housing}}">{{houseTextArr[userInfo.userExt.housing]}}</text>
+          <text wx:else>{{storageId==userId?'暂无':'保密'}}</text>
+        </view>
+        <view class="rows">
+          <text>购车情况</text>
+          <text wx:if="{{userInfo.userExt.car}}">{{carTextArr[userInfo.userExt.car]}}</text>
+          <text wx:else>{{storageId==userId?'暂无':'保密'}}</text>
+        </view>
+        <view class="rows">
+          <text>家中排行</text>
+          <text wx:if="{{userInfo.userExt.ranking}}">{{rankingTextArr[userInfo.userExt.ranking]}}</text>
+          <text wx:else>{{storageId==userId?'暂无':'保密'}}</text>
+        </view>
+      </view>
+    </view>
+    <view class="hazy_action" bindtap="openViewModal" wx:if="{{storageId!=userId && userInfo.isSeePrivateInfo==0}}">申请查看更多资料</view>
+    <view class="hazy_action" wx:elif="{{storageId!=userId && userInfo.isSeePrivateInfo==2}}">等待同意</view>
+  </view>
+</view>
+<view class='zhezhao' hidden="{{flag}}" bindtap="closeViewModal">
+  <!--这是一个遮罩层，在框弹出后遮住框外区域-->
+</view>
+<!--这是下拉框中的内容，一个文本框和一个按钮，按钮触发拉起事件，表示拉起下拉框-->
+<view class="view-modal" style='display:{{yesorno}};'>
+  <view class="center-dialog view-dialog">
+    <view class="center-panel view-panel">
+      <view class="view-content">
+        <textarea rows="2" placeholder="您好，想认识一下" value="{{content}}" bindinput='watchCentent' focus='true'></textarea>
+      </view>
+      <view class="view-btn" bindtap='send'>发送</view>
+    </view>
+  </view>
+</view>

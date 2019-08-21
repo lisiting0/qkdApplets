@@ -1,0 +1,35 @@
+<view class="page gray jy_auth">
+  <view class="jy_auth_block">
+    <view class="jy_auth_title">身份证自拍照示范</view> 
+    <view class="jy_auth_p1">
+      <image src='../../images/auth_p1.jpg'></image>
+      <view class="jy_auth_p1_tip">1、手持您的身份证自拍一张，以证明是您本人。</view>
+    </view>
+  </view> 
+  <view class="jy_auth_block">
+    <view class="jy_auth_tit3">如上所示，上传两张图片</view>
+    <view class="shade">  
+      <image mode="aspectFitf" src="{{attachment1?attachment1:''}}" class="jy_auth_up1 {{attachment1?'':'noImage'}}" wx:if="{{certificationResult.result==1 || certificationResult.result==2}}"></image>
+      <image mode="aspectFitf" src="{{attachment1?attachment1:''}}" class="jy_auth_up1 {{attachment1?'':'noImage'}}" data-id='0' bindtap="uploadImage" wx:else></image>
+      <image mode="aspectFitf" src="{{attachment2?attachment2:''}}" class="jy_auth_up1 {{attachment2?'':'noImage'}}" wx:if="{{certificationResult.result==1 || certificationResult.result==2}}"></image>
+      <image mode="aspectFitf" src="{{attachment2?attachment2:''}}" class="jy_auth_up1 {{attachment2?'':'noImage'}}" data-id='1' bindtap="uploadImage" wx:else></image>
+    </view>
+    <view class="input-class">
+      <input type="text" placeholder="请输入您的真实姓名" value="{{inputName}}" disabled='disabled' style='border-bottom: 1px solid #f2f2f2;' wx:if="{{certificationResult.result==1 || certificationResult.result==2}}"></input>
+      <input type="text" placeholder="请输入您的真实姓名" value="{{inputName}}" bindinput="inputName" style='border-bottom: 1px solid #f2f2f2;' wx:else></input>
+    </view>
+    <view class="input-class">
+      <input type="idcard" placeholder="请输入您的身份证号码" value="{{inputIdNo}}" disabled='disabled' wx:if="{{certificationResult.result==1 || certificationResult.result==2}}"></input>
+      <input type="idcard" placeholder="请输入您的身份证号码" value="{{inputIdNo}}" bindinput="inputIdNo" wx:else></input>
+    </view>
+  </view>
+  <view class="jy_auth_tip">
+    <image src="../../images/auth_ico5.png" mode="aspectFitf"></image>
+    所有上传信息，仅供审核用，不对外显示
+  </view>  
+  <view class="jy_auth_btn" wx:if="{{certificationResult.result==1}}">已通过</view>
+  <view class="jy_auth_btn" wx:elif="{{certificationResult.result==2}}">审核中</view> 
+  <view class="jy_auth_btn" bindtap="submit" wx:elif="{{certificationResult.result==0}}">审核未通过,重新提交</view> 
+  <view class="jy_auth_btn" bindtap="submit" wx:else>提交</view>  
+  <view class="jy_auth_tip" wx:if="{{certificationResult.result==0&&certificationResult.memo}}">原因：{{result.memo}}</view>
+</view> 

@@ -1,0 +1,68 @@
+.jy_info_block {
+  margin: 0 20rpx;
+}
+
+.jy_auth_block .jy_auth_title{
+  font-size: 32rpx;
+}
+
+.jy_auth_block .jy_auth_p1 {
+  text-align: center;
+}
+
+.jy_auth_block .jy_auth_p1 image {
+  width: 300rpx;
+  height: 220rpx;
+  margin: 20rpx auto 0;
+  border: 1px solid #a0a0a0;
+  border-radius: 20rpx;
+}
+
+.jy_auth_block .jy_auth_p1 .jy_auth_p1_tip {
+  width: 300rpx;
+  font-size: 28rpx;
+  margin: 20rpx auto; 
+  text-align: center;  
+}
+
+.shade {
+  display: flex; 
+  align-items: center;
+}
+
+.jy_auth .jy_auth_up1 {
+  width: 140rpx;
+  height: 140rpx;
+  margin-right: 20rpx;
+  margin-bottom: 20rpx;
+  border-radius: 20rpx;
+  display: inline-block;
+  position: relative; 
+}
+
+.jy_auth .jy_auth_up1.noImage {
+  background-color: #EFEFEF;
+}
+
+.jy_auth .jy_auth_up1.noImage::before {
+  content: "\e61f";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  line-height: 140rpx;
+  font-size: 36rpx;
+  color: #B4B4B4;
+}
+
+.input-class input{
+  padding: 10rpx;
+} 
+
+.input-class{
+  margin: 20rpx 10rpx; 
+} 
+
+

@@ -1,0 +1,300 @@
+page {
+  height: 100%;
+  overflow: hidden;
+}
+
+.page {
+  height: 100%;
+  overflow: hidden;
+}
+
+.prizeDraw_bg {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+.setting {
+  position: absolute;
+  top: 23%;
+  right: 0;
+  color: #fff;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-start;
+}
+
+.right-panel view {
+  height: 60rpx;
+  line-height: 60rpx;
+  font-size: 28rpx;
+  text-align: center;
+  padding: 0 20rpx;
+}
+
+.right-panel view:first-child {
+  background-color: rgba(0, 0, 0, 0.5);
+  border-top-left-radius: 20rpx;
+}
+
+.right-panel view:last-child {
+  background-color: rgba(0, 0, 0, 0.2);
+  border-bottom-left-radius: 20rpx;
+}
+
+/* 转盘 */
+
+.canvas-container {
+  position: absolute;
+  top: 34%;
+  left: 11%;
+  width: 588rpx;
+  height: 566rpx;
+  border-radius: 50%;
+}
+
+.canvas-content {
+  position: absolute;
+  left: 9%;
+  top: 7%;
+  z-index: 1;
+  display: block;
+  width: 490rpx;
+  height: 490rpx;
+  border-radius: inherit;
+  background-clip: padding-box;
+  background: repeating-conic-gradient(#ff8684 0 36deg, #fe6869 0 72deg);
+  transform: rotate(-18deg);
+  -ms-transform: rotate(-18deg); /* IE 9 */
+  -moz-transform: rotate(-18deg); /* Firefox */
+  -webkit-transform: rotate(-18deg); /* Safari 和 Chrome */
+  -o-transform: rotate(-18deg); /* Opera */
+}
+
+.canvas-element {
+  position: relative;
+  z-index: 1;
+  width: inherit;
+  height: inherit;
+  border-radius: 50%;
+}
+
+.canvas-list {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: inherit;
+  height: inherit;
+  z-index: 9999;
+  transform: rotate(18deg);
+  -ms-transform: rotate(18deg); /* IE 9 */
+  -moz-transform: rotate(18deg); /* Firefox */
+  -webkit-transform: rotate(18deg); /* Safari 和 Chrome */
+  -o-transform: rotate(18deg); /* Opera */
+}
+
+.canvas-item {
+  position: absolute;
+  left: 0;
+  top: -50rpx;
+  width: 100%;
+  height: 100%;
+  color: #fff;
+}
+
+.canvas-item-text {
+  position: relative;
+  display: block;
+  padding-top: 50rpx;
+  margin: 0 auto;
+  text-align: center;
+  -webkit-transform-origin: 50% 294rpx;
+  transform-origin: 50% 294rpx;
+  font-size: 28rpx;
+}
+
+.canvas-image {
+  width: 50rpx;
+  height: 50rpx;
+  border-radius: 50%;
+  position: relative;
+  display: block;
+  padding-top: 20rpx;
+  margin: 0 auto;
+  text-align: center;
+  -webkit-transform-origin: 50% 200rpx;
+  transform-origin: 50% 200rpx;
+}
+
+/* 分隔线 */
+
+.canvas-line {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: inherit;
+  height: inherit;
+  z-index: 99;
+}
+
+.canvas-litem {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+  -webkit-transform-origin: 50% 294rpx;
+  transform-origin: 50% 294rpx;
+}
+
+.canvas-litem:nth-of-type(2n+1) {
+  background-color: #ff8684;
+}
+
+.canvas-litem:nth-of-type(2n) {
+  background-color: #fe6869;
+}
+
+/**
+* 抽奖按钮
+*/
+
+.canvas-btn {
+  position: absolute;
+  left: 208rpx;
+  top: 155rpx;
+  z-index: 400;
+  width: 170rpx;
+  height: 220rpx;
+  border-radius: 50%;
+}
+
+.canvas-cost {
+  position: absolute;
+  left: 51%;
+  top: 53%;
+  z-index: 400;
+  color: #fff;
+  font-size: 28rpx;
+}
+
+.remark view, .remark navigator {
+  width: 160rpx;
+  height: 60rpx;
+  line-height: 60rpx;
+  color: #fff;
+  font-weight: 500;
+  font-size: 30rpx;
+  text-align: center;
+  background-color: #ffc000;
+}
+
+.remark view {
+  position: absolute;
+  bottom: 4%;
+  left: 0;
+  border-radius: 0 40rpx 40rpx 0;
+}
+
+.remark navigator {
+  position: absolute;
+  right: 0;
+  bottom: 4%;
+  border-radius: 40rpx 0 0 40rpx;
+}
+
+.rule-container {
+  position: relative;
+}
+
+.rule-con {
+  width: 70%;
+  height: 600rpx;
+  margin: 0 auto;
+  background-color: #fff;
+  position: relative;
+}
+
+.rule-con image {
+  height: 120rpx;
+  position: absolute;
+}
+
+.rule-title {
+  text-align: center;
+  color: #fff;
+  font-size: 36rpx;
+  position: relative;
+  padding-top: 14px;
+}
+
+.rule-title::before {
+  content: "";
+  position: absolute;
+  left: 100%;
+  top: 66%;
+  width: 60rpx;
+  height: 1px;
+  background-color: rgba(255, 255, 255, 0.2);
+  margin-left: -460rpx;
+}
+
+.rule-title::after {
+  content: "";
+  position: absolute;
+  right: 100%;
+  top: 66%;
+  width: 60rpx;
+  height: 1px;
+  background-color: rgba(255, 255, 255, 0.2);
+  margin-right: -460rpx;
+}
+
+.rule-remark {
+  margin-top: 70rpx;
+  padding: 0 40rpx;
+}
+
+.icon-cha {
+  position: absolute;
+  right: 20rpx;
+  top: 0rpx;
+  color: #fff;
+  font-size: 30rpx;
+}
+
+.message-swiper {
+  position: absolute;
+  bottom: 10%;
+  width: 90%;
+  height: 80rpx;
+  padding: 0 40rpx;
+}
+
+.message-swiper swiper {
+  width: 100%;
+  height: 64rpx;
+  border: 1px #ffe90b dashed;
+}
+
+.swiper-container {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 20rpx;
+}
+
+.swiper-con .user-name {
+  color: #ffe90b;
+  margin-right: 20rpx;
+}
+
+.swiper-con text {
+  text-align: center;
+  font-size: 28rpx;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  color: #fff;
+}

@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "addMoment": "/component/common/addMoment"
+    },
+  "enablePullDownRefresh": false
+}

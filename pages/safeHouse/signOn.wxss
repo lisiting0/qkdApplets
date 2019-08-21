@@ -1,0 +1,183 @@
+.content {
+  height: 260rpx;
+  padding: 0 65rpx;
+  color: #fff;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
+
+.content-one {
+  height: 120rpx;
+  line-height: 100rpx;
+  text-align: right;
+}
+
+.content-one text {
+  float: left;
+  font-size: 30rpx;
+  margin-left: 30rpx;
+}
+
+.content-one icon {
+  font-size: 18px;
+}
+
+.content-two {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.content-two text:first-child {
+  font-size: 30px;
+  font-weight: 500;
+  margin-left: 30rpx;
+}
+
+.content-two .qd-btn {
+  width: 240rpx;
+  height: 60rpx;
+  line-height: 60rpx;
+  font-size: 36rpx;
+  position: absolute;
+  right: 60rpx;
+  border-radius: 40rpx;
+  text-align: center;
+  border: 3px solid rgba(255, 255, 255, 0.2);
+  background-color: #fff;
+  color: #f29e87; 
+}
+
+.rili {
+  background-color: #f69535;
+  padding: 60rpx 40rpx;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.rili-panel {
+  background-size: cover;
+  background-position: center;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 20rpx;
+}
+
+.rili-title {
+  margin-top: 60rpx;
+  text-align: center;
+  font-size: 30rpx;
+}
+
+.rili-px {
+  margin-top: 45rpx;
+  display: flex;
+  padding: 0 60rpx;
+}
+
+.rili-px text {
+  flex-grow: 1;
+  text-align: center;
+  color: #b7b7b7;
+  font-size: 30rpx;
+}
+
+.rili-day {
+  margin-top: 10rpx;
+  display: flex;
+  padding: 0 60rpx 20rpx;
+  flex-wrap: wrap;
+}
+
+.rili-day text {
+  display: inline-block;
+  width: 50rpx;
+  height: 50rpx;
+  line-height: 50rpx;
+  margin: 16rpx;
+  text-align: center;
+  font-size: 30rpx;
+}
+
+.rili3 {
+  background-color: #fff;
+  padding: 0 40rpx;
+  height: 280rpx;
+}
+
+.rili3-title {
+  font-size: 30rpx;
+  font-weight: 500;
+  height: 60rpx;
+  line-height: 60rpx;
+}
+
+.rili3-list {
+  padding: 30rpx 0 30rpx;
+  position: relative;
+}
+
+.line {
+  width: 100%;
+  height: 3px;
+  border-radius: 1px;
+  background-color: #bfbfbf;
+}
+
+.red-line {
+  height: 3px;
+  background-color: #f69535;
+}
+
+.ul {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  padding: 0 20rpx;
+  display: flex;
+  justify-content: space-between;
+}
+
+.li {
+  font-size: 28rpx;
+  color: #bfbfbf;
+}
+
+.qd-days {
+  width: 100%;
+  text-align: center;
+}
+
+.qd-days text {
+  display: block;
+  text-align: center;
+  line-height: 5rpx;
+}
+
+.qd-days icon {
+  display: inline-flex;
+}
+
+.qd-days icon::before {
+  content: "\a0";
+  display: inline-block;
+  vertical-align: middle;
+  font-size: 36rpx;
+  width: 0.56em;
+  height: 0.56em;
+  border-radius: 50%;
+  border: 2px solid white;
+  background-clip: content-box;
+  background-color: #bfbfbf;
+}
+
+.tips {
+  border: 1px solid #bfbfbf;
+  border-radius: 3px;
+  padding: 0 10rpx;
+}
+
+.tips text {
+  display: block;
+  text-align: center;
+}

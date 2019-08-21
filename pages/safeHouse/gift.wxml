@@ -1,0 +1,102 @@
+<!--金屋/今日收入-->
+<view class="page gray">
+  <view class="top-bottom-gray"></view>
+  <view class="page_bd menu-top">
+    <view class="weui-tab">
+      <view class="weui-navbar">
+        <block wx:for="{{tabs}}" wx:key="*this">
+          <view id="{{index}}" class="weui-navbar__item {{activeIndex == index ? 'weui-bar__item_on' : ''}}" bindtap="tabClick">
+            <view class="weui-navbar__title">{{item}}</view>
+          </view>
+        </block>
+        <view class="weui-navbar__slider" style="left: {{sliderLeft}}px; transform: translateX({{sliderOffset}}px); -webkit-transform: translateX({{sliderOffset}}px);"></view>
+      </view>
+    </view>
+  </view>
+  <view class="header" hidden="{{hideHeader}}">
+    <view>下拉刷新中……</view>
+  </view>
+
+  <view class="weui-tab__panel">
+    <scroll-view scroll-y style="width: 100%; height:{{scroll_height+'px'}};" bindscrolltoupper="refresh" bindscrolltolower="loadMore">
+      <view class="weui-tab__content" hidden="{{activeIndex == 1}}">  
+        <view class="gift_list" wx:for="{{list}}" wx:key="{{item}}">
+          <view class="gift_panel">
+            <image class="jy_gift_img" src="{{item.user.headimgAttachmentId}}"></image>
+            <view class="gift_center">
+              <view>
+                {{item.user.aliasName}}
+                <view class="jy_auth_age" style="{{item.user.sex==1?'background-color:rgb(255, 56, 131);':'background-color:rgb(0, 180, 255);'}}">
+                  <icon class="iconfont {{item.user.sex==2?'icon-xingbie-nv':'icon-xingbie'}}"></icon>
+                  {{item.user.age}}
+                </view>
+              </view>
+              <view wx:if="{{item.type==2}}">
+                <text>赠送{{item.commodityGift.commodityName}}</text>
+                <text class="shiwu">实物</text>
+              </view>
+              <view wx:else>
+                <text>{{item.remark}}</text>
+                <text wx:if="{{item.type==1}}" class="xuni">虚拟</text>
+                <text wx:else class="mianfei">免费</text>
+              </view>
+              <text class="gift_time">{{item.giftTime}}</text>
+            </view>
+            <view class="gift_right" wx:if="{{item.type==2}}">
+              <view wx:if="{{item.commodityGift.handle==1}}">已收货</view>
+              <view wx:elif="{{item.commodityGift.handle==2}}">已折现</view>
+              <view wx:elif="{{item.commodityGift.handle==3}}">已拒绝</view>
+              <view wx:else>价格:{{item.commodityGift.commodityPrice}}元</view> 
+            </view>
+            <view class="gift_right" wx:else>
+              <view class="gift_price">+{{item.receiverIncome}}元</view>
+            </view>
+          </view>
+          <view class="button" wx:if="{{item.type==2&&item.commodityGift.handle==0}}">
+            <text bindtap="dogift(item,1)">接受</text>
+            <text bindtap="dogift(item,2)">折现</text>
+            <text bindtap="dogift(item,3)">拒绝</text>
+          </view>
+        </view>
+      </view>
+
+      <view class="weui-tab__content" hidden="{{activeIndex == 0}}"> 
+        <view class="gift_list" wx:for="{{list}}" wx:key="{{index}}" wx:for-index="bindex">
+          <view class="gift_panel">
+            <image class="jy_gift_img" src="{{item.receiverUser.headimgAttachmentId}}"></image>
+            <view class="gift_center">
+              <view>
+                {{item.receiverUser.aliasName}}
+                <view class="jy_auth_age" style="{{item.receiverUser.sex==1?'background-color:rgb(255, 56, 131);':'background-color:rgb(0, 180, 255);'}}"> 
+                  <icon class="iconfont {{item.receiverUser.sex==2?'icon-xingbie-nv':'icon-xingbie'}}"></icon>
+                  {{item.receiverUser.age}}
+                </view>
+              </view>
+              <view wx:if="{{item.type==2}}">
+                <text>赠送{{item.commodityGift.commodityName}}</text>
+                <text class="shiwu">实物</text>
+              </view>
+              <view wx:else>
+                <text>{{item.remark}}</text>
+                <text wx:if="{{item.type==1}}" class="xuni">虚拟</text>
+                <text wx:else class="mianfei">免费</text>
+              </view>
+              <text class="gift_time">{{item.giftTime}}</text>
+            </view>
+            <view class="gift_right" wx:if="{{item.type==2}}">
+              <view wx:if="{{item.commodityGift.handle==1}}">已收货</view>
+              <view wx:else-if="{{item.commodityGift.handle==2}}">已折现</view>
+              <view wx:else-if="{{item.commodityGift.handle==3}}">已拒绝</view>
+              <view>￥{{item.commodityGift.commodityPrice}}元</view>
+              <view></view>
+            </view>
+            <view class="gift_right" wx:else>
+              <image class="gift_g" src="{{item.img}}"></image>
+            </view>
+          </view>
+        </view>
+      </view>
+      <view class="bottom" hidden="{{hideBottom}}">已加载全部数据</view>
+    </scroll-view>
+  </view>
+</view>

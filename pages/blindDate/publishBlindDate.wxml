@@ -1,0 +1,242 @@
+<view class="page gray publish_bd">
+  <view class="top-bottom-gray"></view>
+  <view class="img_panel">
+    <view class="img_con">
+      <view class="title">活动海报</view>
+      <view class="con" data-type="poster" bindtap="chooseImage">
+        <text wx:if="{{!poster}}">尺寸1040*300.jpg或.png格式</text>
+        <text style="background-image:url({{poster}})" wx:else></text>
+      </view>
+      <view class="next_icon">
+        <icon class="iconfont icon-arrow_r"></icon>
+      </view>
+    </view>
+    <view class="img_con">
+      <view class="title">活动封面</view>
+      <view class="con" data-type="cover" bindtap="chooseImage">
+        <text wx:if="{{!cover}}">尺寸1080*636.jpg或.png格式</text>
+        <text wx:else style="background-image:url({{cover}})"></text>
+      </view>
+      <view class="next_icon">
+        <icon class="iconfont icon-arrow_r"></icon>
+      </view>
+    </view>
+  </view>
+  <view class="userInfo_panel">
+    <view class="userInfo_title">基本资料</view>
+    <view class="userInfo_con">
+      <view>相亲类型</view>
+      <view>
+        <picker class="picker" bindchange="bindShTypeChange" value="{{typeIndex}}" range-key="name" range="{{typeList}}">
+          <view class="flRight">{{typeList[typeIndex].name}}</view>
+        </picker>
+      </view>
+      <view>
+        <icon class="iconfont icon-arrow_r"></icon>
+      </view>
+    </view>
+    <view class="userInfo_con">
+      <view>专场类型</view>
+      <view>
+        <picker class="picker" bindchange="bindSpecialTypeChange" value="{{specialTypeIndex}}" range-key="name" range="{{specialTypeList}}">
+          <view class="flRight">{{specialTypeList[specialTypeIndex].name}}</view>
+        </picker>
+      </view>
+      <view>
+        <icon class="iconfont icon-arrow_r"></icon>
+      </view>
+    </view>
+    <view class="userInfo_con" data-sh="{{shActivityTitle}}" data-popup="shActivityTitle" bindtap="bindPopupChange">
+      <view>活动标题</view>
+      <view>{{activityTitle==""?"请输入活动标题，不少于5个字": activityTitle}}</view>
+      <view>
+        <icon class="iconfont icon-arrow_r"></icon>
+      </view>
+    </view>
+    <view class="userInfo_con" data-url="address" bindtap="navigateTo">
+      <view>活动地点</view>
+      <view>{{addressDetailText==""?"请选择": addressDetailText}}</view>
+      <view>
+        <icon class="iconfont icon-arrow_r"></icon>
+      </view>
+    </view>
+    <view class="userInfo_con">
+      <view class="entry_view">
+        <text>报名人数</text>
+        <input type="number" placeholder-style="color:#b1b1b1;" placeholder="请填写报名总人数" value="{{numberOfPeople}}" data-input="numberOfPeople" bindinput="bindNumberInput" />
+      </view>
+    </view>
+    <view class="userInfo_con">
+      <view class="entry_view">
+        <text>报名费用</text>
+        <input type="number" placeholder-style="color:#b1b1b1;" placeholder="请填写报名费用" value="{{registrationFee}}" data-input="registrationFee" bindinput="bindDoubleInput" />
+      </view>
+    </view>
+    <view class="userInfo_con">
+      <view class="entry_view">
+        <text>男士人数</text>
+        <input type="number" placeholder-style="color:#b1b1b1;" placeholder="请填写男士人数" value="{{extInt8}}" data-input="extInt8" bindinput="bindNumberInput" />
+      </view>
+    </view>
+    <view class="userInfo_con">
+      <view class="entry_view">
+        <text>女士人数</text>
+        <input type="number" placeholder-style="color:#b1b1b1;" placeholder="请填写女士人数" value="{{extInt9}}" data-input="extInt9" bindinput="bindNumberInput" />
+      </view>
+    </view>
+    <view class="userInfo_con">
+      <view>活动时间</view>
+      <view>
+        <pickerYMDHM bind:onPickerChange="onPickerStartTime" date="{{startTime}}" minuteList="{{minuteList}}"></pickerYMDHM>
+      </view>
+      <view>
+        <icon class="iconfont icon-arrow_r"></icon>
+      </view>
+    </view>
+    <view class="userInfo_con">
+      <view>报名时间</view>
+      <view style="color: #000;display: flex;justify-content: space-between;justify-items: center;width: 72%;">
+        <view style="color: #b1b1b1;width:240rpx;margin-right:20rpx;">
+          <pickerYMDHM bind:onPickerChange="onPickerBMStartTime" date="{{bmStartTime}}" minuteList="{{minuteList}}" style="line-height:110rpx;"></pickerYMDHM>
+        </view>
+        <text style="line-height:105rpx;">至</text>
+        <view style="color: #b1b1b1;width:240rpx;">
+          <pickerYMDHM bind:onPickerChange="onPickerBMEndTime" date="{{bmEndTime}}" minuteList="{{minuteList}}" style="line-height:110rpx;"></pickerYMDHM>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="userInfo_panel">
+    <view class="userInfo_title">报名详情</view>
+    <view class="userInfo_con" data-sh="{{shTheme}}" data-popup="shTheme" bindtap="bindPopupChange">
+      <view>相亲主题</view>
+      <view>{{theme==""?"请输入相亲主题，不少于5个字": theme}}</view>
+      <view>
+        <icon class="iconfont icon-arrow_r"></icon>
+      </view>
+    </view>
+    <view class="userInfo_con" data-url="navigation" bindtap="navigateTo">
+      <view>地址导航</view>
+      <view>{{navigation==""?"请填写": "信息已填写"}}</view>
+      <view>
+        <icon class="iconfont icon-arrow_r"></icon>
+      </view>
+    </view>
+    <view class="userInfo_con" data-url="activityProcess" bindtap="navigateTo">
+      <view>活动流程</view>
+      <view>{{activityProcess==""?"请填写": "信息已填写"}}</view>
+      <view>
+        <icon class="iconfont icon-arrow_r"></icon>
+      </view>
+    </view>
+    <view class="userInfo_con" data-url="organizer" bindtap="navigateTo">
+      <view>举办单位</view>
+      <view>{{hostPartys.length>0?"信息已选择": "请选择"}}</view>
+      <view>
+        <icon class="iconfont icon-arrow_r"></icon>
+      </view>
+    </view>
+    <view class="userInfo_con" data-url="activityTips" bindtap="navigateTo">
+      <view>活动提示</view>
+      <view>{{activityTips==""?"请填写": "信息已填写"}}</view>
+      <view>
+        <icon class="iconfont icon-arrow_r"></icon>
+      </view>
+    </view>
+  </view>
+  <view class="userInfo_panel" style="margin-top: 10px;">
+    <view class="userInfo_con" data-sh="{{shExtString7}}" data-popup="shExtString7" catchtap="bindPopupChange">
+      <view>分享标题</view>
+      <view>{{extString7==""?"请输入分享标题，不少于5个字": extString7}}</view>
+      <view>
+        <icon class="iconfont icon-arrow_r"></icon>
+      </view>
+    </view>
+    <view class="userInfo_con" data-sh="{{shExtString8}}" data-popup="shExtString8" catchtap="bindPopupChange">
+      <view>分享描述</view>
+      <view>{{extString8==""?"请输入分享描述，不少于5个字": extString8}}</view>
+      <view>
+        <icon class="iconfont icon-arrow_r"></icon>
+      </view>
+    </view>
+  </view>
+  <view class="userInfo_panel last_panel" style="margin-top: 10px;">
+    <view class="userInfo_con" catchtap="addExtString6">
+      <view>添加渠道设置</view>
+      <view></view>
+      <view>
+        <icon class="iconfont icon-jiahao"></icon>
+      </view>
+    </view>
+    <block wx:for="{{extString6Sort}}" wx:key="key" wx:for-item="v">
+      <view class="userInfo_con" data-key="{{v.key}}" data-ov="{{v.ov}}" catchtap="showExtString6">
+        <view>{{v.ov.name}}</view>
+        <view>男：{{v.ov.boyLimit}}人，{{v.ov.boyFee}}元；女：{{v.ov.girlLimit}}人，{{v.ov.girlFee}}元</view>
+        <view>
+          <icon class="iconfont icon-arrow_r"></icon>
+        </view>
+      </view>
+    </block>
+
+    <view class="publish_bd_btn">
+      <text class="ljfb" data-state="3" catchtap="save">立即发布</text>
+      <text class="bc" hidden="{{activityState==3&&activityState==6}}" data-state="2" catchtap="save">保存</text>
+    </view>
+  </view>
+</view>
+
+<!-- 活动标题 -->
+<view class="wx-dialog dialog-input" hidden="{{!shActivityTitle}}">
+  <view class="weui-mask" data-popup="shActivityTitle" catchtap="bindPopupChange"></view>
+  <view class="weui-dialog" style="max-width: 100%; width: 100%; padding: 0.6rem 0px; background-color: transparent;">
+    <view class="input_content">
+      <view class="input_title">活动标题</view>
+      <view class="input_con">
+        <input type="text" value="{{activityTitle}}" placeholder="活动标题" auto-focus bindinput="activityTitleInput"></input>
+      </view>
+      <view class="submitButton" data-popup="shActivityTitle" catchtap="bindPopupConfirm">确定</view>
+    </view>
+  </view>
+</view>
+
+<!-- 相亲主题 -->
+<view class="wx-dialog dialog-input" hidden="{{!shTheme}}">
+  <view class="weui-mask" data-popup="shTheme" catchtap="bindPopupChange"></view>
+  <view class="weui-dialog" style="max-width: 100%; width: 100%; padding: 0.6rem 0px; background-color: transparent;">
+    <view class="input_content">
+      <view class="input_title">相亲主题</view>
+      <view class="input_con">
+        <textarea placeholder="相亲主题" value="{{theme}}" auto-focus bindinput="themeInput"></textarea>
+      </view>
+      <view class="submitButton" data-popup="shTheme" catchtap="bindPopupConfirm">确定</view>
+    </view>
+  </view>
+</view>
+
+<!-- 分享标题 -->
+<view class="wx-dialog dialog-input" hidden="{{!shExtString7}}">
+  <view class="weui-mask" data-popup="shExtString7" catchtap="bindPopupChange"></view>
+  <view class="weui-dialog" style="max-width: 100%; width: 100%; padding: 0.6rem 0px; background-color: transparent;">
+    <view class="input_content">
+      <view class="input_title">分享标题</view>
+      <view class="input_con">
+        <input type="text" value="{{extString7}}" placeholder="分享标题" auto-focus bindinput="extString7Input"></input>
+      </view>
+      <view class="submitButton" data-popup="shExtString7" catchtap="bindPopupConfirm">确定</view>
+    </view>
+  </view>
+</view>
+
+<!-- 分享描述 -->
+<view class="wx-dialog dialog-input" hidden="{{!shExtString8}}">
+  <view class="weui-mask" data-popup="shExtString8" catchtap="bindPopupChange"></view>
+  <view class="weui-dialog" style="max-width: 100%; width: 100%; padding: 0.6rem 0px; background-color: transparent;">
+    <view class="input_content">
+      <view class="input_title">分享描述</view>
+      <view class="input_con">
+        <textarea placeholder="分享描述" value="{{extString8}}" auto-focus bindinput="extString8Input"></textarea>
+      </view>
+      <view class="submitButton" data-popup="shExtString8" catchtap="bindPopupConfirm">确定</view>
+    </view>
+  </view>
+</view>

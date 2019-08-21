@@ -1,0 +1,30 @@
+@import "../../utils/wxParse/wxParse.wxss";
+.jy_QA_list {
+  padding: 40rpx;
+}
+
+.jy_QA_list_li {
+  position: relative;
+  padding-left: 40rpx;
+  margin-bottom: 20rpx;
+}
+
+.jy_QA_list_li::before {
+  content: "\e658";
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: #c4c7cc;
+  font-size: 32rpx;
+}
+
+.jy_QA_list_li .jy_QA_title {
+  font-size: 32rpx;
+  color: #333;
+  margin-bottom: 20rpx;
+}
+
+.jy_QA_list_li .jy_QA_answer {
+  font-size: 30rpx;
+  color: #c4c7cc;
+}

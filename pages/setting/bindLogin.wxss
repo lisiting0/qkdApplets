@@ -1,0 +1,6 @@
+.jy_auth_id {
+    font-size: 36rpx;
+    color: #111;
+    text-align: center;
+    padding: 80rpx 0 30rpx;
+}

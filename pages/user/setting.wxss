@@ -1,0 +1,6 @@
+.jy_setting .jy_auth_btn {
+  background-color: #aaa;
+  margin: 300rpx 30rpx 0;
+}
+
+ 

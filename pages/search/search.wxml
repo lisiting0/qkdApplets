@@ -1,0 +1,15 @@
+<!-- 发现 -->
+<view class="page gray">
+  <navigator hover-class="none" url="/pages/search/moments" class="router-panel">
+    <image src="../../images/icon_jydt.png" class="qkdt_image"></image>
+    <text class="left">乾坤动态</text> 
+  </navigator>
+  <navigator hover-class="none" url="/pages/search/nearbyPeople" class="router-panel">
+    <image src="../../images/icon_fjdr.png"></image>
+    <text class="left">附近的人</text> 
+  </navigator>
+  <navigator hover-class="none" url="/pages/search/nearbyDating" class="router-panel" style="margin-top:0;border-top: 1px solid #f2f2f2;border-bottom: 1px solid #f2f2f2;">
+    <image src="../../images/icon_fjyy.png"></image>
+    <text class="left">附近约会</text> 
+  </navigator>
+</view>

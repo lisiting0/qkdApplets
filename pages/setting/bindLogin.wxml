@@ -1,0 +1,5 @@
+<view class="page">
+  <view class="jy_auth_id" wx:if="typeId">绑定ID：{{typeId}}</view>
+	<view wx:if="typeId" class="jy_auth_btn" bindtap="toUnbind">解绑</view>
+	<view wx:else class="jy_auth_btn" bindtap="bind">绑定</view>
+</view>

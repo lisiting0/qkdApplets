@@ -1,0 +1,16 @@
+<!--帮助与反馈详情-->
+<import src="../../utils/wxParse/wxParse.wxml" />
+<view class="page ">
+  <view class="jy_QA_list">
+    <view class="iconfont jy_QA_list_li" wx:for="{{question}}" wx:key="item" wx:for-index="idx">
+      <view class="jy_QA_title">{{item.question}}</view>
+      <view class="jy_QA_answer">
+        <block wx:for="{{answerTemArray}}" wx:key="index" wx:for-item="val" wx:for-index="index"> 
+          <block wx:if="{{index == idx}}">
+            <template is="wxParse" data="{{wxParseData: val}}" />
+          </block>
+        </block>
+      </view>
+    </view>
+  </view>
+</view>

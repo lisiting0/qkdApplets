@@ -1,0 +1,39 @@
+<!-- 送礼列表 -->
+<view class="modals modals-bottom-dialog" hidden="{{!showGift}}" bindtap="hideGift">
+  <view class="bottom-dialog-body bottom-pos gift_con" animation='{{animationData}}'>
+    <view class="reward_title">打赏：
+      <text>{{aliasName}}</text>
+      <icon class="iconfont icon-cha" catchtap="hideGift"></icon>
+    </view>
+    <view class="gift_list">
+      <view class="gift">
+        <swiper class="swiper" indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" current="{{giftIndex}}" bindchange="onIndexChange" wx:if="{{giftList && giftList.length>0}}">
+          <block wx:for="{{giftList}}" wx:key="*this">
+            <swiper-item class="flex-gift">
+              <block wx:for="{{item}}" wx:key="num" wx:for-index="num" wx:for-item="v">
+                <view class="gift_li {{giftId==v.id?'active':''}}" data-giftid="{{v.id}}" data-giftname="{{v.giftName}}" data-jiaobi="{{v.jiaobi}}" catchtap="clickSelGift">
+                  <image src="{{v.giftImage}}"></image>
+                  <view class="name">{{v.giftName}}</view>
+                  <view class="jiaobi">乾坤币{{v.jiaobi}}</view>
+                </view>
+              </block>
+            </swiper-item>
+          </block>
+        </swiper>
+      </view>
+      <view class="diot" catchtap="">
+        <block wx:for="{{giftList}}" wx:key="diotIndex" wx:for-index="diotIndex">
+          <text class="{{giftIndex==diotIndex?'active':''}}"></text>
+        </block>
+      </view>
+    </view>
+    <view class="footer">
+      <image src="../../images/coin.png"></image>
+      <text>{{userMoney}}</text>
+      <view class="gift_button" data-uid="{{candidateId}}" data-gid="{{giftId}}" data-objid="{{objectId}}" catchtap="reward">
+        <text style="color:#fff;font-size:30rpx;">确定打赏\n{{giftName?'（'+giftName+'）':''}}</text>
+      </view>
+      <navigator hover-class="none" url="/pages/safeHouse/recharge" class="cz">充值</navigator>
+    </view>
+  </view>
+</view>

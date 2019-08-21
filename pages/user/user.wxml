@@ -1,0 +1,164 @@
+<!--我的-->
+<view class="page gray">
+  <view class="header-top" style="background-image:url({{top}})">
+    <view class="top-layer">
+      <view class="one-panel">
+        <icon class="iconfont icon-qr-code" catchtap="openQrcodeModal"></icon>
+      </view>
+      <view class="clearBoth two-panel">
+        <image src="{{userInfo.headimgAttachmentId}}" class="head-image" mode="aspectFit" catchtap="linkToUserInfo"></image>
+        <view class="action-menu">
+          <view data-url="user/recentVisit" catchtap="linkTo">
+            <text class="news {{news.vistorCount>0?'active':''}}"></text>
+            <text>最近来访\n{{(visitorCount?news.vistorCount>0?visitorCount-news.vistorCount<0?0:visitorCount-news.vistorCount:visitorCount:0)+(news.vistorCount>0?'+'+news.vistorCount:'')}}</text>
+          </view>
+          <view data-url="user/myFocus" data-active="1" catchtap="linkTo">
+            <text></text>
+            <text>关注\n{{userInfo.followCount||0}}</text>
+          </view>
+          <view data-url="user/myFocus" data-active="2" catchtap="linkTo">
+            <text class="news {{news.newFanCount>0?'active':''}}"></text>
+            <text>粉丝\n{{(userInfo.fanCount?news.newFanCount>0?userInfo.fanCount-news.newFanCount<0?0:userInfo.fanCount-news.newFanCount:userInfo.fanCount:0)+(news.newFanCount>0?'+'+news.newFanCount:'')}}</text>
+          </view>
+        </view>
+      </view>
+      <view class="three-panel userinfo">
+        <text class="name">{{userInfo.aliasName}}</text>
+        <view class="auth-panel">
+          <view class="idCard {{userInfo.idStatus==1?'demanda':''}}" wx:if="{{userInfo.idStatus==1 || userInfo.idStatus==2}}">
+            <icon class="iconfont icon-shimingrenzheng"></icon>
+          </view>
+          <view class="idCard" data-url="certificationCenter/identityAuth" catchtap="linkTo" wx:else>
+            <icon class="iconfont icon-shimingrenzheng"></icon>
+          </view>
+          <view class="idCard demanda">
+            <icon class="iconfont icon-shoujirenzheng"></icon>
+          </view>
+          <view class="video {{userInfo.videoStatus==1?'demanda':''}}" wx:if="{{userInfo.videoStatus==1 || userInfo.videoStatus==2}}">
+            <icon class="iconfont icon-shangjiashipinrenzheng"></icon>
+          </view>
+          <view class="video" data-url="certificationCenter/videoAuth" catchtap="linkTo" wx:else>
+            <icon class="iconfont icon-shangjiashipinrenzheng"></icon>
+          </view>
+          <view class="car {{userInfo.carStatus==1?'demanda':''}}" wx:if="{{userInfo.carStatus==1 || userInfo.carStatus==2}}">
+            <icon class="iconfont icon-cherenzheng"></icon>
+          </view>
+          <view class="car" data-url="certificationCenter/carAuth" catchtap="linkTo" wx:else>
+            <icon class="iconfont icon-cherenzheng"></icon>
+          </view>
+          <view class="house {{userInfo.houseStatus==1?'demanda':''}}" wx:if="{{userInfo.houseStatus==1 || userInfo.houseStatus==2}}">
+            <icon class="iconfont icon-fangchanrenzheng"></icon>
+          </view>
+          <view class="house" data-url="certificationCenter/houseAuth" catchtap="linkTo" wx:else>
+            <icon class="iconfont icon-fangchanrenzheng"></icon>
+          </view>
+        </view>
+      </view>
+      <view class="four-panel">
+        <text>{{userInfo.selfLabel||'愿得一人心,白首不相离'}}</text>
+        <view class="city" wx:if="{{city}}">
+          <icon class="iconfont icon-iconfontzhizuobiaozhun023117"></icon>{{city}}</view>
+      </view>
+    </view>
+  </view>
+
+  <view class="four-menu">
+    <view data-url="user/safeHouse" catchtap="linkTo">
+      <icon class="iconfont icon-qianbao3"></icon>
+      <text>乾坤金屋\n</text>
+      <text class="money">{{userInfo.userMoney}}乾坤币</text>
+    </view>
+    <view data-url="safeHouse/prizeDraw" catchtap="linkTo">
+      <icon class="iconfont icon-choujiang2"></icon>
+      <text>乾坤轮</text>
+    </view>
+    <view catchtap="linkToShop">
+      <icon class="iconfont icon-shangcheng1"></icon>
+      <text>乾坤商城</text>
+    </view>
+    <view class='yqhy' data-url="" catchtap="linkTo">
+      <icon class="iconfont icon-tubiaozhizuomoban-"></icon>
+      <text>邀请好友</text>
+    </view>
+  </view>
+
+  <view class="four-menu">
+    <view data-url="user/myOffer" catchtap="linkTo">
+      <icon class="iconfont icon-coffee"></icon>
+      <text>我的约会</text>
+    </view>
+    <view data-url="blindDate/myBlindDate" catchtap="linkTo">
+      <icon class="iconfont icon-quyuehui"></icon>
+      <text>我的相亲</text>
+    </view>
+    <view class='rzyl' data-url="user/certificationCenter" catchtap="linkTo">
+      <icon class="iconfont icon-renzheng3"></icon>
+      <text>认证中心</text>
+    </view>
+    <view data-url="safeHouse/gift" catchtap="linkTo">
+      <icon class="iconfont icon-liwu5"></icon>
+      <text>我的礼物</text>
+    </view>
+    <view data-url="safeHouse/earnCoin" catchtap="linkTo">
+      <icon class="iconfont icon-xiangqinhuodong"></icon>
+      <text>任务中心</text>
+    </view>
+    <view data-url="safeHouse/agent" catchtap="linkTo">
+      <icon class="iconfont icon-dailizhongxin"></icon>
+      <text>我的代理</text>
+    </view>
+    <view data-url="search/myComments" catchtap="linkTo">
+      <icon class="iconfont icon-tubiaozhizuomoban-"></icon>
+      <text>我的动态</text>
+    </view>
+    <view data-url="user/energyRanking" catchtap="linkTo">
+      <icon class="iconfont icon-paihang"></icon>
+      <text>能量排行</text>
+    </view>
+  </view>
+  <navigator hover-class="none" url="/pages/user/apply" class="router-panel">
+    <icon class="iconfont icon-youxiang"></icon>
+    <text class="left">私密资料请求通知</text>
+    <block wx:if="{{applyList && applyList.length>0}}">
+      <view class="apply-img" wx:for="{{applyList}}" wx:key="index" wx:for-item="apply">
+        <image src="{{apply.user.headimgAttachmentId}}"></image>
+      </view>
+    </block>
+  </navigator>
+  <navigator hover-class="none" url="/pages/user/setting" class="router-panel">
+    <icon class="iconfont icon-jiemiantubiaosheji_shezhi"></icon>
+    <text class="left">设置</text>
+  </navigator>
+  <navigator hover-class="none" url="/pages/user/help" class="router-panel">
+    <icon class="iconfont icon-bangzhu"></icon>
+    <text class="left">帮助与反馈</text>
+  </navigator>
+  <view class='marginTop'></view>
+</view>
+
+<view class='zhezhao' hidden="{{flag}}" catchtap="closeQrcodeModal">
+  <!--这是一个遮罩层，在框弹出后遮住框外区域-->
+</view>
+<!--这是下拉框中的内容，一个文本框和一个按钮，按钮触发拉起事件，表示拉起下拉框-->
+<view class="qrcode-modal" style='display:{{yesorno}};'>
+  <view class="center-dialog qrcode-dialog">
+    <view class="qrcode_con">
+      <view class="close-icon" catchtap="closeQrcodeModal">
+        <icon class="iconfont icon-cha"></icon>
+      </view>
+      <view class="qrcode_panel">
+        <image src="../../images/code_border.png" class="qrcode-bg"></image>
+        <view>告诉小伙伴,你在乾坤岛等Ta</view>
+        <view class='qrcode'>
+          <image mode="scaleToFill" src="{{imagePath}}"></image>
+        </view>
+        <!-- 画布，用来画二维码，只用来站位，不用来显示-->
+        <view class="canvas-box">
+          <canvas hidden="{{canvasHidden}}" style="width: 420rpx;height: 420rpx;background:#f1f1f1;" canvas-id="mycanvas" />
+        </view>
+        <view>扫一扫</view>
+        <view>登陆乾坤岛</view>
+      </view>
+    </view>
+  </view>
+</view>

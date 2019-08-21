@@ -1,0 +1,47 @@
+<!--金屋/下级代理-->
+<view class="page gray">
+  <view class="top-bottom-gray"></view> 
+  <view class="agent_top">
+    <view class="top_con">
+      <image class="icon" src="../../images/qkb_icon.png"></image>
+      <view class="left_con">
+        <view>今日消费：{{consumption.consumeJiaobiCountDay}}</view>
+        <view>累计消费：{{accumulatedConsumptionintQkb}}</view>
+      </view>
+      <view class="line"></view>
+      <view>
+        <view>今日收入：{{consumption.incomeJiaobiCountDay}}</view>
+        <view>累计收入：{{accumulatedIncomeQkb}}</view>
+      </view>
+    </view>
+
+    <view class="bottom_con">
+      <image class="icon" src="../../images/money_icon.png"></image>
+      <view class="left_con">
+        <view>今日消费：{{consumption.consumeAmountCountDay}}</view>
+        <view>累计消费：{{accumulatedCashConsumption}}</view>
+      </view>
+      <view class="line"></view>
+      <view>
+        <view>今日收入：{{consumption.incomeAmountCountDay}}</view>
+        <view>累计收入：{{accumulatedCashIncome}}</view>
+      </view>
+    </view>
+  </view>
+  <scroll-view scroll-y style="width: 100%; height:{{scroll_height+'px'}};background-color: #fff;" bindscrolltoupper="refresh" bindscrolltolower="loadMore">
+    <view wx:for="{{listArr}}" wx:key="*this" style="padding:0 20rpx;">
+      <view class="agent-panel" data-id="{{item.id}}" data-name='{{item.aliasName}}' data-url="safeHouse/subAgent" bindtap="linkTo">
+        <image src="{{item.headimgAttachmentId}}" data-id="{{item.id}}" data-url="user/userInfo" bindtap="linkTo"></image>
+        <view class="userinfo_center">
+          <view>{{item.aliasName}}</view>
+          <view class="jy_auth_age" style="{{item.sex==1?'background-color:rgb(255, 56, 131);':'background-color:rgb(0, 180, 255);'}}">
+            <icon class="iconfont {{item.sex==2?'icon-xingbie-nv':'icon-xingbie'}}"></icon>
+            {{item.age}}
+          </view>
+        </view>
+        <view class="userinfo_right"><text>下级{{item.agentNumber}}人</text><icon></icon></view>
+      </view>
+    </view>
+    <view class="bottom" hidden="{{hideBottom}}">已加载全部数据</view>
+  </scroll-view>
+</view>

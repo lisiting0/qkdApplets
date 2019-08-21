@@ -1,0 +1,22 @@
+<!--金屋/提现-->
+<view class="page gray"> 
+  <view class="jy_pf_top">
+    <view class="jy_pf_tit">
+      <block wx:if="{{!userInfo.aliUserName}}"> 
+        <view class="bindAli" bindtap="installAli">添加提现账号</view>
+      </block>
+      <text wx:else>{{userInfo.aliUserName}}</text>
+    </view>
+    <view class="jy_pf_m">提现金额（元）</view>
+    <input class="jy_pf_money" type="number" placeholder="0" value="{{money}}" bindblur="inputBlur" bindfocus="inputFocus"></input>
+    <view class="jy_pf_tb">当前金额 {{money||0}} 元，可提现 {{userIncome}} 元</view>
+  </view>
+  <view class="jy_pf_tips">提现注意事项： </view>
+  <view class="jy_pf_tipList">
+    <view class="jy_pf_tipList_li">1.目前只提供支付宝提现</view>
+    <view class="jy_pf_tipList_li">2.第一次提现请先授权后点击"返回应用"</view>
+    <view class="jy_pf_tipList_li">3.如有疑问,请联系客服</view>
+  </view>
+  <view class="jy_auth_btn">提现</view>
+  <view class="top-bottom-gray"></view>
+</view>
